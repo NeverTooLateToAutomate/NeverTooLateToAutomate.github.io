@@ -173,6 +173,8 @@ On this website, you will find a bunch of codes ready to be pasted in your Excel
 
 <div id="SELECT" class="macroouter">
 
+<h4>Due to the limited space just 10 first rows of a table will be shown! Total number of rows will be mentioned under a table.</h4>
+
 <h1>SELECT</h1>
 
 <h2>Selects everything (all rows and columns) from Employees table.</h2>
@@ -3183,7 +3185,7 @@ SQL query can result in True, False or Unknown (NULL). The following table prese
   </tr>
 </table>
 
-<h6>One more column below</h6>
+<h6>More columns below</h6>
 
 </div>
 
@@ -5448,7 +5450,7 @@ The ALL operator returns true if all of the subquery values meet the condition.
 
 
 
-<div id="INNER JOIN" class="macroouter">
+<div id="INNER_JOIN" class="macroouter">
 
 <h1>INNER JOIN</h1>
 
@@ -5521,86 +5523,80 @@ The ALL operator returns true if all of the subquery values meet the condition.
 
 
 
+<div id="LEFT_JOIN" class="macroouter">
 
-<div id="" class="macroouter">
+<h1>LEFT JOIN</h1>
 
-<h1></h1>
+<h2><p>The LEFT JOIN keyword returns all records from the left table (table A), and the matched records from the right table (table B). If there is no match, the result is NULL from the right side.</p>
 
-<h2></h2>
+<p>! If we use RIGHT JOIN and switch the order of tables in query the same results will be obtained which will be shown in the next example.</p>
+
+<p>! Similar results were obtained in above INNER JOIN query which means there are records in table A (EmployeeTerritories) which don't match table B (Territories).</p>
+
+</h2>
 
 <div class="macroinner">
 
-<h3></h3>
+<h3>SELECT EmployeeID, Territories.TerritoryDescription</h3>
 
-<h3></h3>
+<h3>FROM EmployeeTerritories</h3>
 
-<h3></h3>
+<h3>LEFT JOIN Territories ON EmployeeTerritories.TerritoryID = Territories.TerritoryID</h3>
+
+<h3>ORDER BY EmployeeID, Territories.TerritoryDescription</h3>
 
 </div>
 
 <div class="tbl">
 
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">EmployeeID</th>
+    <th class="tg-yw4l">TerritoryDescription</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Wilton</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Neward</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Westboro</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Bedford</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Georgetow</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Boston</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Cambridge</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Braintree</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Louisville</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">3</td>
+    <td class="tg-yw4l">Atlanta</td>
+  </tr>
+</table>
 
-
-<h6> rows in total</h6>
-
-</div>
-
-</div>
-
-
-
-
-<div id="" class="macroouter">
-
-<h1></h1>
-
-<h2></h2>
-
-<div class="macroinner">
-
-<h3></h3>
-
-<h3></h3>
-
-<h3></h3>
-
-</div>
-
-<div class="tbl">
-
-
-
-<h6> rows in total</h6>
-
-</div>
-
-</div>
-
-
-
-
-<div id="" class="macroouter">
-
-<h1></h1>
-
-<h2></h2>
-
-<div class="macroinner">
-
-<h3></h3>
-
-<h3></h3>
-
-<h3></h3>
-
-</div>
-
-<div class="tbl">
-
-
-
-<h6> rows in total</h6>
+<h6>49 rows in total</h6>
 
 </div>
 
@@ -5611,25 +5607,70 @@ The ALL operator returns true if all of the subquery values meet the condition.
 
 <div id="" class="macroouter">
 
-<h1></h1>
-
-<h2></h2>
+<h2>Using RIGHT JOIN to obtain the same result as above. Order of tables in query was altered.</h2>
 
 <div class="macroinner">
 
-<h3></h3>
+<h3>SELECT EmployeeID, Territories.TerritoryDescription</h3>
 
-<h3></h3>
+<h3>FROM Territories</h3>
 
-<h3></h3>
+<h3>RIGHT JOIN EmployeeTerritories ON Territories.TerritoryID = EmployeeTerritories.TerritoryID</h3>
+
+<h3>ORDER BY EmployeeID, Territories.TerritoryDescription</h3>
 
 </div>
 
 <div class="tbl">
 
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">EmployeeID</th>
+    <th class="tg-yw4l">TerritoryDescription</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Wilton</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Neward</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Westboro</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Bedford</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Georgetow</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Boston</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Cambridge</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Braintree</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Louisville</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">3</td>
+    <td class="tg-yw4l">Atlanta</td>
+  </tr>
+</table>
 
-
-<h6> rows in total</h6>
+<h6>49 rows in total</h6>
 
 </div>
 
@@ -5639,25 +5680,165 @@ The ALL operator returns true if all of the subquery values meet the condition.
 
 <div id="" class="macroouter">
 
-<h1></h1>
-
-<h2></h2>
+<h2>Three-table left join example.</h2>
 
 <div class="macroinner">
 
-<h3></h3>
+<h3>SELECT EmployeeTerritories.EmployeeID, Employees.FirstName + ' ' + Employees.LastName AS FullName,</h3>
 
-<h3></h3>
+<h3>Territories.TerritoryDescription</h3>
 
-<h3></h3>
+<h3>FROM Employees</h3>
+
+<h3>LEFT JOIN EmployeeTerritories ON Employees.EmployeeID = EmployeeTerritories.EmployeeID</h3>
+
+<h3>LEFT JOIN Territories ON EmployeeTerritories.TerritoryID = Territories.TerritoryID</h3>
 
 </div>
 
 <div class="tbl">
 
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">EmployeeID</th>
+    <th class="tg-yw4l">FullName</th>
+    <th class="tg-yw4l">TerritoryDescription</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Nancy Davolio</td>
+    <td class="tg-yw4l">Wilton</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Nancy Davolio</td>
+    <td class="tg-yw4l">Neward</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Westboro</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Bedford</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Georgetow</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Boston</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Cambridge</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Braintree</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Louisville</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">3</td>
+    <td class="tg-yw4l">Janet Leverling</td>
+    <td class="tg-yw4l">Atlanta</td>
+  </tr>
+</table>
+
+<h6>49 rows in total</h6>
+
+</div>
+
+</div>
 
 
-<h6> rows in total</h6>
+
+
+<div id="RIGHT_JOIN" class="macroouter">
+
+<h1>RIGHT JOIN</h1>
+
+<h2><p>The RIGHT JOIN keyword returns all records from the right table (table B), and the matched records from the left table (table A). If there is no match, the result is NULL from the left side.</p>
+
+<p>! If we use LEFT JOIN and switch the order of tables in query the same results will be obtained which will be shown in the next example.</p>
+
+<p>! There are 4 more records than in case of similar LEFT JOIN example. This is because in 4 cases there are no matches which results in NULL values.</p>
+
+</h2>
+
+<div class="macroinner">
+
+<h3>SELECT EmployeeID, Territories.TerritoryDescription</h3>
+
+<h3>FROM EmployeeTerritories</h3>
+
+<h3>RIGHT JOIN Territories ON EmployeeTerritories.TerritoryID = Territories.TerritoryID</h3>
+
+<h3>ORDER BY EmployeeID, Territories.TerritoryDescription</h3>
+
+</div>
+
+<div class="tbl">
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">EmployeeID</th>
+    <th class="tg-yw4l">TerritoryDescription</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">NULL</td>
+    <td class="tg-yw4l">Austin</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">NULL</td>
+    <td class="tg-yw4l">Bentonville</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">NULL</td>
+    <td class="tg-yw4l">Columbia</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">NULL</td>
+    <td class="tg-yw4l">Dallas</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Neward</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Wilton</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Bedford</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Boston</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Braintree</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Cambridge</td>
+  </tr>
+</table>
+
+<h6>53 rows in total</h6>
 
 </div>
 
@@ -5667,25 +5848,72 @@ The ALL operator returns true if all of the subquery values meet the condition.
 
 <div id="" class="macroouter">
 
-<h1></h1>
-
-<h2></h2>
+<h2>Using RIGHT JOIN to obtain the same result as above. Order of tables in query was altered.</h2>
 
 <div class="macroinner">
 
-<h3></h3>
+<h3>SELECT EmployeeID, Territories.TerritoryDescription</h3>
 
-<h3></h3>
+<h3>FROM Territories</h3>
 
-<h3></h3>
+<h3>LEFT JOIN EmployeeTerritories ON Territories.TerritoryID = EmployeeTerritories.TerritoryID</h3>
+
+<h3>ORDER BY EmployeeID, Territories.TerritoryDescription</h3>
 
 </div>
 
 <div class="tbl">
 
+<div class="tbl">
 
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">EmployeeID</th>
+    <th class="tg-yw4l">TerritoryDescription</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">NULL</td>
+    <td class="tg-yw4l">Austin</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">NULL</td>
+    <td class="tg-yw4l">Bentonville</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">NULL</td>
+    <td class="tg-yw4l">Columbia</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">NULL</td>
+    <td class="tg-yw4l">Dallas</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Neward</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Wilton</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Bedford</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Boston</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Braintree</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Cambridge</td>
+  </tr>
+</table>
 
-<h6> rows in total</h6>
+<h6>53 rows in total</h6>
 
 </div>
 
@@ -5695,25 +5923,169 @@ The ALL operator returns true if all of the subquery values meet the condition.
 
 <div id="" class="macroouter">
 
-<h1></h1>
-
-<h2></h2>
+<h2>Three-table right join example.</h2>
 
 <div class="macroinner">
 
-<h3></h3>
+<h3>SELECT EmployeeTerritories.EmployeeID, Employees.FirstName + ' ' + Employees.LastName,</h3>
 
-<h3></h3>
+<h3>Territories.TerritoryDescription</h3>
 
-<h3></h3>
+<h3>FROM Employees</h3>
+
+<h3>RIGHT JOIN EmployeeTerritories ON Employees.EmployeeID = EmployeeTerritories.EmployeeID</h3>
+
+<h3>RIGHT JOIN Territories ON EmployeeTerritories.TerritoryID = Territories.TerritoryID</h3>
 
 </div>
 
 <div class="tbl">
 
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">EmployeeID</th>
+    <th class="tg-yw4l">(No column name)</th>
+    <th class="tg-yw4l">TerritoryDescription</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Westboro</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Bedford</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Georgetow</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Boston</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Cambridge</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Braintree</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">5</td>
+    <td class="tg-yw4l">Steven Buchanan</td>
+    <td class="tg-yw4l">Providence</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">9</td>
+    <td class="tg-yw4l">Anne Dodsworth</td>
+    <td class="tg-yw4l">Hollis</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">9</td>
+    <td class="tg-yw4l">Anne Dodsworth</td>
+    <td class="tg-yw4l">Portsmouth</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Nancy Davolio</td>
+    <td class="tg-yw4l">Wilton</td>
+  </tr>
+</table>
+
+<h6>53 rows in total</h6>
+
+</div>
+
+</div>
 
 
-<h6> rows in total</h6>
+
+<div id="FULL_JOIN" class="macroouter">
+
+<h1>FULL JOIN</h1>
+
+<h2>Returns all records from both Table A and Table B regardless there are matches or not.</h2>
+
+<div class="macroinner">
+
+<h3>SELECT EmployeeID, Territories.TerritoryDescription</h3>
+
+<h3>FROM EmployeeTerritories</h3>
+
+<h3>FULL JOIN Territories ON EmployeeTerritories.TerritoryID = Territories.TerritoryID</h3>
+
+<h3>ORDER BY EmployeeID, Territories.TerritoryDescription</h3>
+
+</div>
+
+<div class="tbl">
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">EmployeeID</th>
+    <th class="tg-yw4l">(No column name)</th>
+    <th class="tg-yw4l">TerritoryDescription</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Westboro</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Bedford</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Georgetow</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Boston</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Cambridge</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Braintree</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">5</td>
+    <td class="tg-yw4l">Steven Buchanan</td>
+    <td class="tg-yw4l">Providence</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">9</td>
+    <td class="tg-yw4l">Anne Dodsworth</td>
+    <td class="tg-yw4l">Hollis</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">9</td>
+    <td class="tg-yw4l">Anne Dodsworth</td>
+    <td class="tg-yw4l">Portsmouth</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Nancy Davolio</td>
+    <td class="tg-yw4l">Wilton</td>
+  </tr>
+</table>
+
+<h6>53 rows in total</h6>
 
 </div>
 
@@ -5723,40 +6095,609 @@ The ALL operator returns true if all of the subquery values meet the condition.
 
 <div id="" class="macroouter">
 
-<h1></h1>
-
-<h2></h2>
+<h2>Example shows combination of full and left table joins.</h2>
 
 <div class="macroinner">
 
-<h3></h3>
+<h3>SELECT EmployeeTerritories.EmployeeID, Employees.FirstName + ' ' + Employees.LastName,</h3>
 
-<h3></h3>
+<h3>Territories.TerritoryDescription</h3>
 
-<h3></h3>
+<h3>FROM Employees</h3>
+
+<h3>FULL JOIN EmployeeTerritories ON Employees.EmployeeID = EmployeeTerritories.EmployeeID</h3>
+
+<h3>LEFT JOIN Territories ON EmployeeTerritories.TerritoryID = Territories.TerritoryID</h3>
 
 </div>
 
 <div class="tbl">
 
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">EmployeeID</th>
+    <th class="tg-yw4l">(No column name)</th>
+    <th class="tg-yw4l">TerritoryDescription</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Nancy Davolio</td>
+    <td class="tg-yw4l">Wilton</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">Nancy Davolio</td>
+    <td class="tg-yw4l">Neward</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Westboro</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Bedford</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Georgetow</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Boston</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Cambridge</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Braintree</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">Andrew Fuller</td>
+    <td class="tg-yw4l">Louisville</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">3</td>
+    <td class="tg-yw4l">Janet Leverling</td>
+    <td class="tg-yw4l">Atlanta</td>
+  </tr>
+</table>
 
-
-<h6> rows in total</h6>
+<h6>53 rows in total</h6>
 
 </div>
 
 </div>
 
 
-///////////
-<br>
-
-<br>
 
 
+<div id="SELF_JOIN" class="macroouter">
+
+<h1>SELF JOIN</h1>
+
+<h2>Self joins connects rows with other rows in the same table.</h2>
+
+<p>In the example Andrew Fuller doesn't appear as he reports to NULL. We may assume there is no one also above in hierarchy.</p>
+
+<div class="macroinner">
+
+<h3>SELECT a.LastName AS Employee, b.LastName AS Supervisor</h3>
+
+<h3>FROM Employees a, Employees b</h3>
+
+<h3>WHERE b.EmployeeID = a.ReportsTo</h3>
 
 </div>
 
+<div class="tbl">
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">Employee</th>
+    <th class="tg-yw4l">Supervisor</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Davolio</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Leverling</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Peacock</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Buchanan</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Suyama</td>
+    <td class="tg-yw4l">Buchanan</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">King</td>
+    <td class="tg-yw4l">Buchanan</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Callahan</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Dodsworth</td>
+    <td class="tg-yw4l">Buchanan</td>
+  </tr>
+</table>
+
+<h6>8 rows in total</h6>
+
+</div>
+
+</div>
+
+
+
+<div id="" class="macroouter">
+
+<h2>In the example we assume that Andrew Fuller reports to himself.</h2>
+
+<div class="macroinner">
+
+<h3>SELECT a.LastName AS Employee, b.LastName AS Supervisor</h3>
+
+<h3>FROM Employees a, Employees b</h3>
+
+<h3>WHERE b.EmployeeID = ISNULL(a.ReportsTo, 2)</h3>
+
+</div>
+
+<div class="tbl">
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">Employee</th>
+    <th class="tg-yw4l">Supervisor</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Davolio</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Fuller</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Leverling</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Peacock</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Buchanan</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Suyama</td>
+    <td class="tg-yw4l">Buchanan</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">King</td>
+    <td class="tg-yw4l">Buchanan</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Callahan</td>
+    <td class="tg-yw4l">Fuller</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Dodsworth</td>
+    <td class="tg-yw4l">Buchanan</td>
+  </tr>
+</table>
+
+<h6>9 rows in total</h6>
+
+</div>
+
+</div>
+
+
+
+<div id="UNION" class="macroouter">
+
+<h1>UNION</h1>
+
+<h2>The UNION operator combines the results of two or more SELECT statements. In order to use UNION columns in tables have to match. Duplicated pairs are removed.</h2>
+
+<div class="macroinner">
+
+<h3>SELECT City, Country FROM Suppliers</h3>
+
+<h3>UNION</h3>
+
+<h3>SELECT City, Country FROM Employees</h3>
+
+</div>
+
+<div class="tbl">
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">City</th>
+    <th class="tg-yw4l">Country</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Ann Arbor</td>
+    <td class="tg-yw4l">USA</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Annecy</td>
+    <td class="tg-yw4l">France</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Bend</td>
+    <td class="tg-yw4l">USA</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Berlin</td>
+    <td class="tg-yw4l">Germany</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Boston</td>
+    <td class="tg-yw4l">USA</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Cuxhaven</td>
+    <td class="tg-yw4l">Germany</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Frankfurt</td>
+    <td class="tg-yw4l">Germany</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Göteborg</td>
+    <td class="tg-yw4l">Sweden</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Kirkland</td>
+    <td class="tg-yw4l">USA</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Lappeenranta</td>
+    <td class="tg-yw4l">Finland</td>
+  </tr>
+</table>
+
+<h6>33 rows in total</h6>
+
+</div>
+
+</div>
+
+
+
+<div id="" class="macroouter">
+
+<h2>The UNION ALL operator combines the results of two or more SELECT statements, however duplicated pairs are not removed. London, UK appears multiple times</h2>
+
+<div class="macroinner">
+
+<h3>SELECT City, Country FROM Suppliers</h3>
+
+<h3>UNION ALL</h3>
+
+<h3>SELECT City, Country FROM Employees</h3>
+
+</div>
+
+<div class="tbl">
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">City</th>
+    <th class="tg-yw4l">Country</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">London</td>
+    <td class="tg-yw4l">UK</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">New Orleans</td>
+    <td class="tg-yw4l">USA</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Ann Arbor</td>
+    <td class="tg-yw4l">USA</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Tokyo</td>
+    <td class="tg-yw4l">Japan</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Oviedo</td>
+    <td class="tg-yw4l">Spain</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Osaka</td>
+    <td class="tg-yw4l">Japan</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Melbourne</td>
+    <td class="tg-yw4l">Australia</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Manchester</td>
+    <td class="tg-yw4l">UK</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Göteborg</td>
+    <td class="tg-yw4l">Sweden</td>
+  </tr>
+</table>
+
+<h6>38 rows in total</h6>
+
+</div>
+
+</div>
+
+
+
+<div id="INSERT_INTO" class="macroouter">
+
+<h1>INSERT INTO</h1>
+
+<h2>Inserts a new record into a table.</h2>
+
+<div class="macroinner">
+
+<h3>INSERT INTO Employees (LastName, FirstName, Title)</h3>
+
+<h3>VALUES ('Janus', 'Piotr', 'Sales Representative')</h3>
+
+</div>
+
+<div class="tbl">
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">LastName</th>
+    <th class="tg-yw4l">FirstName</th>
+    <th class="tg-yw4l">Title</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Davolio</td>
+    <td class="tg-yw4l">Nancy</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Fuller</td>
+    <td class="tg-yw4l">Andrew</td>
+    <td class="tg-yw4l">Vice President, Sales</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Leverling</td>
+    <td class="tg-yw4l">Janet</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Peacock</td>
+    <td class="tg-yw4l">Margaret</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Buchanan</td>
+    <td class="tg-yw4l">Steven</td>
+    <td class="tg-yw4l">Sales Manager</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Suyama</td>
+    <td class="tg-yw4l">Michael</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">King</td>
+    <td class="tg-yw4l">Robert</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Callahan</td>
+    <td class="tg-yw4l">Laura</td>
+    <td class="tg-yw4l">Inside Sales Coordinator</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Dodsworth</td>
+    <td class="tg-yw4l">Anne</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Janus</td>
+    <td class="tg-yw4l">Piotr</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+</table>
+
+<h6>(1 row affected)</h6>
+
+</div>
+
+</div>
+
+
+
+<div id="" class="macroouter">
+
+<h1>UPDATE</h1>
+
+<h2>Updates a record in a table.</h2>
+
+<div class="macroinner">
+
+<h3>UPDATE Employees</h3>
+
+<h3>SET FirstName = 'Peter', LastName = 'Janusz'</h3>
+
+<h3>WHERE EmployeeID = 10</h3>
+
+</div>
+
+<div class="tbl">
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">LastName</th>
+    <th class="tg-yw4l">FirstName</th>
+    <th class="tg-yw4l">Title</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Davolio</td>
+    <td class="tg-yw4l">Nancy</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Fuller</td>
+    <td class="tg-yw4l">Andrew</td>
+    <td class="tg-yw4l">Vice President, Sales</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Leverling</td>
+    <td class="tg-yw4l">Janet</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Peacock</td>
+    <td class="tg-yw4l">Margaret</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Buchanan</td>
+    <td class="tg-yw4l">Steven</td>
+    <td class="tg-yw4l">Sales Manager</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Suyama</td>
+    <td class="tg-yw4l">Michael</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">King</td>
+    <td class="tg-yw4l">Robert</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Callahan</td>
+    <td class="tg-yw4l">Laura</td>
+    <td class="tg-yw4l">Inside Sales Coordinator</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Dodsworth</td>
+    <td class="tg-yw4l">Anne</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Janusz</td>
+    <td class="tg-yw4l">Piotr</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+</table>
+
+<h6>(1 row affected)</h6>
+
+</div>
+
+</div>
+
+
+
+<div id="" class="macroouter">
+
+<h1>DELETE</h1>
+
+<h2>Deletes a record from a table.</h2>
+
+<div class="macroinner">
+
+<h3>DELETE FROM Employees</h3>
+
+<h3>WHERE EmployeeID = 10</h3>
+
+</div>
+
+<div class="tbl">
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">LastName</th>
+    <th class="tg-yw4l">FirstName</th>
+    <th class="tg-yw4l">Title</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Davolio</td>
+    <td class="tg-yw4l">Nancy</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Fuller</td>
+    <td class="tg-yw4l">Andrew</td>
+    <td class="tg-yw4l">Vice President, Sales</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Leverling</td>
+    <td class="tg-yw4l">Janet</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Peacock</td>
+    <td class="tg-yw4l">Margaret</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Buchanan</td>
+    <td class="tg-yw4l">Steven</td>
+    <td class="tg-yw4l">Sales Manager</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Suyama</td>
+    <td class="tg-yw4l">Michael</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">King</td>
+    <td class="tg-yw4l">Robert</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Callahan</td>
+    <td class="tg-yw4l">Laura</td>
+    <td class="tg-yw4l">Inside Sales Coordinator</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Dodsworth</td>
+    <td class="tg-yw4l">Anne</td>
+    <td class="tg-yw4l">Sales Representative</td>
+  </tr>
+</table>
+
+<h6>(1 row affected)</h6>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 
 
@@ -5795,16 +6736,6 @@ On this website, you will find a bunch of SQL queries which will guide you how t
 
 </div>
 
-<!--
-<div class="dashed">
-	<div class="grey-bg container-fluid">
-		<div class="row slideanim" id="counter">
-			<div class="counter-Txt"><h5>Currently available on the website</h5><h5><span class="counter-value" data-count="62">0</span></h5><h5>SQL queries</h5></div>
-		</div>
-	</div>
-</div>
--->
-
 <div id="" class="list">
 <br>
 <h4><a href="#SELECT">SELECT</a></h4>
@@ -5837,12 +6768,13 @@ On this website, you will find a bunch of SQL queries which will guide you how t
 <h4><a href="#EXISTS">EXISTS</a></h4>
 <h4><a href="#ANY_ALL">ANY, ALL</a></h4>
 <h4><a href="#JOINS">JOINS</a></h4>
-<h4><a href="#INNER JOIN">INNER JOIN</a></h4>
-<h4><a href="#LEFT JOIN">LEFT JOIN</a></h4>
-<h4><a href="#RIGHT JOIN">RIGHT JOIN</a></h4>
-<h4><a href="#FULL JOIN">FULL JOIN</a></h4>
+<h4><a href="#INNER_JOIN">INNER JOIN</a></h4>
+<h4><a href="#LEFT_JOIN">LEFT JOIN</a></h4>
+<h4><a href="#RIGHT_JOIN">RIGHT JOIN</a></h4>
+<h4><a href="#FULL_JOIN">FULL JOIN</a></h4>
+<h4><a href="#SELF_JOIN">SELF JOIN</a></h4>
 <h4><a href="#UNION">UNION</a></h4>
-<h4><a href="#INSERT INTO">INSERT INTO</a></h4>
+<h4><a href="#INSERT_INTO">INSERT INTO</a></h4>
 <h4><a href="#UPDATE">UPDATE</a></h4>
 <h4><a href="#DELETE">DELETE</a></h4>
 
