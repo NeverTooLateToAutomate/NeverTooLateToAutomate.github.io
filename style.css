@@ -153,10 +153,10 @@ h2{padding-bottom:15px;font-size:16px;font-weight:400;background-color:;line-hei
 h4{font-size:15px;font-weight:400;background-color:;line-height: 200%;}
 /* h5{font-size:24px;font-weight:400;background-color:;line-height: 150%;} */
 
-h5{font-family: "Courier New", Courier, Lato, Arial, Helvetica, Sans-serif}
+h5{font-family: Cousine, Lato, Arial, Helvetica, Sans-serif}
 h5{color: #FF0000;font-size:14px;font-weight:400;line-height: 100%;}
 
-h6{font-family:Courier New, Lato, Arial, Helvetica, Sans-serif}
+h6{font-family: Cousine, Lato, Arial, Helvetica, Sans-serif}
 h6{color: #000000;font-size:14px;font-weight:400;line-height: 100%;}
 
 .macroinner {
