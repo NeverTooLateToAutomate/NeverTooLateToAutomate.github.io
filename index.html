@@ -161,8 +161,89 @@ On this website, you will find a bunch of codes ready to be pasted in your Excel
 
 <div id="Calculate" class="macroouter">
 <h1>Access</h1>
-<h1>Export from Access using Connection Object</h1>
-<h2>Enables export from Access to Excel using Connection Object.
+<h1>Export from Access 1 oCmd</h1>
+<h2>Enables export from Access to Excel using Command Object.</h2>
+<div class="macroinner">
+<h6>Sub CommandConn()</h6>
+<br>
+<h6>&nbsp;&nbsp    On Error GoTo ErrHandler:</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim oConn As New ADODB.Connection</h6>
+<h6>&nbsp;&nbsp    Dim oCmd As New ADODB.Command</h6>
+<h6>&nbsp;&nbsp    Dim oRs As New ADODB.Recordset</h6>
+<h6>&nbsp;&nbsp    Dim iCols As Long</h6>
+<br>
+<h6>&nbsp;&nbsp    oCmd.CommandText = "SELECT * FROM Invoice;"</h6>
+<h6>&nbsp;&nbsp    oCmd.CommandType = adCmdText</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Connect to data source</h5>
+<h6>&nbsp;&nbsp    Set oConn = GetNewConnection</h6>
+<h6>&nbsp;&nbsp    oCmd.ActiveConnection = oConn</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Execute SQL command</h5>
+<h6>&nbsp;&nbsp    Set oRs = oCmd.Execute</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Headers</h5>
+<h6>&nbsp;&nbsp    For iCols = 0 To oRs.Fields.Count - 1</h6>
+<h6>&nbsp;&nbsp    Sheets("Access").Cells(11, iCols + 1).Value = oRs.Fields(iCols).Name</h6>
+<h6>&nbsp;&nbsp    Next</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Copy recordset</h5>
+<h5>&nbsp;&nbsp    ' MsgBox oRs.RecordCount</h5>
+<h6>&nbsp;&nbsp    Range("A12").CopyFromRecordset oRs</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Clean up</h5>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<h6>&nbsp;&nbsp    oConn.Close</h6>
+<h6>&nbsp;&nbsp    Set oRs = Nothing</h6>
+<h6>&nbsp;&nbsp    Set oConn = Nothing</h6>
+<h6>&nbsp;&nbsp    Set oCmd = Nothing</h6>
+<br>
+<h6>&nbsp;&nbsp		ErrHandler:</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Clean up</h5>
+<h6>&nbsp;&nbsp    If oRs.State = adStateOpen Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        oRs.Close</h6>
+<h6>&nbsp;&nbsp    End If</h6>
+<br>
+<h6>&nbsp;&nbsp    If oConn.State = adStateOpen Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        oConn.Close</h6>
+<h6>&nbsp;&nbsp    End If</h6>
+<br>
+<h6>&nbsp;&nbsp    Set oRs = Nothing</h6>
+<h6>&nbsp;&nbsp    Set oConn = Nothing</h6>
+<h6>&nbsp;&nbsp    Set oCmd = Nothing</h6>
+<br>
+<h6>&nbsp;&nbsp    If Err <> 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        MsgBox Err.Source & "-->" & Err.Description, , "Error"</h6>
+<h6>&nbsp;&nbsp    End If</h6>
+<br>
+<h6>&nbsp;&nbsp		End Sub</h6>
+</div>
+<br>
+<div class="macroinner">
+<h5>&nbsp;&nbsp' BeginNewConnection</h5>
+<br>
+<h6>&nbsp;&nbspPrivate Function GetNewConnection() As ADODB.Connection</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim oCn As New ADODB.Connection</h6>
+<h6>&nbsp;&nbsp    Dim sConn As String</h6>
+<br>
+<h6>&nbsp;&nbsp    sConn = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\Users\admin\GarageMike.accdb;"</h6>
+<h6>&nbsp;&nbsp    oCn.Open sConn</h6>
+<br>
+<h6>&nbsp;&nbsp    If oCn.State = adStateOpen Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Set GetNewConnection = oCn</h6>
+<h6>&nbsp;&nbsp    End If</h6>
+<br>
+<h6>&nbsp;&nbsp	   End Function</h6>
+</div>
+</div>
+
+
+<div id="Calculate" class="macroouter">
+<h1>Export from Access 2 oConn</h1>
+<h2>Enables export from Access to Excel using Connection Object.<br>
 Here oRs.Open takes a Connection object (oConn) variable as the value of its ActiveConnection parameter.<br>
 Useful link:<br>
 https://docs.microsoft.com/en-us/sql/ado/guide/data/using-a-connection-object?view=sql-server-2017</h2>
@@ -206,158 +287,139 @@ https://docs.microsoft.com/en-us/sql/ado/guide/data/using-a-connection-object?vi
 <h6>&nbsp;&nbsp    Set oConn = Nothing</h6>
 <br>
 <h6>End Sub</h6>
-
 </div>
 </div>
 
 
 <div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
+<h1>Export from Access 3 oRs</h1>
+<h2>Enables export from Access to Excel using Recordset Object.
+Recordset.Open can be used to implicitly establish a connection and issue a command over that connection in a single operation.
+Notice that oRs.Open takes a connection string (sConn), in place of a Connection object (oConn), as the value of its ActiveConnection parameter. Also the client-side cursor type is enforced by setting the CursorLocation property on the Recordset object.<br>
+Useful link:<br>
+https://docs.microsoft.com/en-us/sql/ado/guide/data/using-a-recordset-object?view=sql-server-2017</h2>
+<div class="macroinner">
+<h6>Sub RecordsetConn()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim oRs As New ADODB.Recordset</h6>
+<h6>&nbsp;&nbsp    Dim sConn As String</h6>
+<h6>&nbsp;&nbsp    Dim sSQL As String</h6>
+<h6>&nbsp;&nbsp    Dim iCols As Long</h6>
+<br>
+<h6>&nbsp;&nbsp    sConn = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\Users\admin\GarageMike.accdb;"</h6>
+<h6>&nbsp;&nbsp    sSQL = "SELECT * FROM Invoice;"</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Connect to data source and execute SQL command</h5>
+<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockBatchOptimistic, adCmdText</h6>
+<h5>&nbsp;&nbsp    ' Set oRs = sConn.Execute(sSQL) - won't work</h5>
+<br>
+<h5>&nbsp;&nbsp    ' Headers</h5>
+<h6>&nbsp;&nbsp    For iCols = 0 To oRs.Fields.Count - 1</h6>
+<h6>&nbsp;&nbsp    Sheets("Access").Cells(6, iCols + 1).Value = oRs.Fields(iCols).Name</h6>
+<h6>&nbsp;&nbsp    Next</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Copy recordset</h5>
+<h5>&nbsp;&nbsp    ' MsgBox oRs.RecordCount</h5>
+<h6>&nbsp;&nbsp    Range("A7").CopyFromRecordset oRs</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Clean up</h5>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<h6>&nbsp;&nbsp    Set oRs = Nothing</h6>
+<br>
+<h6>End Sub</h6>
+</div>
+</div>
+
+
+<div id="Calculate" class="macroouter">
+<h1>Export from Access 4 DoCmd</h1>
+<h2>You can use the methods of the DoCmd object to run Microsoft Office Access actions from Visual Basic.<br>
+Works with Microsoft Access 16.0 Object Library and Microsoft Office 16.0 Access database engine object library.<br>
+Useful links:<br>
+https://docs.microsoft.com/en-us/office/vba/api/access.docmd<br>
+https://docs.microsoft.com/en-us/office/vba/api/access.acspreadsheettype<br>
+http://access-excel.tips/access-vba-cocmd-transferspreadsheet/</h2>
+<div class="macroinner">
+<h6>Sub ExportFromAccess()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim acc As Object</h6>
+<h6>&nbsp;&nbsp    Set acc = CreateObject("Access.Application")</h6>
+<br>
+<h6>&nbsp;&nbsp    With acc</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .OpenCurrentDatabase "C:\Users\admin\Documents\Nauka\Bazy danych\Access2010DB\GarageMike.accdb"</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .DoCmd.TransferSpreadsheet acExport, 10, "Vehicles", "C:\Users\admin\test.xlsm", True, "Vehicles"</h6> 
+<h5>&nbsp;&nbsp	' Application.ActiveWorkbook.FullName</h5>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp        ' 10 = acSpreadsheetTypeExcel12Xml</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .CloseCurrentDatabase</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .Quit</h6>
+<h6>&nbsp;&nbsp    End With</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Clean up</h5>
+<h6>&nbsp;&nbsp    Set acc = Nothing</h6>
+<br>
+<h6>End Sub</h6>
+</div>
+</div>
+
+
+<div id="Calculate" class="macroouter">
+<h1>Loop Through Recordset</h1>
+<h2>Enables export from Access to Excel using Recordset Object and including loop through recordset.</h2>
+<div class="macroinner">
+<h6>Sub RecordsetConnLoop()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim oRs As New ADODB.Recordset</h6>
+<h6>&nbsp;&nbsp    Dim sConn As String</h6>
+<h6>&nbsp;&nbsp    Dim sSQL As String</h6>
+<br>
+<h6>&nbsp;&nbsp    sConn = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\Users\admin\GarageMike.accdb;"</h6>
+<h6>&nbsp;&nbsp    sSQL = "SELECT * FROM Vehicles;"</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Create and Open the Recordset object.</h5>
+<h5>&nbsp;&nbsp    oRs.CursorLocation = adUseClient ' !!!</h5>
+<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockBatchOptimistic, adCmdText</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Does recordset contains rows</h5>
+<h6>&nbsp;&nbsp    If Not (oRs.EOF And oRs.BOF) Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        oRs.MoveFirst</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Do Until oRs.EOF = True</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Debug.Print oRs.Fields("Vehicle ID") & " " & oRs.Fields("Model")</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            oRs.MoveNext</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Loop</h6>
+<h6>&nbsp;&nbsp    Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        MsgBox "There are no records in the recordset."</h6>
+<h6>&nbsp;&nbsp    End If</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Clean up</h5>
+<h6>&nbsp;&nbsp    Set oRs.ActiveConnection = Nothing</h6>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<h6>&nbsp;&nbsp    Set oRs = Nothing</h6>
+<br>
+<h6>End Sub</h6>
+</div>
+</div>
+
+
+<div id="Calculate" class="macroouter">
+<h1>Import to Access 1 oRs</h1>
 <h2>Descr.</h2>
 <div class="macroinner">
 <h6>code</h6>
 </div>
 </div>
 
+
 <div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
+<h1>Import to Access 2 Sql</h1>
 <h2>Descr.</h2>
 <div class="macroinner">
 <h6>code</h6>
 </div>
 </div>
 
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
 
 <div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
-<h2>Descr.</h2>
-<div class="macroinner">
-<h6>code</h6>
-</div>
-</div>
-
-<div id="Calculate" class="macroouter">
-<h1>Access</h1>
-<h1>Calculate</h1>
+<h1>Import to Access 3 DoCmd</h1>
 <h2>Descr.</h2>
 <div class="macroinner">
 <h6>code</h6>
