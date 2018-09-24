@@ -159,7 +159,7 @@ On this website, you will find a bunch of codes ready to be pasted in your Excel
 <div id="section2" class="">
 
 
-<div id="Calculate" class="macroouter">
+<div id="CommandConn" class="macroouter">
 <h1>Access</h1>
 <h1>Export from Access 1 oCmd</h1>
 <h2>Enables export from Access to Excel using Command Object.</h2>
@@ -241,7 +241,7 @@ On this website, you will find a bunch of codes ready to be pasted in your Excel
 </div>
 
 
-<div id="Calculate" class="macroouter">
+<div id="ObjectConn" class="macroouter">
 <h1>Export from Access 2 oConn</h1>
 <h2>Enables export from Access to Excel using Connection Object.<br>
 Here oRs.Open takes a Connection object (oConn) variable as the value of its ActiveConnection parameter.<br>
@@ -291,7 +291,7 @@ https://docs.microsoft.com/en-us/sql/ado/guide/data/using-a-connection-object?vi
 </div>
 
 
-<div id="Calculate" class="macroouter">
+<div id="RecordsetConn" class="macroouter">
 <h1>Export from Access 3 oRs</h1>
 <h2>Enables export from Access to Excel using Recordset Object.
 Recordset.Open can be used to implicitly establish a connection and issue a command over that connection in a single operation.
@@ -331,7 +331,7 @@ https://docs.microsoft.com/en-us/sql/ado/guide/data/using-a-recordset-object?vie
 </div>
 
 
-<div id="Calculate" class="macroouter">
+<div id="ExportFromAccessDoCmd" class="macroouter">
 <h1>Export from Access 4 DoCmd</h1>
 <h2>You can use the methods of the DoCmd object to run Microsoft Office Access actions from Visual Basic.<br>
 Works with Microsoft Access 16.0 Object Library and Microsoft Office 16.0 Access database engine object library.<br>
@@ -346,7 +346,7 @@ http://access-excel.tips/access-vba-cocmd-transferspreadsheet/</h2>
 <h6>&nbsp;&nbsp    Set acc = CreateObject("Access.Application")</h6>
 <br>
 <h6>&nbsp;&nbsp    With acc</h6>
-<h6>&nbsp;&nbsp;&nbsp;&nbsp        .OpenCurrentDatabase "C:\Users\admin\Documents\Nauka\Bazy danych\Access2010DB\GarageMike.accdb"</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .OpenCurrentDatabase "C:\Users\admin\GarageMike.accdb"</h6>
 <h6>&nbsp;&nbsp;&nbsp;&nbsp        .DoCmd.TransferSpreadsheet acExport, 10, "Vehicles", "C:\Users\admin\test.xlsm", True, "Vehicles"</h6> 
 <h5>&nbsp;&nbsp	' Application.ActiveWorkbook.FullName</h5>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp        ' 10 = acSpreadsheetTypeExcel12Xml</h5>
@@ -362,7 +362,7 @@ http://access-excel.tips/access-vba-cocmd-transferspreadsheet/</h2>
 </div>
 
 
-<div id="Calculate" class="macroouter">
+<div id="RecordsetConnLoop" class="macroouter">
 <h1>Loop Through Recordset</h1>
 <h2>Enables export from Access to Excel using Recordset Object and including loop through recordset.</h2>
 <div class="macroinner">
@@ -376,7 +376,7 @@ http://access-excel.tips/access-vba-cocmd-transferspreadsheet/</h2>
 <h6>&nbsp;&nbsp    sSQL = "SELECT * FROM Vehicles;"</h6>
 <br>
 <h5>&nbsp;&nbsp    ' Create and Open the Recordset object.</h5>
-<h5>&nbsp;&nbsp    oRs.CursorLocation = adUseClient ' !!!</h5>
+<h6>&nbsp;&nbsp    oRs.CursorLocation = adUseClient</h6>
 <h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockBatchOptimistic, adCmdText</h6>
 <br>
 <h5>&nbsp;&nbsp    ' Does recordset contains rows</h5>
@@ -399,33 +399,194 @@ http://access-excel.tips/access-vba-cocmd-transferspreadsheet/</h2>
 </div>
 </div>
 
-<!--
-<div id="Calculate" class="macroouter">
+
+<div id="RecordsetConnAddUpdateDelete" class="macroouter">
 <h1>Import to Access 1 oRs</h1>
-<h2>Descr.</h2>
+<h2>Establishes connection with Access database and allows adding, updating and deleting records using recordset.<br>
+Useful links:<br>
+https://docs.microsoft.com/en-us/sql/ado/guide/data/using-a-recordset-object?view=sql-server-2017</h2>
 <div class="macroinner">
-<h6>code</h6>
+<h6>Sub RecordsetConnAddUpdateDelete()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim oRs As New ADODB.Recordset</h6>
+<h6>&nbsp;&nbsp    Dim fld As ADODB.Field</h6>
+<h6>&nbsp;&nbsp    Dim sConn As String</h6>
+<h6>&nbsp;&nbsp    Dim sSQL As String</h6>
+<h6>&nbsp;&nbsp    Dim PrintoRs As String</h6>
+<br>
+<h6>&nbsp;&nbsp    sConn = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\Users\admin\Documents\db.accdb;"</h6>
+<h6>&nbsp;&nbsp    sSQL = "SELECT * FROM [Publishers];"</h6>
+<br>
+<h5>&nbsp;&nbsp    ' oRs fields</h5>
+<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockOptimistic</h6>
+<h6>&nbsp;&nbsp    Debug.Print oRs.RecordCount</h6>
+<h6>&nbsp;&nbsp    For Each fld In oRs.Fields</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Debug.Print fld.Name</h6>
+<h6>&nbsp;&nbsp    Next fld</h6>
+<br>
+<h5>&nbsp;&nbsp    ' oRs values</h5>
+<h6>&nbsp;&nbsp    Do Until oRs.EOF</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For Each fld In oRs.Fields</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            PrintoRs = PrintoRs & fld.Value & " "</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next fld</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Debug.Print PrintoRs</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        PrintoRs = ""</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        oRs.MoveNext</h6>
+<h6>&nbsp;&nbsp    Loop</h6>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<br>
+<h5>&nbsp;&nbsp    ' insert</h5>
+<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockOptimistic</h6>
+<h6>&nbsp;&nbsp    oRs.MoveLast</h6>
+<h6>&nbsp;&nbsp    oRs.AddNew</h6>
+<h6>&nbsp;&nbsp    oRs!pub_id = 4545</h6>
+<h6>&nbsp;&nbsp    oRs!pub_name = "Gringo Bros."</h6>
+<h6>&nbsp;&nbsp    oRs!city = "Warsaw"</h6>
+<h6>&nbsp;&nbsp    oRs!State = ""</h6>
+<h6>&nbsp;&nbsp    oRs!country = "Poland"</h6>
+<h6>&nbsp;&nbsp    oRs.Update</h6>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<br>
+<h5>&nbsp;&nbsp    ' oRs values</h5>
+<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockOptimistic</h6>
+<h6>&nbsp;&nbsp    Do Until oRs.EOF</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For Each fld In oRs.Fields</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            PrintoRs = PrintoRs & fld.Value & " "</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next fld</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Debug.Print PrintoRs</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        PrintoRs = ""</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        oRs.MoveNext</h6>
+<h6>&nbsp;&nbsp    Loop</h6>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<br>
+<h5>&nbsp;&nbsp    ' update</h5>
+<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockOptimistic</h6>
+<h6>&nbsp;&nbsp    oRs.Find ("pub_id = 4545")</h6>
+<h6>&nbsp;&nbsp    oRs!pub_id = 9999</h6>
+<h6>&nbsp;&nbsp    oRs!pub_name = "Gregory Bros."</h6>
+<h6>&nbsp;&nbsp    oRs.Update</h6>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<br>
+<h5>&nbsp;&nbsp    ' oRs values</h5>
+<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockOptimistic</h6>
+<h6>&nbsp;&nbsp    Do Until oRs.EOF</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For Each fld In oRs.Fields</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            PrintoRs = PrintoRs & fld.Value & " "</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next fld</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Debug.Print PrintoRs</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        PrintoRs = ""</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        oRs.MoveNext</h6>
+<h6>&nbsp;&nbsp    Loop</h6>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<br>
+<h5>&nbsp;&nbsp    ' delete</h5>
+<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockOptimistic</h6>
+<h6>&nbsp;&nbsp    oRs.Find ("pub_name = 'Gregory Bros.'")</h6>
+<h6>&nbsp;&nbsp    oRs.Delete</h6>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<br>
+<h5>&nbsp;&nbsp    ' oRs values</h5>
+<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockOptimistic</h6>
+<h6>&nbsp;&nbsp    Do Until oRs.EOF</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For Each fld In oRs.Fields</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            PrintoRs = PrintoRs & fld.Value & " "</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next fld</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Debug.Print PrintoRs</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        PrintoRs = ""</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        oRs.MoveNext</h6>
+<h6>&nbsp;&nbsp    Loop</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Disconnect the Recordset</h5>
+<h6>&nbsp;&nbsp    oRs.Close</h6>
+<h6>&nbsp;&nbsp    Set oRs.ActiveConnection = Nothing</h6>
+<h6>&nbsp;&nbsp    Set oRs = Nothing</h6>
+<br>
+<h6>End Sub</h6>
 </div>
 </div>
 
 
-<div id="Calculate" class="macroouter">
+<div id="ObjectConnSQLInsertUpdateDelete" class="macroouter">
 <h1>Import to Access 2 Sql</h1>
-<h2>Descr.</h2>
+<h2>Connect to Access and insert, update and delete records using SQL queries.</h2>
 <div class="macroinner">
-<h6>code</h6>
+<h6>Sub ObjectConnSQLInsertUpdateDelete()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim oConn As New ADODB.Connection</h6>
+<h6>&nbsp;&nbsp    Dim oRs As ADODB.Recordset</h6>
+<h6>&nbsp;&nbsp    Dim sConn As String</h6>
+<h6>&nbsp;&nbsp    Dim sSQL As String</h6>
+<h6>&nbsp;&nbsp    Dim source1 As String</h6>
+<h6>&nbsp;&nbsp    Dim source2 As String</h6>
+<h6>&nbsp;&nbsp    Dim source3 As String</h6>
+<br>
+<h5>&nbsp;&nbsp    'Source</h5>
+<h6>&nbsp;&nbsp    source1 = ThisWorkbook.Sheets("Access").Range("A16")</h6>
+<h6>&nbsp;&nbsp    source2 = ThisWorkbook.Sheets("Access").Range("B16")</h6>
+<h6>&nbsp;&nbsp    source3 = ThisWorkbook.Sheets("Access").Range("C16")</h6>
+<br>
+<h6>&nbsp;&nbsp    sConn = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\Users\admin\db.accdb;"</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Connect to data source</h5>
+<h6>&nbsp;&nbsp    oConn.Open sConn</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Count query</h5>
+<h6>&nbsp;&nbsp    sSQL = "SELECT COUNT(ID) AS num FROM EMPLOYEE"</h6>
+<h6>&nbsp;&nbsp    Set oRs = oConn.Execute(sSQL)</h6>
+<h6>&nbsp;&nbsp    Debug.Print (oRs!num)</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Insert query</h5>
+<h6>&nbsp;&nbsp    sSQL = "INSERT INTO Employee (ID, [Last Name], [First Name]) VALUES ('" & source1 & "', '" & source2 & "', '" & source3 & "')"</h6>
+<h5>&nbsp;&nbsp    'Set oRs = New ADODB.Recordset</h5>
+<h6>&nbsp;&nbsp    Set oRs = oConn.Execute(sSQL)</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Update query</h5>
+<h6>&nbsp;&nbsp    sSQL = "UPDATE Employee SET [Last Name] = '" & "Jones" & "', [First Name] = '" & "Papa" & "' WHERE ID = 3"</h6>
+<h6>&nbsp;&nbsp    Set oRs = oConn.Execute(sSQL)</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Delete query</h5>
+<h6>&nbsp;&nbsp    sSQL = "DELETE FROM Employee WHERE [Last Name] = '" & "Jones" & "'"</h6>
+<h6>&nbsp;&nbsp    Set oRs = oConn.Execute(sSQL)</h6>
+<h6>&nbsp;&nbsp    oConn.Close</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Clean up</h5>
+<h6>&nbsp;&nbsp    Set oRs = Nothing</h6>
+<h6>&nbsp;&nbsp    Set oConn = Nothing</h6>
+<br>
+<h6>End Sub</h6>
 </div>
 </div>
 
 
-<div id="Calculate" class="macroouter">
+<div id="ImportToAccessDoCmd" class="macroouter">
 <h1>Import to Access 3 DoCmd</h1>
-<h2>Descr.</h2>
+<h2>You can use the methods of the DoCmd object to run Microsoft Office Access actions from Visual Basic.<br>
+Useful links:<br>
+https://docs.microsoft.com/en-us/office/vba/api/access.docmd<br>
+https://docs.microsoft.com/en-us/office/vba/api/access.acspreadsheettype<br>
+http://access-excel.tips/access-vba-cocmd-transferspreadsheet/</h2>
 <div class="macroinner">
-<h6>code</h6>
+<h6>Sub ImportToAccess()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim acc As Object</h6>
+<h6>&nbsp;&nbsp    Set acc = CreateObject("Access.Application")</h6>
+<br>
+<h6>&nbsp;&nbsp    With acc</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .OpenCurrentDatabase "C:\Users\admin\Documents\db.accdb"</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp         .DoCmd.TransferSpreadsheet acImport, 10, "Vehicles", "C:\Users\admin\Desktop\Makra na stronę.xlsm", True, "Access!J8:Q9"</h6> 
+<h5>&nbsp;&nbsp;&nbsp;&nbsp			' Application.ActiveWorkbook.FullName</h5>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp         ' 10 = acSpreadsheetTypeExcel12Xml</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp         .CloseCurrentDatabase</h6>
+<h6>&nbsp;&nbsp        .Quit</h6>
+<h6>&nbsp;&nbsp    End With</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Clean up</h5>
+<h6>&nbsp;&nbsp    Set acc = Nothing</h6>
+<br>
+<h6>End Sub</h6>
 </div>
 </div>
--->
+
 
 <div id="importMSsqlserver" class="macroouter">
 <h1>MS Sql Server</h1>
@@ -661,6 +822,128 @@ https://powerspreadsheets.com/send-email-excel-vba/#The-MailItem-Object
 <h6>&nbsp;&nbsp    Set objOutlook = Nothing</h6>
 <br>
 <h6>End Sub</h6>
+</div>
+</div>
+
+
+<div id="outlookhtml" class="macroouter">
+<h1>Create mail icl. range and signature</h1>
+<h2>Prepares mail in Outlook. Body of e-mail is prepared using HTML language. Table is inserted into body. Macro also adds sender's signature.<br>
+Useful links:<br>
+https://www.rondebruin.nl/win/s1/outlook/signature.htm<br>
+https://www.rondebruin.nl/win/s1/outlook/bmail2.htm</h2>
+<div class="macroinner">
+<h6>Sub CreateMail_html()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim objOutlook As Object</h6>
+<h6>&nbsp;&nbsp    Dim objEmail As Object</h6>
+<h6>&nbsp;&nbsp    Dim sd As Worksheet</h6>
+<h6>&nbsp;&nbsp    Dim strbody As String</h6>
+<h6>&nbsp;&nbsp    Dim SigString As String</h6>
+<h6>&nbsp;&nbsp    Dim Signature As String</h6>
+<h6>&nbsp;&nbsp    Dim rng As Range</h6>
+<br>
+<h6>&nbsp;&nbsp    Set sh = ThisWorkbook.Worksheets("Outlook")</h6>
+<h6>&nbsp;&nbsp    Set rng = sh.Range("E10:F14").SpecialCells(xlCellTypeVisible)</h6>
+<h6>&nbsp;&nbsp    Set objOutlook = CreateObject("Outlook.Application")</h6>
+<h6>&nbsp;&nbsp    Set objEmail = objOutlook.CreateItem(olMailItem)</h6>
+<br>
+<h6>&nbsp;&nbsp    strbody = "&lt;p style=font-size:11pt;font-family:Calibri>" & sh.Range("B10").Text & "&lt;/p&gt;" _</h6>
+<h6>&nbsp;&nbsp    & "&lt;p style=font-size:11pt;font-family:Calibri>" & sh.Range("B11").Text & "&lt;b&gt;" & _</h6>
+<h6>&nbsp;&nbsp		sh.Range("B12").Text & "&lt;/b&gt;" & sh.Range("B13").Text & "&lt;br&gt;" & sh.Range("B14").Text & "&lt;/p&gt;"</h6>
+<br>
+<h6>&nbsp;&nbsp    SigString = Environ("appdata") & "\Microsoft\Signatures\Signature.htm"</h6>
+<br>
+<h6>&nbsp;&nbsp    If Dir(SigString) <> "" Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Signature = GetBoiler(SigString)</h6>
+<h6>&nbsp;&nbsp    Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Signature = ""</h6>
+<h6>&nbsp;&nbsp    End If</h6>
+<br>
+<h6>&nbsp;&nbsp    On Error Resume Next</h6>
+<h6>&nbsp;&nbsp    With objEmail</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .To = sh.Range("A10").Text</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .CC = sh.Range("A11").Text</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .Subject = sh.Range("A12").Text</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .BodyFormat = olFormatHTML</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .HTMLBody = "&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;" & strbody & RangetoHTML(rng) & "&lt;br&gt;" & Signature & "&lt;body&gt;&lt;/html&gt;"</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .Display</h6>
+<h6>&nbsp;&nbsp    End With</h6>
+<br>
+<h6>&nbsp;&nbsp    Set objEmail = Nothing</h6>
+<h6>&nbsp;&nbsp    Set objOutlook = Nothing</h6>
+<br>
+<h6>End Sub</h6>
+</div>
+<br>
+<div class="macroinner">
+<h6>&nbsp;&nbspFunction GetBoiler(ByVal sFile As String) As String</h6>
+<h5>&nbsp;&nbsp'Dick Kusleika</h5>
+<h6>&nbsp;&nbsp    Dim fso As Object</h6>
+<h6>&nbsp;&nbsp    Dim ts As Object</h6>
+<h6>&nbsp;&nbsp    Set fso = CreateObject("Scripting.FileSystemObject")</h6>
+<h6>&nbsp;&nbsp    Set ts = fso.GetFile(sFile).OpenAsTextStream(1, -2)</h6>
+<h6>&nbsp;&nbsp    GetBoiler = ts.readall</h6>
+<h6>&nbsp;&nbsp    ts.Close</h6>
+<h6>&nbsp;&nbspEnd Function</h6>
+</div>
+<br>
+<div class="macroinner">
+<h6>&nbsp;&nbspFunction RangetoHTML(rng As Range)</h6>
+<h5>&nbsp;&nbsp' Changed by Ron de Bruin 28-Oct-2006</h5>
+<h5>&nbsp;&nbsp' Working in Office 2000-2016</h5>
+<h6>&nbsp;&nbsp    Dim fso As Object</h6>
+<h6>&nbsp;&nbsp    Dim ts As Object</h6>
+<h6>&nbsp;&nbsp    Dim TempFile As String</h6>
+<h6>&nbsp;&nbsp    Dim TempWB As Workbook</h6>
+<br>
+<h6>&nbsp;&nbsp    TempFile = Environ$("temp") & "\" & Format(Now, "dd-mm-yy h-mm-ss") & ".htm"</h6>
+<br>
+<h5>&nbsp;&nbsp    'Copy the range and create a new workbook to past the data in</h5>
+<h6>&nbsp;&nbsp    rng.Copy</h6>
+<h6>&nbsp;&nbsp    Set TempWB = Workbooks.Add(1)</h6>
+<h6>&nbsp;&nbsp    With TempWB.Sheets(1)</h6>
+<h6>&nbsp;&nbsp        .Cells(1).PasteSpecial Paste:=8</h6>
+<h6>&nbsp;&nbsp        .Cells(1).PasteSpecial xlPasteValues, , False, False</h6>
+<h6>&nbsp;&nbsp        .Cells(1).PasteSpecial xlPasteFormats, , False, False</h6>
+<h6>&nbsp;&nbsp        .Cells(1).Select</h6>
+<h6>&nbsp;&nbsp        Application.CutCopyMode = False</h6>
+<h6>&nbsp;&nbsp        On Error Resume Next</h6>
+<h6>&nbsp;&nbsp        .DrawingObjects.Visible = True</h6>
+<h6>&nbsp;&nbsp        .DrawingObjects.Delete</h6>
+<h6>&nbsp;&nbsp        On Error GoTo 0</h6>
+<h6>&nbsp;&nbsp    End With</h6>
+<br>
+<h5>&nbsp;&nbsp    'Publish the sheet to a htm file</h5>
+<h6>&nbsp;&nbsp    With TempWB.PublishObjects.Add( _</h6>
+<h6>&nbsp;&nbsp         SourceType:=xlSourceRange, _</h6>
+<h6>&nbsp;&nbsp         Filename:=TempFile, _</h6>
+<h6>&nbsp;&nbsp         Sheet:=TempWB.Sheets(1).Name, _</h6>
+<h6>&nbsp;&nbsp         Source:=TempWB.Sheets(1).UsedRange.Address, _</h6>
+<h6>&nbsp;&nbsp         HtmlType:=xlHtmlStatic)</h6>
+<h6>&nbsp;&nbsp        .Publish (True)</h6>
+<h6>&nbsp;&nbsp    End With</h6>
+<br>
+<h5>&nbsp;&nbsp    'Read all data from the htm file into RangetoHTML</h5>
+<h6>&nbsp;&nbsp    Set fso = CreateObject("Scripting.FileSystemObject")</h6>
+<h6>&nbsp;&nbsp    Set ts = fso.GetFile(TempFile).OpenAsTextStream(1, -2)</h6>
+<h6>&nbsp;&nbsp    RangetoHTML = ts.readall</h6>
+<h6>&nbsp;&nbsp    ts.Close</h6>
+<h6>&nbsp;&nbsp    RangetoHTML = Replace(RangetoHTML, "align=center x:publishsource=", _</h6>
+<h6>&nbsp;&nbsp                          "align=left x:publishsource=")</h6>
+<br>
+<h5>&nbsp;&nbsp    'Close TempWB</h5>
+<h6>&nbsp;&nbsp    RangetoHTML = Replace(RangetoHTML, "align=center x:publishsource=", _</h6>
+<h6>&nbsp;&nbsp        "align=left x:publishsource=")</h6>
+<h6>&nbsp;&nbsp    TempWB.Close savechanges:=False</h6>
+<br>
+<h5>&nbsp;&nbsp    'Delete the htm file we used in this function</h5>
+<h6>&nbsp;&nbsp    Kill TempFile</h6>
+<br>
+<h6>&nbsp;&nbsp    Set ts = Nothing</h6>
+<h6>&nbsp;&nbsp    Set fso = Nothing</h6>
+<h6>&nbsp;&nbsp    Set TempWB = Nothing</h6>
+<h6>&nbsp;&nbspEnd Function</h6>
 </div>
 </div>
 
@@ -3300,14 +3583,14 @@ On this website, you will find a bunch of codes ready to be pasted in your Excel
 <div id="" class="list">
 <br>
 <h4><b><a href="#access">Access</a></b></h4>
-<h4><a href="#">Export from Access 1 oCmd</a></h4>
-<h4><a href="#">Export from Access 2 oConn</a></h4>
-<h4><a href="#">Export from Access 3 oRs</a></h4>
-<h4><a href="#">Export from Access 4 DoCmd</a></h4>
-<h4><a href="#">Loop Through Recordset</a></h4>
-<!--<h4><a href="#">Import to Access 1 oRs</a></h4>
-<h4><a href="#">Import to Access 2 Sql</a></h4>
-<h4><a href="#">Import to Access 3 DoCmd</a></h4>-->
+<h4><a href="#CommandConn">Export from Access 1 oCmd</a></h4>
+<h4><a href="#ObjectConn">Export from Access 2 oConn</a></h4>
+<h4><a href="#RecordsetConn">Export from Access 3 oRs</a></h4>
+<h4><a href="#ExportFromAccessDoCmd">Export from Access 4 DoCmd</a></h4>
+<h4><a href="#RecordsetConnLoop">Loop Through Recordset</a></h4>
+<h4><a href="#RecordsetConnAddUpdateDelete">Import to Access 1 oRs</a></h4>
+<h4><a href="#ObjectConnSQLInsertUpdateDelete">Import to Access 2 Sql</a></h4>
+<h4><a href="#ImportToAccessDoCmd">Import to Access 3 DoCmd</a></h4>
 <br>
 
 <h4><b><a href="#access">MS Sql Server</a></b></h4>
