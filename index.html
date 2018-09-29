@@ -1091,6 +1091,73 @@ http://www.vbaexpress.com/forum/showthread.php?57817-Getting-Attachments-from-Ou
 </div>
 
 
+<div id="outlook7" class="macroouter">
+<h1>Reply All early binding</h1>
+<h2>Replies to all using early binding. Microsoft Outlook 16.0 Object Library has to be loaded.</h2>
+<div class="macroinner">
+<h6>Sub MailReplyAll_eb()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim olItem As Outlook.MailItem</h6>
+<h6>&nbsp;&nbsp    Dim olReply As Outlook.MailItem</h6>
+<h6>&nbsp;&nbsp    Dim olNs As Outlook.Namespace</h6>
+<h6>&nbsp;&nbsp    Dim olFolder As Outlook.MAPIFolder</h6>
+<br>
+<h6>&nbsp;&nbsp    Set olNs = Outlook.GetNamespace("MAPI")</h6>
+<h6>&nbsp;&nbsp    Set olFolder = olNs.GetDefaultFolder(6)</h6>
+<h6>&nbsp;&nbsp    Set olFolder = olFolder.Folders("temp")</h6>
+<br>
+<h6>&nbsp;&nbsp    For Each olItem In olFolder.Items</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        If InStr(olItem.Subject, "mail subject") <> 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Set olReply = olItem.ReplyAll</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            With olReply</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                .HTMLBody = "Hello, thank you. " & vbCrLf & olReply.HTMLBody</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                .Display</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End With</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+<h6>&nbsp;&nbsp    Next olItem</h6>
+<br>
+<h6>&nbsp;&nbsp    Set olItem = Nothing</h6>
+<br>
+<h6>End Sub</h6>
+</div>
+</div>
+
+
+<div id="outlook8" class="macroouter">
+<h1>Reply All late binding</h1>
+<h2>Replies to all using late binding.</h2>
+<div class="macroinner">
+<h6>Sub MailReplyAll_lb()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim objOutlook As Object</h6>
+<h6>&nbsp;&nbsp    Dim olItem As Object</h6>
+<h6>&nbsp;&nbsp    Dim olReply As Object</h6>
+<h6>&nbsp;&nbsp    Dim olNs As Object</h6>
+<h6>&nbsp;&nbsp    Dim olFolder As Object</h6>
+<br>
+<h6>&nbsp;&nbsp    Set objOutlook = CreateObject("Outlook.Application")</h6>
+<h6>&nbsp;&nbsp    Set olItem = objOutlook.CreateItem(olMailItem)</h6>
+<h6>&nbsp;&nbsp    Set olReply = objOutlook.CreateItem(olMailItem)</h6>
+<br>
+<h6>&nbsp;&nbsp    Set olNs = objOutlook.GetNamespace("MAPI")</h6>
+<h6>&nbsp;&nbsp    Set olFolder = olNs.GetDefaultFolder(6)</h6>
+<h6>&nbsp;&nbsp    Set olFolder = olFolder.Folders("temp")</h6>
+<br>
+<h6>&nbsp;&nbsp    For Each olItem In olFolder.Items</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        If InStr(olItem.Subject, "mail subject") <> 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp       Set olReply = olItem.ReplyAll</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            With olReply</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                .HTMLBody = "Hello, thank you. " & vbCrLf & olReply.HTMLBody</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp               .Display</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End With</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+<h6>&nbsp;&nbsp    Next olItem</h6>
+<br>
+<h6>&nbsp;&nbsp    Set olItem = Nothing</h6>
+</div>
+</div>
+
+
 <div id="copyfromxltopp" class="macroouter">
 <h1>PowerPoint</h1>
 <h1>Copy from Excel to PowerPoint</h1>
@@ -1751,6 +1818,192 @@ https://bettersolutions.com/vba/functions/shell-function.htm</h2>
 </div>
 
 
+<div id="openwebsite" class="macroouter">
+<h1>Web Scraping</h1>
+<h1>Open Website</h1>
+<h2>Opens website in Internet Explorer.</h2>
+<div class="macroinner">
+<h6>Sub OpenWebsiteIE()</h6>
+<h6>&nbsp;&nbsp     Dim ie As Object</h6>
+<h6>&nbsp;&nbsp     Dim url As String</h6>
+<br>
+<h6>&nbsp;&nbsp     url = "http://stats.nba.com/leaders"</h6>
+<h6>&nbsp;&nbsp     Set ie = CreateObject("InternetExplorer.Application")</h6>
+<h6>&nbsp;&nbsp     ie.Visible = True</h6>
+<h6>&nbsp;&nbsp     ie.navigate url</h6>
+<br>
+<h6>&nbsp;&nbsp     While ie.Busy</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp          DoEvents</h6>
+<h6>&nbsp;&nbsp     Wend</h6>
+<h6>End Sub</h6>
+</div>
+</div>
+
+
+<div id="webscraping1" class="macroouter">
+<h1>Get currency data</h1>
+<h2>Opens ECB website and copies recent currency rates.<br>
+Useful link:<br>
+' https://ncsullivanblog.wordpress.com/2017/09/16/scraping-html-table-with-vba/</h2>
+<div class="macroinner">
+<h6>Sub getECBcurrencydata()</h6>
+<br>
+<h6>&nbsp;&nbsp     Dim ie As Object</h6>
+<h6>&nbsp;&nbsp     Dim url As String</h6>
+<br>
+<h6>&nbsp;&nbsp     Dim Table As Object</h6>
+<h6>&nbsp;&nbsp     Dim tRows As Object</h6>
+<h6>&nbsp;&nbsp     Dim tHead As Object</h6>
+<h6>&nbsp;&nbsp     Dim tCells As Object</h6>
+<br>
+<h6>&nbsp;&nbsp     Dim rNum As Integer</h6>
+<h6>&nbsp;&nbsp     Dim cNum As Integer</h6>
+<br>
+<h5>&nbsp;&nbsp     ' Website</h5>
+<h6>&nbsp;&nbsp     url = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"</h6>
+<br>
+<h6>&nbsp;&nbsp     Set ie = CreateObject("InternetExplorer.Application")</h6>
+<h6>&nbsp;&nbsp     ie.Visible = True</h6>
+<h6>&nbsp;&nbsp     ie.navigate url</h6>
+<br>
+<h5>&nbsp;&nbsp     ' Website loading</h5>
+<h6>&nbsp;&nbsp     While ie.Busy</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp          DoEvents</h6>
+<h6>&nbsp;&nbsp     Wend</h6>
+<h6>&nbsp;&nbsp     Application.Wait DateAdd("s", 15, Now)</h6>
+<br>
+<h6>&nbsp;&nbsp     rNum = 1</h6>
+<h6>&nbsp;&nbsp     cNum = 1</h6>
+<br>
+<h5>&nbsp;&nbsp     ' Table name, row, column</h5>
+<h6>&nbsp;&nbsp     Set Table = ie.document.getelementsbyclassname("ecb-forexTable")</h6>
+<h6>&nbsp;&nbsp     Set tRows = Table(0).getelementsbytagname("tr")</h6>
+<h6>&nbsp;&nbsp     Set tHead = Table(0).getelementsbytagname("th")</h6>
+<br>
+<h5>&nbsp;&nbsp     ' Loop through each table heading</h5>
+<h6>&nbsp;&nbsp     For Each h In tHead</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        ThisWorkbook.Worksheets("WebScraping2").Cells(rNum, cNum).Value = h.innertext</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        cNum = cNum + 1</h6>
+<h6>&nbsp;&nbsp     Next</h6>
+<br>
+<h6>&nbsp;&nbsp     rNum = rNum + 1</h6>
+<h6>&nbsp;&nbsp     cNum = 1</h6>
+<br>
+<h5>&nbsp;&nbsp     ' Loop through each row in the table</h5>
+<h6>&nbsp;&nbsp     For Each r In tRows</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Set tCells = r.getelementsbytagname("td")</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            For Each c In tCells</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ThisWorkbook.Worksheets("WebScraping2").Cells(rNum, cNum).Value = c.innertext</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                cNum = cNum + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Next</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        rNum = rNum + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        cNum = 1</h6>
+<h6>&nbsp;&nbsp     Next</h6>
+<br>
+<h6>&nbsp;&nbsp     ie.Quit</h6>
+<h6>&nbsp;&nbsp     Set ie = Nothing</h6>
+<br>
+<h6>End Sub</h6>
+</div>
+</div>
+
+
+<div id="webscraping2" class="macroouter">
+<h1>Get sport data</h1>
+<h2>Opens Eurobasket website and copies sport stats.<br>
+Useful link:<br>
+' https://ncsullivanblog.wordpress.com/2017/09/16/scraping-html-table-with-vba/</h2>
+<div class="macroinner">
+<h6>Sub getEurobasketdata()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim ie As Object</h6>
+<h6>&nbsp;&nbsp    Dim url As String</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim Table As Object</h6>
+<h6>&nbsp;&nbsp    Dim tRows As Object</h6>
+<h6>&nbsp;&nbsp    Dim tHead As Object</h6>
+<h6>&nbsp;&nbsp    Dim tCells As Object</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim temp As Object</h6>
+<h6>&nbsp;&nbsp    Dim numPages As String</h6>
+<h6>&nbsp;&nbsp    Dim np As Variant</h6>
+<h6>&nbsp;&nbsp    Dim btn As Object</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim rNum As Integer</h6>
+<h6>&nbsp;&nbsp    Dim cNum As Integer</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Website</h5>
+<h6>&nbsp;&nbsp    url = "http://www.euroleague.net/main/statistics?mode=Leaders&entity=Players&seasonmode=Single&seasoncode=E2017&cat=Valuation&agg=Accumulated"</h6>
+<br>
+<h6>&nbsp;&nbsp    Set ie = CreateObject("InternetExplorer.Application")</h6>
+<h6>&nbsp;&nbsp    ie.Visible = True</h6>
+<h6>&nbsp;&nbsp    ie.navigate url</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Website loading</h5>
+<h6>&nbsp;&nbsp    While ie.Busy</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        DoEvents</h6>
+<h6>&nbsp;&nbsp    Wend</h6>
+<h6>&nbsp;&nbsp    Application.Wait DateAdd("s", 7, Now)</h6>
+<br>
+<h5>&nbsp;&nbsp    ' How many pages</h5>
+<br>
+<h6>&nbsp;&nbsp    Set temp = ie.document.getelementsbyclassname("StatsCenterPager")</h6>
+<h6>&nbsp;&nbsp    numPages = temp(0).innertext</h6>
+<h5>&nbsp;&nbsp    'Debug.Print numPages 123456></h5>
+<h6>&nbsp;&nbsp    np = Mid(numPages, 6, 1)</h6>
+<br>
+<h6>&nbsp;&nbsp    rNum = 1</h6>
+<h6>&nbsp;&nbsp    cNum = 1</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Loop through pages</h5>
+<h6>&nbsp;&nbsp    For i = 1 To np</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Table name, row, column</h5>
+<h6>&nbsp;&nbsp    Set Table = ie.document.getelementsbyclassname("StatsGridResults")</h6>
+<h6>&nbsp;&nbsp    Set tRows = Table(0).getelementsbytagname("tr")</h6>
+<h6>&nbsp;&nbsp    Set tHead = Table(0).getelementsbytagname("th")</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Loop through each table heading</h5>
+<h6>&nbsp;&nbsp    For Each h In tHead</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        ThisWorkbook.Worksheets("WebScraping1").Cells(rNum, cNum).Value = h.innertext</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        cNum = cNum + 1</h6>
+<h6>&nbsp;&nbsp    Next</h6>
+<br>
+<h6>&nbsp;&nbsp    rNum = rNum + 1</h6>
+<h6>&nbsp;&nbsp    cNum = 1</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Loop through each row in the table</h5>
+<h6>&nbsp;&nbsp    For Each r In tRows</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Set tCells = r.getelementsbytagname("td")</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            For Each c In tCells</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ThisWorkbook.Worksheets("WebScraping1").Cells(rNum, cNum).Value = c.innertext</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                cNum = cNum + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Next</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        rNum = rNum + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        cNum = 1</h6>
+<h6>&nbsp;&nbsp    Next</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Next Page</h5>
+<h6>&nbsp;&nbsp    Set btn = ie.document.getelementsbyclassname("wp-pager-next")</h6>
+<h6>&nbsp;&nbsp    If i < 6 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp       btn(0).Click</h6>
+<h6>&nbsp;&nbsp    End If</h6>
+<br>
+<h6>&nbsp;&nbsp    While ie.Busy</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp       DoEvents</h6>
+<h6>&nbsp;&nbsp    Wend</h6>
+<h6>&nbsp;&nbsp    Application.Wait DateAdd("s", 5, Now)</h6>
+<br>
+<h6>&nbsp;&nbsp    Next</h6>
+<br>
+<h6>&nbsp;&nbsp    ie.Quit</h6>
+<h6>&nbsp;&nbsp    Set ie = Nothing</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
 
 <!--
 SAMPLE
@@ -1767,1032 +2020,558 @@ SAMPLE
 <!-- old macros -->
 
 <div id="Calculate" class="macroouter">
-
 <h1>Range</h1>
-
 <h1>Calculate</h1>
-
 <h2>If your calculation option is set to manual it will calculate your selection range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub Calculate()</h6>
-
 <h6>Selection.Calculate</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
 
 
 <div id="ClearComments" class="macroouter">
-
 <h1>ClearComments</h1>
-
 <h2>Removes comments from the selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub ClearComments()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>cell.ClearComments</h6>
-
 <h6>Next cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="ColumnWidth" class="macroouter">
-
 <h1>ColumnWidth</h1>
-
 <h2>Specifies column width for a determined range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub ColumnWidth()</h6>
-
 <h6>Dim ColWidth As Integer</h6>
-
 <h6>ColWidth = Application.InputBox("Column width")</h6>
-
 <h6>With ActiveSheet.Columns("A:E")</h6>
-
 <h6>.ColumnWidth = ColWidth</h6>
-
 <h6>End With</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="CountDuplicates" class="macroouter">
-
 <h1>CountDuplicates</h1>
-
 <h2>Counts values that appear at least twice in a selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CountDuplicates()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If Not IsEmpty(cell) Then _</h6>
-
 <h6>If WorksheetFunction.CountIf(Selection, cell) > 1 Then _</h6>
-
 <h6>count = count + (1 / WorksheetFunction.CountIf(Selection, cell))</h6>
-
 <h6>End If</h6>
-
 <h6>End If</h6>
-
 <h6>Next cell</h6>
-
 <h6>MsgBox count</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="CountUnique" class="macroouter">
-
 <h1>CountUnique</h1>
-
 <h2>Counts values that are unique in a selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CountUnique()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If Not IsEmpty(cell) Then _</h6>
-
 <h6>If WorksheetFunction.CountIf(Selection, cell) = 1 Then _</h6>
-
 <h6>count = count + 1</h6>
-
 <h6>End If</h6>
-
 <h6>End If</h6>
-
 <h6>Next cell</h6>
-
 <h6>MsgBox count</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="CountValue" class="macroouter">
-
 <h1>CountValue</h1>
-
 <h2>Counts any chosen value within a selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CountValue()</h6>
-
 <h6>Dim i As Variant</h6>
-
 <h6>i = InputBox("Name value")</h6>
-
 <h6>MsgBox WorksheetFunction.CountIf(Selection, i)</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="CountWords" class="macroouter">
-
 <h1>CountWords</h1>
-
 <h2>The macro counts number of words in a selection.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CountWords()</h6>
-
 <h6>Dim WordCount As Long</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If IsEmpty(cell) Then</h6>
-
 <h6>WordCount = WordCount</h6>
-
 <h6>Else</h6>
-
 <h6>If cell.HasFormula Then</h6>
-
 <h6>WordCount = WordCount</h6>
-
 <h6>Else</h6>
-
 <h6>If IsNumeric(cell) Then</h6>
-
 <h6>WordCount = WordCount</h6>
-
 <h6>Else</h6>
-
 <h6>WordCount = WordCount + Len(Trim(cell)) - Len(Replace(Trim(cell), " ", "")) + 1</h6>
-
 <h6>End If</h6>
-
 <h6>End If</h6>
-
 <h6>End If</h6>
-
 <h6>Next cell</h6>
-
 <h6>MsgBox WordCount & " words found in the selected range."</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="DeleteEmptyColumns" class="macroouter">
-
 <h1>DeleteEmptyColumns</h1>
-
 <h2>Deletes empty columns for a selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub DeleteEmptyColumns()</h6>
-
 <h6>Dim i As Integer</h6>
-
 <h6>For i = Selection.Column + Selection.Columns.count - 1 To Selection.Column Step -1</h6>
-
 <h6>If Application.WorksheetFunction.CountA(Columns(i)) = 0 Then Columns(i).EntireColumn.Delete</h6>
-
 <h6>Next i</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="DeleteEmptyRows" class="macroouter">
-
 <h1>DeleteEmptyRows</h1>
-
 <h2>Deletes empty rows for a selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub DeleteEmptyRows()</h6>
-
 <h6>Dim i As Integer</h6>
-
 <h6>For i = Selection.Row + Selection.Rows.count - 1 To Selection.Row Step -1</h6>
-
 <h6>If Application.WorksheetFunction.CountA(Rows(i)) = 0 Then Rows(i).EntireRow.Delete</h6>
-
 <h6>Next i</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="FillBlankCells" class="macroouter">
-
 <h1>FillBlankCells</h1>
-
 <h2>Fills blank cells in a selection with any number or text.</h2>
-
 <div class="macroinner">
-
 <h6>Sub FillBlankCells()</h6>
-
 <h6>Dim i As Variant</h6>
-
 <h6>i = InputBox("Fill in blank cells with...")</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If IsEmpty(cell) Then cell.Value = i</h6>
-
 <h6>Next cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="FindOdd" class="macroouter">
-
 <h1>FindOdd</h1>
-
 <h2>Highlights odd numbers in your selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub FindOdd()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If cell Mod 2 <> 0 Then cell.Interior.ColorIndex = 4 'green</h6>
-
 <h6>Next cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="FormulasToValues" class="macroouter">
-
 <h1>FormulasToValues</h1>
-
 <h2>Converts formulas to values within a selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub FormulasToValues()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If cell.HasFormula Then</h6>
-
 <h6>cell.Formula = cell.Value</h6>
-
 <h6>End If</h6>
-
 <h6>Next cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="HighlightCell" class="macroouter">
-
 <h1>HighlightCell</h1>
-
 <h2>Highlighs active cell.</h2>
-
 <div class="macroinner">
-
 <h6>Private Sub Worksheet_SelectionChange(ByVal Target As Range)</h6>
-
 <h6>Application.ScreenUpdating = False</h6>
-
 <h6>Cells.Interior.ColorIndex = 0</h6>
-
 <h6>Target.Interior.ColorIndex = 4 'green</h6>
-
 <h6>Application.ScreenUpdating = True</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="HighlightDuplicates" class="macroouter">
-
 <h1>HighlightDuplicates</h1>
-
 <h2>Highlights values that appear at least twice in a selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub HighlightDuplicates()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If WorksheetFunction.CountIf(Selection, cell) > 1 Then cell.Interior.ColorIndex = 4 'green</h6>
-
 <h6>Next cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="HighlightEvenRows" class="macroouter">
-
 <h1>HighlightEvenRows</h1>
-
 <h2>Highlights odd row numbers within your selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub ColorEvenRows()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If cell.Row Mod 2 = 0 Then cell.EntireRow.Interior.ColorIndex = 4 'green</h6>
-
 <h6>Next cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="HighlightRowsColumns" class="macroouter">
-
 <h1>HighlightRowsColumns</h1>
-
 <h2>Highlighs row and column of an active cell.</h2>
-
 <div class="macroinner">
-
 <h6>Private Sub Worksheet_SelectionChange(ByVal Target As Range)</h6>
-
 <h6>If Target.Cells.Count > 1 Then Exit Sub</h6>
-
 <h6>Application.ScreenUpdating = False</h6>
-
 <h6>Cells.Interior.ColorIndex = 0</h6>
-
 <h6>With Target</h6>
-
 <h6>    .EntireRow.Interior.ColorIndex = 4 'green</h6>
-
 <h6>    .EntireColumn.Interior.ColorIndex = 4 'green</h6>
-
 <h6>End With</h6>
-
 <h6>Application.ScreenUpdating = True</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="HighlightUnique" class="macroouter">
-
 <h1>HighlightUnique</h1>
-
 <h2>Highlights values that are unique in a selected range.</h2>
-
 <div class="macroinner">
-
 <h6>Sub HighlightUnique()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If WorksheetFunction.CountIf(Selection, cell) = 1 Then cell.Interior.ColorIndex = 4 'green color</h6>
-
 <h6>Next cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="InsertRows" class="macroouter">
-
 <h1>InsertRows</h1>
-
 <h2>Inserts empty rows every second line.</h2>
-
 <div class="macroinner">
-
 <h6>Sub InsertRows()</h6>
-
 <h6>Dim i, LastRow As Long</h6>
-
 <h6>LastRow = Cells(Rows.Count, "A").End(xlUp).Row</h6>
-
 <h6>For i = LastRow To 2 Step -1</h6>
-
 <h6>Rows(i).Insert</h6>
-
 <h6>Next i</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="NumberToPercent" class="macroouter">
-
 <h1>NumberToPercent</h1>
-
 <h2>Adds % symbol to numbers and converts them into a percentage.</h2>
-
 <div class="macroinner">
-
 <h6>Sub NumberToPercent()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If Not IsEmpty(cell) Then _</h6>
-
 <h6>If IsNumeric(cell) Then cell.Value = cell.Value * 0.01</h6>
-
 <h6>With cell</h6>
-
 <h6>    .NumberFormat = "0.00%"</h6>
-
 <h6>End With</h6>
-
 <h6>End If</h6>
-
 <h6>Next cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="RemoveNegative" class="macroouter">
-
 <h1>RemoveNegative</h1>
-
 <h2>Converts negative to positive numbers.</h2>
-
 <div class="macroinner">
-
 <h6>Sub RemoveNegative()</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If cell.Value < 0 Then cell.Value = Abs(cell.Value)</h6>
-
 <h6>Next cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="SaveRangeAsPDF" class="macroouter">
-
 <h1>SaveRangeAsPDF</h1>
-
 <h2>Saves a selected range as PDF.</h2>
-
 <div class="macroinner">
-
 <h6>Sub SaveRangeAsPDF()</h6>
-
 <h6>Selection.ExportAsFixedFormat Type:=xlTypePDF, OpenAfterPublish:=True</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="UnwrapText" class="macroouter">
-
 <h1>UnwrapText</h1>
-
 <h2>Unwraps text within a selected range. </h2>
-
 <div class="macroinner">
-
 <h6>Sub UnwrapText()</h6>
-
 <h6>Selection.WrapText = False 'True = wrap</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="AscWs" class="macroouter">
-
 <h1>AscendingWs</h1>
-
 <h2>The macro sorts worksheets in an ascending order, from a to z. </h2>
-
 <div class="macroinner">
-
 <h6>Sub AscendingWs()</h6>
-
 <h6>Dim x As Integer, y As Integer</h6>
-
 <h6>For x = 1 To Sheets.count</h6>
-
 <h6>For y = 1 To Sheets.count - 1</h6>
-
 <h6>If UCase(Sheets(y).Name) > UCase(Sheets(y + 1).Name) Then</h6>
-
 <h6>Sheets(y).Move after:=Sheets(y + 1)</h6>
-
 <h6>End If</h6>
-
 <h6>Next y</h6>
-
 <h6>Next x</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="Autofit" class="macroouter">
-
 <h1>Autofit</h1>
-
 <h2>Autofits columns and rows in the active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub Autofit()</h6>
-
 <h6>ActiveSheet.Columns.Autofit</h6>
-
 <h6>ActiveSheet.Rows.Autofit</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="CalculateWs" class="macroouter">
-
 <h1>CalculateWs</h1>
-
 <h2>If your calculation option is manual it will calculate within your active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CalculateWs()</h6>
-
 <h6>ActiveSheet.Calculate</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="ClearCommentsSheet" class="macroouter">
-
 <h1>ClearCommentsSheet</h1>
-
 <h2>Removes comments from the active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub ClearCommentsWs()</h6>
-
 <h6>ActiveSheet.Cells.ClearComments</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="ClearFormattingWs" class="macroouter">
-
 <h1>ClearFormattingWs</h1>
-
 <h2>Clears formatting in the active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub ClearFormattingWs()</h6>
-
 <h6>ActiveSheet.Cells.ClearFormats</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="DescWs" class="macroouter">
-
 <h1>DescWs</h1>
-
 <h2>Macro sorts worksheets in a descending order, from z to a.</h2>
-
 <div class="macroinner">
-
 <h6>Sub DescendingWs()</h6>
-
 <h6>Dim x As Integer, y As Integer</h6>
-
 <h6>For x = 1 To Sheets.count</h6>
-
 <h6>For y = 1 To Sheets.count - 1</h6>
-
 <h6>If UCase(Sheets(y).Name) < UCase(Sheets(y + 1).Name) Then</h6>
-
 <h6>Sheets(y).Move after:=Sheets(y + 1)</h6>
-
 <h6>End If</h6>
-
 <h6>Next y</h6>
-
 <h6>Next x</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="FormulasToValuesWs" class="macroouter">
-
 <h1>FormulasToValuesWs</h1>
-
 <h2>Converts formulas to values within the active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub FormulasToValuesWs()</h6>
-
 <h6>With ActiveSheet.UsedRange</h6>
-
 <h6>    .Value = .Value</h6>
-
 <h6>End With</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="HighlightComments" class="macroouter">
-
 <h1>HighlightComments</h1>
-
 <h2>Highlights cells that contain comments. Works within the active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub HighlightCommentsWs()</h6>
-
 <h6>Dim rng As Range</h6>
-
 <h6>On Error Resume Next</h6>
-
 <h6>Set rng = Cells.SpecialCells(xlCellTypeComments)</h6>
-
 <h6>If Not rng Is Nothing Then</h6>
-
 <h6>rng.Interior.ColorIndex = 4 'green</h6>
-
 <h6>End If</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="PrintPagesCopies" class="macroouter">
-
 <h1>PrintPagesCopies</h1>
-
 <h2>Prints the active worksheet. You should specify page(s) and number of copies.</h2>
-
 <div class="macroinner">
-
 <h6>Sub PrintPagesCopies()</h6>
-
 <h6>PageFrom = InputBox("From page")</h6>
-
 <h6>PageTo = InputBox("To page")</h6>
-
 <h6>CopiesNr = InputBox("Number of copies")</h6>
-
 <h6>ActiveSheet.PrintOut From:=PageFrom, To:=PageTo, Copies:=CopiesNr</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="PrintSheet" class="macroouter">
-
 <h1>PrintSheet</h1>
-
 <h2>Prints the active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub PrintSheet()</h6>
-
 <h6>ActiveSheet.PrintOut</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="SaveWsAsPDF" class="macroouter">
-
 <h1>SaveWsAsPDF</h1>
-
 <h2>Saves the active worksheet as a PDF.</h2>
-
 <div class="macroinner">
-
 <h6>Sub SaveWsAsPDF()</h6>
-
 <h6>ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, OpenAfterPublish:=True</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="UnhideColumns" class="macroouter">
-
 <h1>UnhideColumns</h1>
-
 <h2>Unhides columns in the active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub UnhideColumns()</h6>
-
 <h6>Cells.EntireColumn.Hidden = False</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="UnhideColumnsRows" class="macroouter">
-
 <h1>UnhideColumnsRows</h1>
-
 <h2>Unhides columns and rows in the active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub UnhideColumnsRows()</h6>
-
 <h6>Cells.EntireColumn.Hidden = False</h6>
-
 <h6>Cells.EntireRow.Hidden = False</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="UnhideRows" class="macroouter">
-
 <h1>UnhideRows</h1>
-
 <h2>Unhides rows in the active worksheet.</h2>
-
 <div class="macroinner">
-
 <h6>Sub UnhideRows()</h6>
-
 <h6>Cells.EntireRow.Hidden = False</h6>
-
 <h6>End Sub</h6>
-
 </div>	
-	
 </div>
-
 
 
 <div id="CalculateAuto" class="macroouter">
-	
 <h1>CalculateAuto</h1>
-
 <h2>Switches to automatic calculation.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CalculateAuto()</h6>
-
 <h6>Application.Calculation = xlCalculationAutomatic</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="CalculateMan" class="macroouter">
-
 <h1>CalculateMan</h1>
-
 <h2>Switches to manual calculation.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CalculateMan()</h6>
-
 <h6>Application.Calculation = xlCalculationManual</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="ClearCommentsWb" class="macroouter">
-
 <h1>ClearCommentsWb</h1>
-
 <h2>Removes comments in the entire workbook.</h2>
-
 <div class="macroinner">
-
 <h6>Sub ClearCommentsWb()</h6>
-
 <h6>Dim Ws As Worksheet</h6>
-
 <h6>For Each Ws In ActiveWorkbook.Worksheets</h6>
-
 <h6>Ws.Cells.ClearComments</h6>
-
 <h6>Next Ws</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="ClearFormattingWb" class="macroouter">
-
 <h1>ClearFormattingWb</h1>
-
 <h2>Clears formatting in the workbook.</h2>
-
 <div class="macroinner">
-
 <h6>Sub ClearFormattingWb()</h6>
-
 <h6>Dim Ws As Worksheet</h6>
-
 <h6>For Each Ws In ActiveWorkbook.Worksheets</h6>
-
 <h6>Ws.Cells.ClearFormats</h6>
-
 <h6>Next Ws</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
 
 
@@ -2886,213 +2665,115 @@ https://docs.microsoft.com/en-us/office/vba/api/Excel.Application.GetOpenFilenam
 </div>
 
 
-
 <div id="HideEmptyWs" class="macroouter">
-
 <h1>HideEmptyWs</h1>
-
 <h2>Hides empty worksheets from the workbook.</h2>
-
 <div class="macroinner">
-
 <h6>Sub HideEmptyWs()</h6>
-
 <h6>Dim Ws As Worksheet</h6>
-
 <h6>For Each Ws In ActiveWorkbook.Worksheets</h6>
-
 <h6>If Application.CountA(Ws.Cells) = 0 Then Ws.Visible = False</h6>
-
 <h6>Next Ws</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="HighlightNamed" class="macroouter">
-
 <h1>HighlightNamed</h1>
-
 <h2>Highlights named ranges in your workbook.</h2>
-
 <div class="macroinner">
-
 <h6>Sub HighlightNamed()</h6>
-
 <h6>Dim RngNm As Name</h6>
-
 <h6>Dim rng As Range</h6>
-
 <h6>On Error Resume Next</h6>
-
 <h6>For Each RngNm In Application.ActiveWorkbook.Names</h6>
-
 <h6>Set rng = RngNm.RefersToRange</h6>
-
 <h6>rng.Interior.ColorIndex = 4 'green</h6>
-
 <h6>Next</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="PasswordWb" class="macroouter">
-
 <h1>PasswordWb</h1>
-
 <h2>Secures file with a password.</h2>
-
 <div class="macroinner">
-
 <h6>Sub PasswordWb()</h6>
-
 <h6>On Error GoTo ErrorHandler:</h6>
-
 <h6>Dim pass As Variant</h6>
-
 <h6>pass = InputBox("Please enter the password")</h6>
-
 <h6>ActiveWorkbook.SaveAs Password:=pass 'Filename:="Pelna_Nazwa_Pliku",</h6>
-
 <h6>Exit Sub</h6>
-
 <h6>ErrorHandler:</h6>
-
 <h6>MsgBox "Failed to set password for workbook"</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="ProtectWb" class="macroouter">
-
 <h1>ProtectWb</h1>
-
 <h2>Protects the workbook from structure changes.</h2>
-
 <div class="macroinner">
-
 <h6>Sub ProtectWb()</h6>
-
 <h6>On Error GoTo ErrorHandler:</h6>
-
 <h6>Dim pass As Variant</h6>
-
 <h6>pass = InputBox("Please enter the password")</h6>
-
 <h6>ActiveWorkbook.Protect Structure:=True, Windows:=True, Password:=pass</h6>
-
 <h6>MsgBox "Workbook protected"</h6>
-
 <h6>Exit Sub</h6>
-
 <h6>ErrorHandler:</h6>
-
 <h6>MsgBox "Failed to protect workbook"</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="RemoveEmptyWs" class="macroouter">
-
 <h1>RemoveEmptyWs</h1>
-
 <h2>Removes empty worksheets from the workbook.</h2>
-
 <div class="macroinner">
-
 <h6>Sub RemoveEmptyWs()</h6>
-
 <h6>Application.DisplayAlerts = False</h6>
-
 <h6>Dim Ws As Worksheet</h6>
-
 <h6>For Each Ws In ActiveWorkbook.Worksheets</h6>
-
 <h6>If Application.CountA(Ws.Cells) = 0 Then Ws.Delete</h6>
-
 <h6>Next Ws</h6>
-
 <h6>Application.DisplayAlerts = True</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="RemoveNamed" class="macroouter">
-
 <h1>RemoveNamed</h1>
-
 <h2>Removes named ranges from your workbook.</h2>
-
 <div class="macroinner">
-
 <h6>Sub RemoveNamed()</h6>
-
 <h6>Dim RngNm As Name</h6>
-
 <h6>Dim rng As Range</h6>
-
 <h6>On Error Resume Next</h6>
-
 <h6>For Each RngNm In Application.ActiveWorkbook.Names</h6>
-
 <h6>    RngNm.Delete</h6>
-
 <h6>Next</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="UnhideWs" class="macroouter">
-
 <h1>UnhideWs</h1>
-
 <h2>Unhides hidden worksheets.</h2>
-
 <div class="macroinner">
-
 <h6>Sub UnhideWs()</h6>
-
 <h6>Dim Ws As Worksheet</h6>
-
 <h6>For Each Ws In ActiveWorkbook.Worksheets</h6>
-
 <h6>Ws.Visible = True</h6>
-
 <h6>Next Ws</h6>
-
 <h6>End Sub</h6>
-
 </div>	
-	
 </div>
 
 
@@ -3121,409 +2802,220 @@ https://docs.microsoft.com/en-us/office/vba/api/excel.application.getsaveasfilen
 
 
 <div id="CloseAllWb" class="macroouter">	
-	
 <h1>CloseAllWb</h1>
-
 <h2>Closes all open workbooks at once.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CloseAllWb()</h6>
-
 <h6>Dim wb As Workbook</h6>
-
 <h6>For Each wb In Workbooks</h6>
-
 <h6>wb.Close savechanges:=False 'or True if you want changes saved</h6>
-
 <h6>Next wb</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="CloseExcel" class="macroouter">
-
 <h1>CloseExcel</h1>
-
 <h2>Closes the Excel application.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CloseExcel()</h6>
-
 <h6>Application.DisplayAlerts = False</h6>
-
 <h6>ThisWorkbook.Save</h6>
-
 <h6>Application.DisplayAlerts = True</h6>
-
 <h6>Application.Quit</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="CloseOtherWb" class="macroouter">
-
 <h1>CloseOtherWb</h1>
-
 <h2>Closes all open workbooks at once, apart from the active workbook.</h2>
-
 <div class="macroinner">
-
 <h6>Sub CloseOtherWb()</h6>
-
 <h6>Dim wb As Workbook</h6>
-
 <h6>For Each wb In Workbooks</h6>
-
 <h6>If wb.Name <> ThisWorkbook.Name Then</h6>
-
 <h6>wb.Close savechanges:=False 'or True if you want changes saved</h6>
-
 <h6>End If</h6>
-
 <h6>Next wb</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="ConvertToRoman" class="macroouter">
-
 <h1>ConvertToRoman</h1>
-
 <h2>Converts arabic numbers to roman numbers.</h2>
-
 <div class="macroinner">
-
 <h6>Sub ConvertToRoman()</h6>
-
 <h6>For Each Cell In Selection</h6>
-
 <h6>If IsNumeric(Cell) = True Then Cell.Value = Application.WorksheetFunction.Roman(Cell.Value, 0) 'max 3999</h6>
-
 <h6>Next Cell</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="CountTime" class="macroouter">
-
 <h1>CountTime</h1>
-
 <h2>Counts time spent in the workbook.</h2>
-
 <div class="macroinner">
-
 <h6>Public Start As Double</h6>
-
 <h6>Public Finish As String</h6>
-
 <h6>Private Sub Workbook_BeforeClose(Cancel As Boolean)</h6>
-
 <h6>Finish = Format((Timer - Start) / 86400, "hh:mm:ss")</h6>
-
 <h6>MsgBox "Time spent on This workbook " & Finish, vbInformation</h6>
-
 <h6>End Sub</h6>
-
 <h6>Private Sub Workbook_Open()</h6>
-
 <h6>Start = Timer</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="FirstLastDayMonth" class="macroouter">
-
 <h1>FirstLastDayMonth</h1>
-
 <h2>The macro shows the first and the last day of the month in the open file.</h2>
-
 <div class="macroinner">
-
 <h6>Sub Auto_Open()</h6>
-
 <h6>Call FirstDayMonth</h6>
-
 <h6>Call LastDayMonth</h6>
-
 <h6>End Sub</h6>
-
 <h6>Sub FirstDayMonth()</h6>
-
 <h6>Dim FirstDay As Date</h6>
-
 <h6>FirstDay = DateSerial(Year(Date), Month(Date), 1)</h6>
-
 <h6>MsgBox FirstDay</h6>
-
 <h6>End Sub</h6>
-
 <h6>Sub LastDayMonth()</h6>
-
 <h6>Dim LastDay As Date</h6>
-
 <h6>LastDay = DateSerial(Year(Date), Month(Date) + 1, 0)</h6>
-
 <h6>MsgBox LastDay</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="LastAuthorSaveTime" class="macroouter">
-
 <h1>LastAuthorSaveTime</h1>
-
 <h2>The macro identifies the last author and save date.</h2>
-
 <div class="macroinner">
-
 <h6>Sub LastAuthorSaveTime()</h6>
-
 <h6>Dim FileAuthor As Object</h6>
-
 <h6>Set FileAuthor = ThisWorkbook.BuiltinDocumentProperties("Last Author")</h6>
-
 <h6>Dim FileDate As Object</h6>
-
 <h6>Set FileDate = ThisWorkbook.BuiltinDocumentProperties("Last Save Time")</h6>
-
 <h6>MsgBox "Last Updated By: " & FileAuthor & " on " & FileDate</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="Reminder" class="macroouter">
-
 <h1>Reminder</h1>
-
 <h2>The macro activates on a pre-determined weekday to remind you about an event.</h2>
-
 <div class="macroinner">
-
 <h6>Private Sub Workbook_Open()</h6>
-
 <h6>If Weekday(Now()) = vbWednesday Then</h6>
-
 <h6>MsgBox "Today is Wednesday. Remember about..."</h6>
-
 <h6>End If</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="RestrictAccess" class="macroouter">
-
 <h1>RestrictAccess</h1>
-
 <h2>Allows or restricts access depending on the system user name.</h2>
-
 <div class="macroinner">
-
 <h6>Private Sub Workbook_Open()</h6>
-
 <h6>If Application.UserName = "admin" Then</h6>
-
 <h6>MsgBox "Hello " & Application.UserName</h6>
-
 <h6>Else</h6>
-
 <h6>MsgBox "You are not entitled to use this file"</h6>
-
 <h6>Application.Quit</h6>
-
 <h6>End If</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="SaveFileCopy" class="macroouter">
-
 <h1>SaveFileCopy</h1>
-
 <h2>Creates a copy of your file. The copy is created in the location of your original file. Its name will contain today's date.</h2>
-
 <div class="macroinner">
-
 <h6>Sub SaveFileCopy()</h6>
-
 <h6>ActiveWorkbook.SaveCopyAs ActiveWorkbook.Path & "\" & Date & " Copy of " & ActiveWorkbook.Name</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="StartCalculator" class="macroouter">
-
 <h1>StartCalculator</h1>
-
 <h2>Opens a calculator from Excel level.</h2>
-
 <div class="macroinner">
-
 <h6>Sub StartCalculator()</h6>
-
 <h6>Application.ActivateMicrosoftApp Index:=0</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="StartMsWord" class="macroouter">
-
 <h1>StartMsWord</h1>
-
 <h2>Opens MS Word from Excel level.</h2>
-
 <div class="macroinner">
-
 <h6>Sub StartMsWord()</h6>
-
 <h6>Application.ActivateMicrosoftApp xlMicrosoftWord 'or Index:=1</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="TimeCountMin" class="macroouter">
-
 <h1>TimeCountMin</h1>
-
 <h2>Counts time in minutes.</h2>
-
 <div class="macroinner">
-
 <h6>Sub TimeCountMin()</h6>
-
 <h6>Dim Start As Double</h6>
-
 <h6>Dim Finish As String</h6>
-
 <h6>Start = Timer</h6>
-
 <h6>'Macro starts</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If IsEmpty(cell) = True Then</h6>
-
 <h6>cell.Value = 1</h6>
-
 <h6>End If</h6>
-
 <h6>Next cell</h6>
-
 <h6>'Maro ends</h6>
-
 <h6>Finish = Format((Timer - Start) / 86400, "hh:mm:ss")</h6>
-
 <h6>MsgBox Finish & " minutes", vbInformation</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 <div id="TimeCountSec" class="macroouter">
-
 <h1>TimeCountSec</h1>
-
 <h2>Counts time in seconds.</h2>
-
 <div class="macroinner">
-
 <h6>Sub TimeCountSec()</h6>
-
 <h6>Dim Start As Double</h6>
-
 <h6>Dim Finish As Double</h6>
-
 <h6>Start = Timer</h6>
-
 <h6>'Macro starts</h6>
-
 <h6>For Each cell In Selection</h6>
-
 <h6>If IsEmpty(cell) = True Then</h6>
-
 <h6>cell.Value = 1</h6>
-
 <h6>End If</h6>
-
 <h6>Next cell</h6>
-
 <h6>'Maro ends</h6>
-
 <h6>Finish = Round(Timer - Start, 0)</h6>
-
 <h6>MsgBox Finish & " seconds", vbInformation</h6>
-
 <h6>End Sub</h6>
-
 </div>
-
 </div>
-
 
 
 </div> <!--End of Section 2-->
@@ -3614,6 +3106,8 @@ On this website, you will find a bunch of codes ready to be pasted in your Excel
 <h4><a href="#outlook4">Get Outlook data</a></h4>
 <h4><a href="#outlook5">Get Outlook data conditions</a></h4>
 <h4><a href="#outlook6">Get Outlook attachments</a></h4>
+<h4><a href="#outlook7">Reply All early binding</a></h4>
+<h4><a href="#outlook8">Reply All late binding</a></h4>
 <br>
 
 <h4><b><a href="#access">Power Point</a></b></h4>
@@ -3655,6 +3149,11 @@ On this website, you will find a bunch of codes ready to be pasted in your Excel
 <h4><a href="#shellopenfile">Shell open File</a></h4>
 <br>
 
+<h4><b><a href="#access">Web Scraping</a></b></h4>
+<h4><a href="#openwebsite">Open Website</a></h4>
+<h4><a href="#webscraping1">Get currency data</a></h4>
+<h4><a href="#webscraping2">Get sport data</a></h4>
+<br>
 
 <!--<old macros-->
 
