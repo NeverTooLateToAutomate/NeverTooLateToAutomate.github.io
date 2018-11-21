@@ -1844,7 +1844,7 @@ https://bettersolutions.com/vba/functions/shell-function.htm</h2>
 <h1>Get currency data</h1>
 <h2>Opens ECB website and copies recent currency rates.<br>
 Useful link:<br>
-' https://ncsullivanblog.wordpress.com/2017/09/16/scraping-html-table-with-vba/</h2>
+https://ncsullivanblog.wordpress.com/2017/09/16/scraping-html-table-with-vba/</h2>
 <div class="macroinner">
 <h6>Sub getECBcurrencydata()</h6>
 <br>
@@ -1912,7 +1912,7 @@ Useful link:<br>
 <h1>Get sport data</h1>
 <h2>Opens Eurobasket website and copies sport stats.<br>
 Useful link:<br>
-' https://ncsullivanblog.wordpress.com/2017/09/16/scraping-html-table-with-vba/</h2>
+https://ncsullivanblog.wordpress.com/2017/09/16/scraping-html-table-with-vba/</h2>
 <div class="macroinner">
 <h6>Sub getEurobasketdata()</h6>
 <br>
@@ -2005,6 +2005,1036 @@ Useful link:<br>
 </div>
 
 
+<div id="webscraping3" class="macroouter">
+<h1>Download file from web</h1>
+<h2>Enables download of a specific file from website. PtrSafe is for 64Bit Excel.<br>
+Useful links:<br>
+https://www.mrexcel.com/forum/excel-questions/352868-download-file-web-using-vba.html<br>
+https://msdn.microsoft.com/en-us/ie/ms775123(v=vs.94)<br>
+https://www.jkp-ads.com/articles/apideclarations.asp<br>
+https://ncsullivanblog.wordpress.com/2017/09/16/scraping-html-table-with-vba/</h2>
+<div class="macroinner">
+<h6>&nbsp;&nbspOption Explicit</h6>
+<h6>&nbsp;&nbspDeclare PtrSafe Function URLDownloadToFile Lib "urlmon" Alias "URLDownloadToFileA" (ByVal pCaller As Long, ByVal szURL As String, ByVal szFileName As String, ByVal dwReserved As Long, ByVal lpfnCB As Long) As Long</h6>
+<br>
+<h6>Sub DownloadFileAPI()</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim strURL As String</h6>
+<h6>&nbsp;&nbsp    Dim LocalFilePath As String</h6>
+<h6>&nbsp;&nbsp    Dim DownloadStatus As Long</h6>
+<h6>&nbsp;&nbsp    Dim myArray As Variant</h6>
+<h6>&nbsp;&nbsp    Dim i As Integer</h6>
+<br>
+<h5>&nbsp;&nbsp    ' Specify file path</h5>
+<h6>&nbsp;&nbsp    strURL = "http://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultstronaopisowa/1772/1/5/uwagi_ogolne.pdf"</h6>
+<h6>&nbsp;&nbsp    myArray = Split(strURL, "/")</h6>
+<h6>&nbsp;&nbsp    LocalFilePath = "C:\Users\admin\Desktop\" & myArray(UBound(myArray))</h6>
+<h6>&nbsp;&nbsp    DownloadStatus = URLDownloadToFile(0, strURL, LocalFilePath, 0, 0)</h6>
+<br>
+<h6>&nbsp;&nbsp    If DownloadStatus = 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        MsgBox "File Downloaded. Check in this path: " & LocalFilePath</h6>
+<h6>&nbsp;&nbsp    Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        MsgBox "Download File Process Failed"</h6>
+<h6>&nbsp;&nbsp    End If</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
+
+
+<div id="primenumbers" class="macroouter">
+<h1>Mathematical</h1>
+<h1>Prime number</h1>
+<h2>A prime number (or a prime) is a natural number greater than 1 that has only two divisors, itself and 1. Macro checks if number is prime.</h2>
+<div class="macroinner">
+<h6>Sub PrimeNumbersTest()</h6>
+<br>
+<h6>&nbsp;&nbsp	Dim num As Long, i As Long, sum As Long</h6>
+<br>
+<h6>&nbsp;&nbsp num = InputBox("Type a number")</h6>
+<h6>&nbsp;&nbsp sum = 0</h6>
+<br>
+<h6>&nbsp;&nbsp	For i = 1 To num</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  If num Mod i = 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    sum = sum + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  End If</h6>
+<h6>&nbsp;&nbsp	Next i</h6>
+<br>
+<h6>&nbsp;&nbsp	If sum = 2 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  Debug.Print num & " is a prime number."</h6>
+<h6>&nbsp;&nbsp	Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  Debug.Print num & " is not a prime number."</h6>
+<h6>&nbsp;&nbsp	End If</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
+
+<div id="multitable" class="macroouter">
+<h1>Multiplication Table</h1>
+<h2>A multiplication table shows the results of multiplying two numbers.</h2>
+<div class="macroinner">
+<h6>Sub MultiplicationTable()</h6>
+<br>
+<h6>&nbsp;&nbsp  Dim num1 As Integer, num2 As Integer, res As Integer</h6>
+<br>
+<h6>&nbsp;&nbsp  For num1 = 1 To 10 Step 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  For num2 = 1 To 10 Step 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    res = num1 * num2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    Worksheets(1).Cells(num1, num2).Value = res</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  Next num2</h6>
+<h6>&nbsp;&nbsp  Next num1</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
+
+<div id="leapyear" class="macroouter">
+<h1>Leap Year</h1>
+<h2>Macro tests if a year is a leap year.</h2>
+<div class="macroinner">
+<h6>&nbsp;&nbsp		Dim myYear As Integer</h6>
+<br>
+<h6>&nbsp;&nbsp		myYear = InputBox("Type a year")</h6>
+<br>
+<h6>&nbsp;&nbsp		If myYear Mod 4 = 0 And myYear Mod 100 <> 0 Or myYear Mod 400 = 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp		  Debug.Print myYear & " is a leap year."</h6>
+<h6>&nbsp;&nbsp		Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp		  Debug.Print myYear & " is not a leap year."</h6>
+<h6>&nbsp;&nbsp		End If</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
+
+<div id="fibonacci" class="macroouter">
+<h1>Fibonacci Numbers</h1>
+<h2>In the Fibonacci sequence each number in the sequence is the sum of the two numbers that precede it. Macro debugs all Fibonacci numbers within a specified series.</h2>
+<div class="macroinner">
+<h6>Sub FibonacciNumbers()</h6>
+<br>
+<h6>&nbsp;&nbsp		Dim maxnum As Long, num1 As Long, num2 As Long, sum As Long</h6>
+<br>
+<h6>&nbsp;&nbsp		maxnum = InputBox("Type a number")</h6>
+<br>
+<h6>&nbsp;&nbsp		num1 = 0</h6>
+<h6>&nbsp;&nbsp		num2 = 1</h6>
+<br>
+<h6>&nbsp;&nbsp		Debug.Print num1</h6>
+<h6>&nbsp;&nbsp		Debug.Print num2</h6>
+<br>
+<h6>&nbsp;&nbsp		Do While num1 + num2 < maxnum</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  	  sum = num1 + num2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  	  Debug.Print sum</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  	  num1 = num2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp  	  num2 = sum</h6>
+<h6>&nbsp;&nbsp		Loop</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
+
+<div id="grcommondivisor" class="macroouter">
+<h1>Greatest Common Divisor</h1>
+<h2>Macro identifies greater common divisor for two numbers.</h2>
+<div class="macroinner">
+<h6>Sub GreatestCommonDivisor()</h6>
+<br>
+<h6>&nbsp;&nbsp		Dim num1 As Long, num2 As Long, div As Long</h6>
+<br>
+<h6>&nbsp;&nbsp		num1 = InputBox("Enter bigger number")</h6>
+<h6>&nbsp;&nbsp		num2 = InputBox("Enter smaller number")</h6>
+<br>
+<h6>&nbsp;&nbsp		Do While num1 Mod num2 > 0</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp		  div = num1 Mod num2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp		  num1 = num2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp		  num2 = div</h6>
+<h6>&nbsp;&nbsp		Loop</h6>
+<br>
+<h6>&nbsp;&nbsp		Debug.Print div & " is the greates common divisor for the declared numbers."</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
+
+<div id="easysudokusolver" class="macroouter">
+<h1>Games</h1>
+<h1>Easy Sudoku Solver</h1>
+<h2>Macro identifies straight-forward numbers in Sudoku over a number of iterations.<br>
+The following Sudoku belong tp ease ones and can be solved in 0.2 sec in 11 iterations.</h2>
+<img src="sudoku1.png" class="img-responsive" alt="">
+<br>
+<div class="macroinner">
+<h6>Option Explicit</h6>
+<br>
+<h6>Sub EasySudokuSolver()</h6>
+<br>
+<h6>&nbsp;&nbspApplication.ScreenUpdating = False</h6>
+<br>
+<h5>&nbsp;&nbsp' Variables</h5>
+<h6>&nbsp;&nbspDim wb As Workbook</h6>
+<h6>&nbsp;&nbspDim ws As Worksheet</h6>
+<h6>&nbsp;&nbspSet wb = ThisWorkbook</h6>
+<h6>&nbsp;&nbspSet ws = wb.Sheets("Sudoku")</h6>
+<br>
+<h6>&nbsp;&nbspDim cell As Range</h6>
+<h6>&nbsp;&nbspDim rng As Range</h6>
+<h6>&nbsp;&nbspSet rng = ws.Range("A1:I9")</h6>
+<h6>&nbsp;&nbsprng.Font.Color = vbBlack</h6>
+<br>
+<h6>&nbsp;&nbspDim r As Byte</h6>
+<h6>&nbsp;&nbspDim c As Byte</h6>
+<h6>&nbsp;&nbspDim n As Byte</h6>
+<h6>&nbsp;&nbspDim num As Byte</h6>
+<h6>&nbsp;&nbspDim tempnum As Byte</h6>
+<h6>&nbsp;&nbspDim iter As Integer</h6>
+<br>
+<h6>&nbsp;&nbspiter = InputBox("Type number of iterations")</h6>
+<br>
+<h5>&nbsp;&nbsp' temporary number</h5>
+<h6>&nbsp;&nbsptempnum = 10</h6>
+<br>
+<h5>&nbsp;&nbsp' number of iterations for numbers 1 to 9</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbspFor n = 1 To iter</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    For Each cell In rng</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        If IsEmpty(cell) Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If n = iter Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                MsgBox "Sudoku has not been solved in " & n & " iteration/s."</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Exit Sub</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextIteration</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    Next</h6>
+<br>
+<h6>&nbsp;&nbsp    MsgBox "Sudoku has been solved in " & n & " iteration/s."</h6>
+<h6>&nbsp;&nbsp    Exit Sub</h6>
+<br>
+<h6>&nbsp;&nbspNextIteration:</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    For num = 1 To 9</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For Each cell In rng</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If IsEmpty(cell) Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp          	cell.Value = tempnum</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            	'do nothing</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp		   Next cell</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp        ' row</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For r = 1 To 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(ws.Cells(r, 1).Resize(1, 9), num) > 0 Then</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(r, 1).Resize(1, 9)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        cell.ClearContents</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next r</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp        ' column</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For c = 1 To 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(ws.Cells(1, c).Resize(9, 1), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(1, c).Resize(9, 1)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        cell.ClearContents</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next c</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp        ' square zones</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For r = 1 To 7 Step 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For c = 1 To 7 Step 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(ws.Cells(r, c).Resize(3, 3), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(r, c).Resize(3, 3)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                       cell.ClearContents</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp	       Next c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next r</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp        ' checking numbers</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For r = 1 To 7 Step 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For c = 1 To 7 Step 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(ws.Cells(r, c).Resize(3, 3), tempnum) = 1 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(r, c).Resize(3, 3)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                cell.Select</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        cell.Value = num</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        cell.Font.Color = vbBlue</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(r, c).Resize(3, 3)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                         cell.ClearContents</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next r</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    Next num</h6>
+<h6>&nbsp;&nbspNext n</h6>
+<br>
+<h6>&nbsp;&nbspApplication.ScreenUpdating = True</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
+
+<div id="brutesudokusolver" class="macroouter">
+<h1>Brute Sudoku Solver</h1>
+<h2>Code solves Sudoku using brute force. Firstly, it identifies side of square that is most suitable to start with.<br>
+The following Sudoku requires use of brute force. Can be solved in 2.4 sec.</h2>
+<img src="sudoku2.png" class="img-responsive" alt="">
+<br>
+<div class="macroinner">
+<h6>Option Explicit</h6>
+<br>
+<h6>Sub BruteSudokuSolver()</h6>
+<br>
+<h6>&nbsp;&nbspApplication.ScreenUpdating = False</h6>
+<br>
+<h6>&nbsp;&nbspDim wb As Workbook</h6>
+<h6>&nbsp;&nbspDim ws As Worksheet</h6>
+<h6>&nbsp;&nbspSet wb = ThisWorkbook</h6>
+<h6>&nbsp;&nbspSet ws = wb.Sheets("Sudoku")</h6>
+<br>
+<h6>&nbsp;&nbspDim StartTime As Single</h6>
+<h6>&nbsp;&nbspDim r As Byte</h6>
+<h6>&nbsp;&nbspDim c As Byte</h6>
+<h6>&nbsp;&nbspDim n As Byte</h6>
+<h6>&nbsp;&nbspDim k As Byte</h6>
+<h6>&nbsp;&nbspDim num As Byte</h6>
+<br>
+<h6>&nbsp;&nbspDim rng As Range</h6>
+<h6>&nbsp;&nbspSet rng = ws.Range("A1:I9")</h6>
+<h6>&nbsp;&nbsprng.Font.Color = vbBlack</h6>
+<br>
+<h6>&nbsp;&nbspStartTime = Timer</h6>
+<br>
+<h6>&nbsp;&nbspr = 1</h6>
+<h6>&nbsp;&nbspc = 1</h6>
+<br>
+<h6>&nbsp;&nbspNextStep:</h6>
+<br>
+<h5>&nbsp;&nbsp' 10th row reached, 9 rows populated</h5>
+<h6>&nbsp;&nbspIf r = 10 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    MsgBox "Sudoku solved in " & Round(Timer - StartTime, 1) & " seconds."</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    Exit Sub</h6>
+<h6>&nbsp;&nbspEnd If</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp    ' if number is black</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    If Not IsEmpty(Cells(r, c)) And Cells(r, c).Font.Color = vbBlack Then</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        ' step forward</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        If c = 9 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            r = r + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            c = 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            c = c + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp    ' if number is red</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    ElseIf Not IsEmpty(Cells(r, c)) And Cells(r, c).Font.Color = vbRed Then</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        n = Cells(r, c).Value</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        k = n + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For num = k To 10</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        If num = 10 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Cells(r, c).ClearContents</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            ' step back</h5>
+<h6>&nbsp;&nbspAgain1:</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If c = 1 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                r = r - 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                c = 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                c = c - 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Cells(r, c).Font.Color = vbBlack Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo Again1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            ' 1st condition Row</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            If Application.WorksheetFunction.CountIf(Range(Cells(r, 1), Cells(r, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' 2nd condition Column</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                If Application.WorksheetFunction.CountIf(Range(Cells(1, c), Cells(9, c)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' 3rd condition Range</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                   Select Case r</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 1), Cells(3, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 4), Cells(3, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 7), Cells(3, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 1), Cells(6, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 4), Cells(6, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 7), Cells(6, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 1), Cells(9, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 4), Cells(9, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 7), Cells(9, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Cells(r, c) = num</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Cells(r, c).Font.Color = vbRed</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' step forward</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                If c = 9 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    r = r + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    c = 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    c = c + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                End If</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+<br>
+<h6>&nbsp;&nbspNextNum1:</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp       Next num</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp    ' if empty</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    Else</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For num = 1 To 10</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        If num = 10 Then</h6>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            ' step back</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Cells(r, c).ClearContents</h6>
+<h6>&nbsp;&nbspAgain2:</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If c = 1 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                r = r - 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                c = 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                c = c - 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Cells(r, c).Font.Color = vbBlack Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo Again2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            ' 1st condition Row</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(Range(Cells(r, 1), Cells(r, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' 2nd condition Column</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                If Application.WorksheetFunction.CountIf(Range(Cells(1, c), Cells(9, c)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    ' 3rd condition Range</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    Select Case r</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 1), Cells(3, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 4), Cells(3, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 7), Cells(3, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 1), Cells(6, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 4), Cells(6, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 7), Cells(6, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 1), Cells(9, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 4), Cells(9, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 7), Cells(9, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Cells(r, c) = num</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Cells(r, c).Font.Color = vbRed</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' step forward</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                If c = 9 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    r = r + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    c = 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    c = c + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                End If</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+<br>
+<h6>&nbsp;&nbspNextNum2:</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Next num</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    End If</h6>
+<br>
+<h6>&nbsp;&nbspApplication.ScreenUpdating = True</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
+
+<div id="combinedsudokusolver" class="macroouter">
+<h1>Combined Sudoku Solver</h1>
+<h2>The following code combines above solutions. Firstly, over a number of iterations it identifies straight-forward numbers in Sudoku. If cannot identify all numbers it switches to brute solution.<br>
+The following Sudoku is called anti-brute. It was solved by an author in around 7 mins using ASUS i5-7200U CPU @ 2.50GHz 8GB.</h2>
+<img src="sudoku3.png" class="img-responsive" alt="">
+<br>
+<div class="macroinner">
+<h6>Option Explicit</h6>
+<br>
+<h6>Sub CombinedSudokuSolver()</h6>
+<br>
+<h6>&nbsp;&nbspApplication.ScreenUpdating = False</h6>
+<br>
+<h5>&nbsp;&nbsp' Variables</h5>
+<h6>&nbsp;&nbspDim StartTime As Single</h6>
+<br>
+<h6>&nbsp;&nbspDim wb As Workbook</h6>
+<h6>&nbsp;&nbspDim ws As Worksheet</h6>
+<h6>&nbsp;&nbspSet wb = ThisWorkbook</h6>
+<h6>&nbsp;&nbspSet ws = wb.Sheets("Sudoku")</h6>
+<br>
+<h6>&nbsp;&nbspDim cell As Range</h6>
+<h6>&nbsp;&nbspDim rng As Range</h6>
+<h6>&nbsp;&nbspSet rng = ws.Range("A1:I9")</h6>
+<h6>&nbsp;&nbsprng.Font.Color = vbBlack</h6>
+<h6>&nbsp;&nbspDim rng2 As Range</h6>
+<h6>&nbsp;&nbspSet rng2 = ws.Range("A10:I18")</h6>
+<br>
+<h6>&nbsp;&nbspDim r As Byte</h6>
+<h6>&nbsp;&nbspDim c As Byte</h6>
+<h6>&nbsp;&nbspDim n As Byte</h6>
+<h6>&nbsp;&nbspDim k As Byte</h6>
+<h6>&nbsp;&nbspDim i As Byte</h6>
+<h6>&nbsp;&nbspDim num As Byte</h6>
+<h6>&nbsp;&nbspDim tempnum As Byte</h6>
+<br>
+<h6>&nbsp;&nbspDim a As Byte</h6>
+<h6>&nbsp;&nbspDim b As Byte</h6>
+<h6>&nbsp;&nbspDim d As Byte</h6>
+<h6>&nbsp;&nbspDim e As Byte</h6>
+<h6>&nbsp;&nbspDim transp As Byte</h6>
+<h6>&nbsp;&nbspDim transpback As Byte</h6>
+<h6>&nbsp;&nbspDim g As Byte</h6>
+<br>
+<br>
+<h6>&nbsp;&nbspStartTime = Timer</h6>
+<br>
+<h5>&nbsp;&nbsp' temporary number</h5>
+<h6>&nbsp;&nbsptempnum = 10</h6>
+<br>
+<h5>&nbsp;&nbsp' number of iterations for numbers 1 to 9</h5>
+<h6>&nbsp;&nbsp		For n = 1 To 9 '11</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    For Each cell In rng</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        If IsEmpty(cell) Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If n = 9 Then '11</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo RotationStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextIteration</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    	Next</h6>
+<br>
+<h6>&nbsp;&nbsp    	MsgBox "Sudoku solved in " & Round(Timer - StartTime, 1) & " seconds in " & n & " iteration/s."</h6>
+<h6>&nbsp;&nbsp	Exit Sub</h6>
+<br>
+<h6>NextIteration:</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    For num = 1 To 9</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For Each cell In rng</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If IsEmpty(cell) Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                cell.Value = tempnum</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            'do nothing</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Next cell</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        ' row</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For r = 1 To 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(ws.Cells(r, 1).Resize(1, 9), num) > 0 Then</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(r, 1).Resize(1, 9)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        cell.ClearContents</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Next r</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        ' column</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For c = 1 To 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(ws.Cells(1, c).Resize(9, 1), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(1, c).Resize(9, 1)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        cell.ClearContents</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Next c</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        ' square zones</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For r = 1 To 7 Step 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For c = 1 To 7 Step 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(ws.Cells(r, c).Resize(3, 3), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(r, c).Resize(3, 3)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                   If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        cell.ClearContents</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Next c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Next r</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        ' checking numbers</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For r = 1 To 7 Step 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For c = 1 To 7 Step 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(ws.Cells(r, c).Resize(3, 3), tempnum) = 1 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(r, c).Resize(3, 3)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                cell.Select</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        cell.Value = num</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        cell.Font.Color = vbBlue</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                For Each cell In ws.Cells(r, c).Resize(3, 3)</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    If cell.Value = tempnum Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                         cell.ClearContents</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Next cell</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Next c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Next r</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    Next num</h6>
+<h6>&nbsp;&nbspNext n</h6>
+<br>
+<h6>RotationStep:</h6>
+<br>
+<h5>&nbsp;&nbsp' rotation clockwise</h5>
+<h6>&nbsp;&nbspa = Application.WorksheetFunction.CountA(Range(Cells(1, 1), Cells(1, 9)))</h6>
+<h6>&nbsp;&nbspb = Application.WorksheetFunction.CountA(Range(Cells(1, 9), Cells(9, 9)))</h6>
+<h6>&nbsp;&nbspd = Application.WorksheetFunction.CountA(Range(Cells(9, 1), Cells(9, 9)))</h6>
+<h6>&nbsp;&nbspe = Application.WorksheetFunction.CountA(Range(Cells(1, 1), Cells(9, 1)))</h6>
+<br>
+<h6>&nbsp;&nbspIf a >= b And a >= d And a >= e Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbspGoTo BruteStep</h6>
+<h6>&nbsp;&nbspElseIf b >= a And b >= d And b >= e Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsptransp = 1</h6>
+<h6>&nbsp;&nbspElseIf d >= a And d >= b And d >= e Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsptransp = 2</h6>
+<h6>&nbsp;&nbspElseIf e >= a And e >= b And e >= d Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsptransp = 3</h6>
+<h6>&nbsp;&nbspEnd If</h6>
+<br>
+<h6>&nbsp;&nbsp	Debug.Print transp</h6>
+<br>
+<h6>&nbsp;&nbsp	For g = 1 To transp</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    i = 9</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    For r = 1 To 9</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    Range(Cells(r, 1), Cells(r, 9)).Copy</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    Cells(10, i).PasteSpecial Paste:=xlPasteAll, transpose:=True</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    i = i - 1</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    Next r</h6>
+<br>
+<h6>&nbsp;&nbsp    rng2.Copy</h6>
+<h6>&nbsp;&nbsp    rng.PasteSpecial Paste:=xlPasteAll</h6>
+<h6>&nbsp;&nbsp    rng2.Clear</h6>
+<br>
+<h6>&nbsp;&nbsp	Next g</h6>
+<br>
+<h6>BruteStep:</h6>
+<br>
+<h6>&nbsp;&nbspr = 1</h6>
+<h6>&nbsp;&nbspc = 1</h6>
+<h6>&nbsp;&nbspn = 0</h6>
+<br>
+<h6>&nbsp;&nbspNextStep:</h6>
+<br>
+<h5>&nbsp;&nbsp' 10th row reached, 9 rows populated</h5>
+<h6>&nbsp;&nbsp	If r = 10 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp     GoTo FinalStep</h6>
+<h6>&nbsp;&nbsp	End If</h6>
+<br>
+<h5>&nbsp;&nbsp    ' if number is black</h5>
+<h6>&nbsp;&nbsp    If Not IsEmpty(Cells(r, c)) And (Cells(r, c).Font.Color = vbBlack Or Cells(r, c).Font.Color = vbBlue) Then</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp        ' step forward</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        If c = 9 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            r = r + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            c = 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            c = c + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+<br>
+<h5>&nbsp;&nbsp    ' if number is red</h5>
+<h6>&nbsp;&nbsp    ElseIf Not IsEmpty(Cells(r, c)) And Cells(r, c).Font.Color = vbRed Then</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        n = Cells(r, c).Value</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        k = n + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        For num = k To 10</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        If num = 10 Then</h6>
+<h6>&nbsp;&nbsp            Cells(r, c).ClearContents</h6>
+<br>
+<h5>' step back</h5>
+<h6>Again1:</h6>
+<h6>&nbsp;&nbsp            If c = 1 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp                r = r - 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp                c = 9</h6>
+<h6>&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp                c = c - 1</h6>
+<h6>&nbsp;&nbsp            End If</h6>
+<br>
+<h6>&nbsp;&nbsp            If Cells(r, c).Font.Color = vbBlack Or Cells(r, c).Font.Color = vbBlue Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp                GoTo Again1</h6>
+<h6>&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextStep</h6>
+<h6>&nbsp;&nbsp            End If</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp            ' 1st condition Row</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(Range(Cells(r, 1), Cells(r, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' 2nd condition Column</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                If Application.WorksheetFunction.CountIf(Range(Cells(1, c), Cells(9, c)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' 3rd condition Range</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    Select Case r</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 1), Cells(3, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 4), Cells(3, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 7), Cells(3, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 1), Cells(6, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 4), Cells(6, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 7), Cells(6, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 1), Cells(9, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 4), Cells(9, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 7), Cells(9, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Cells(r, c) = num</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Cells(r, c).Font.Color = vbRed</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' step forward</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                If c = 9 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    r = r + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    c = 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    c = c + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                End If</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp        End If</h6>
+<br>
+<h6>NextNum1:</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next num</h6>
+<br>
+<h5>&nbsp;&nbsp    ' if empty</h5>
+<h6>&nbsp;&nbsp    Else</h6>
+<br>
+<h6>&nbsp;&nbsp        For num = 1 To 10</h6>
+<br>
+<h6>&nbsp;&nbsp        If num = 10 Then</h6>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp            ' step back</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            Cells(r, c).ClearContents</h6>
+<h6>Again2:</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            If c = 1 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                r = r - 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                c = 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                c = c - 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            If Cells(r, c).Font.Color = vbBlack Or Cells(r, c).Font.Color = vbBlue Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo Again2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextStep</h6>
+<h6>&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp        Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp            ' 1st condition Row</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            If Application.WorksheetFunction.CountIf(Range(Cells(r, 1), Cells(r, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' 2nd condition Column</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                If Application.WorksheetFunction.CountIf(Range(Cells(1, c), Cells(9, c)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Else</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' 3rd condition Range</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    Select Case r</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 1), Cells(3, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 4), Cells(3, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(1, 7), Cells(3, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 1), Cells(6, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 4), Cells(6, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(4, 7), Cells(6, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                        Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Select Case c</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 1, 2, 3</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 1), Cells(9, 3)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 4, 5, 6</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 4), Cells(9, 6)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            Case 7, 8, 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                If Application.WorksheetFunction.CountIf(Range(Cells(7, 7), Cells(9, 9)), num) > 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                    GoTo NextNum2</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                            End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    End Select</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Cells(r, c) = num</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Cells(r, c).Font.Color = vbRed</h6>
+<br>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                ' step forward</h5>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                If c = 9 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    r = r + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    c = 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    c = c + 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                    GoTo NextStep</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                End If</h6>
+<br>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                End If</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+<h6>&nbsp;&nbsp        End If</h6>
+<br>
+<h6>NextNum2:</h6>
+<br>
+<h6>&nbsp;&nbsp        Next num</h6>
+<h6>&nbsp;&nbsp    End If</h6>
+<br>
+<h6>FinalStep:</h6>
+<br>
+<h5>&nbsp;&nbsp' rotation back to starting point</h5>
+<h6>&nbsp;&nbsp		If transp = 0 Then</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    MsgBox "Sudoku solved in " & Round(Timer - StartTime, 1) & " seconds."</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    Exit Sub</h6>
+<h6>&nbsp;&nbsp		Else</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    transpback = 4 - transp</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    For g = 1 To transpback</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        i = 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        For r = 1 To 9</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Range(Cells(r, 1), Cells(r, 9)).Copy</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Cells(10, i).PasteSpecial Paste:=xlPasteAll, transpose:=True</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        i = i - 1</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Next r</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        rng2.Copy</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        rng.PasteSpecial Paste:=xlPasteAll</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        rng2.Clear</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp    Next g</h6>
+<h6>&nbsp;&nbsp		End If</h6>
+<h6>&nbsp;&nbsp    MsgBox "Sudoku solved in " & Round(Timer - StartTime, 1) & " seconds."</h6>
+<h6>&nbsp;&nbsp    Exit Sub</h6>
+<br>
+<h6>&nbsp;&nbspApplication.ScreenUpdating = True</h6>
+<br>
+<h6>End Sub</h6>
+
+</div>
+</div>
+
+
 <!--
 SAMPLE
 <div id="Calculate" class="macroouter">
@@ -2025,7 +3055,7 @@ SAMPLE
 <h2>If your calculation option is set to manual it will calculate your selection range.</h2>
 <div class="macroinner">
 <h6>Sub Calculate()</h6>
-<h6>Selection.Calculate</h6>
+<h6>&nbsp;&nbspSelection.Calculate</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2036,9 +3066,9 @@ SAMPLE
 <h2>Removes comments from the selected range.</h2>
 <div class="macroinner">
 <h6>Sub ClearComments()</h6>
-<h6>For Each cell In Selection</h6>
-<h6>cell.ClearComments</h6>
-<h6>Next cell</h6>
+<h6>&nbsp;&nbspFor Each cell In Selection</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspcell.ClearComments</h6>
+<h6>&nbsp;&nbspNext cell</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2049,11 +3079,11 @@ SAMPLE
 <h2>Specifies column width for a determined range.</h2>
 <div class="macroinner">
 <h6>Sub ColumnWidth()</h6>
-<h6>Dim ColWidth As Integer</h6>
-<h6>ColWidth = Application.InputBox("Column width")</h6>
-<h6>With ActiveSheet.Columns("A:E")</h6>
-<h6>.ColumnWidth = ColWidth</h6>
-<h6>End With</h6>
+<h6>&nbsp;&nbspDim ColWidth As Integer</h6>
+<h6>&nbsp;&nbspColWidth = Application.InputBox("Column width")</h6>
+<h6>&nbsp;&nbspWith ActiveSheet.Columns("A:E")</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp.ColumnWidth = ColWidth</h6>
+<h6>&nbsp;&nbspEnd With</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2064,12 +3094,12 @@ SAMPLE
 <h2>Counts values that appear at least twice in a selected range.</h2>
 <div class="macroinner">
 <h6>Sub CountDuplicates()</h6>
-<h6>For Each cell In Selection</h6>
-<h6>If Not IsEmpty(cell) Then _</h6>
-<h6>If WorksheetFunction.CountIf(Selection, cell) > 1 Then _</h6>
-<h6>count = count + (1 / WorksheetFunction.CountIf(Selection, cell))</h6>
-<h6>End If</h6>
-<h6>End If</h6>
+<h6>&nbsp;&nbspFor Each cell In Selection</h6>
+<h6>&nbsp;&nbspIf Not IsEmpty(cell) Then _</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspIf WorksheetFunction.CountIf(Selection, cell) > 1 Then _</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspcount = count + (1 / WorksheetFunction.CountIf(Selection, cell))</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspEnd If</h6>
+<h6>&nbsp;&nbspEnd If</h6>
 <h6>Next cell</h6>
 <h6>MsgBox count</h6>
 <h6>End Sub</h6>
@@ -2082,14 +3112,14 @@ SAMPLE
 <h2>Counts values that are unique in a selected range.</h2>
 <div class="macroinner">
 <h6>Sub CountUnique()</h6>
-<h6>For Each cell In Selection</h6>
-<h6>If Not IsEmpty(cell) Then _</h6>
-<h6>If WorksheetFunction.CountIf(Selection, cell) = 1 Then _</h6>
-<h6>count = count + 1</h6>
-<h6>End If</h6>
-<h6>End If</h6>
+<h6>&nbsp;&nbspFor Each cell In Selection</h6>
+<h6>&nbsp;&nbspIf Not IsEmpty(cell) Then _</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspIf WorksheetFunction.CountIf(Selection, cell) = 1 Then _</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspcount = count + 1</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspEnd If</h6>
+<h6>&nbsp;&nbspEnd If</h6>
 <h6>Next cell</h6>
-<h6>MsgBox count</h6>
+<h6>&nbsp;&nbspMsgBox count</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2100,9 +3130,9 @@ SAMPLE
 <h2>Counts any chosen value within a selected range.</h2>
 <div class="macroinner">
 <h6>Sub CountValue()</h6>
-<h6>Dim i As Variant</h6>
-<h6>i = InputBox("Name value")</h6>
-<h6>MsgBox WorksheetFunction.CountIf(Selection, i)</h6>
+<h6>&nbsp;&nbspDim i As Variant</h6>
+<h6>&nbsp;&nbspi = InputBox("Name value")</h6>
+<h6>&nbsp;&nbspMsgBox WorksheetFunction.CountIf(Selection, i)</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2113,23 +3143,23 @@ SAMPLE
 <h2>The macro counts number of words in a selection.</h2>
 <div class="macroinner">
 <h6>Sub CountWords()</h6>
-<h6>Dim WordCount As Long</h6>
-<h6>For Each cell In Selection</h6>
-<h6>If IsEmpty(cell) Then</h6>
-<h6>WordCount = WordCount</h6>
-<h6>Else</h6>
-<h6>If cell.HasFormula Then</h6>
-<h6>WordCount = WordCount</h6>
-<h6>Else</h6>
-<h6>If IsNumeric(cell) Then</h6>
-<h6>WordCount = WordCount</h6>
-<h6>Else</h6>
-<h6>WordCount = WordCount + Len(Trim(cell)) - Len(Replace(Trim(cell), " ", "")) + 1</h6>
-<h6>End If</h6>
-<h6>End If</h6>
-<h6>End If</h6>
-<h6>Next cell</h6>
-<h6>MsgBox WordCount & " words found in the selected range."</h6>
+<h6>&nbsp;&nbspDim WordCount As Long</h6>
+<h6>&nbsp;&nbspFor Each cell In Selection</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspIf IsEmpty(cell) Then</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspWordCount = WordCount</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspElse</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspIf cell.HasFormula Then</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspWordCount = WordCount</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspElse</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspIf IsNumeric(cell) Then</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspWordCount = WordCount</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspElse</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspWordCount = WordCount + Len(Trim(cell)) - Len(Replace(Trim(cell), " ", "")) + 1</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspEnd If</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspEnd If</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspEnd If</h6>
+<h6>&nbsp;&nbspNext cell</h6>
+<h6>&nbsp;&nbspMsgBox WordCount & " words found in the selected range."</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2140,10 +3170,10 @@ SAMPLE
 <h2>Deletes empty columns for a selected range.</h2>
 <div class="macroinner">
 <h6>Sub DeleteEmptyColumns()</h6>
-<h6>Dim i As Integer</h6>
-<h6>For i = Selection.Column + Selection.Columns.count - 1 To Selection.Column Step -1</h6>
-<h6>If Application.WorksheetFunction.CountA(Columns(i)) = 0 Then Columns(i).EntireColumn.Delete</h6>
-<h6>Next i</h6>
+<h6>&nbsp;&nbspDim i As Integer</h6>
+<h6>&nbsp;&nbspFor i = Selection.Column + Selection.Columns.count - 1 To Selection.Column Step -1</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspIf Application.WorksheetFunction.CountA(Columns(i)) = 0 Then Columns(i).EntireColumn.Delete</h6>
+<h6>&nbsp;&nbspNext i</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2154,10 +3184,10 @@ SAMPLE
 <h2>Deletes empty rows for a selected range.</h2>
 <div class="macroinner">
 <h6>Sub DeleteEmptyRows()</h6>
-<h6>Dim i As Integer</h6>
-<h6>For i = Selection.Row + Selection.Rows.count - 1 To Selection.Row Step -1</h6>
-<h6>If Application.WorksheetFunction.CountA(Rows(i)) = 0 Then Rows(i).EntireRow.Delete</h6>
-<h6>Next i</h6>
+<h6>&nbsp;&nbspDim i As Integer</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspFor i = Selection.Row + Selection.Rows.count - 1 To Selection.Row Step -1</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbspIf Application.WorksheetFunction.CountA(Rows(i)) = 0 Then Rows(i).EntireRow.Delete</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspNext i</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2168,11 +3198,11 @@ SAMPLE
 <h2>Fills blank cells in a selection with any number or text.</h2>
 <div class="macroinner">
 <h6>Sub FillBlankCells()</h6>
-<h6>Dim i As Variant</h6>
-<h6>i = InputBox("Fill in blank cells with...")</h6>
-<h6>For Each cell In Selection</h6>
-<h6>If IsEmpty(cell) Then cell.Value = i</h6>
-<h6>Next cell</h6>
+<h6>&nbsp;&nbspDim i As Variant</h6>
+<h6>&nbsp;&nbspi = InputBox("Fill in blank cells with...")</h6>
+<h6>&nbsp;&nbspFor Each cell In Selection</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspIf IsEmpty(cell) Then cell.Value = i</h6>
+<h6>&nbsp;&nbspNext cell</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2183,9 +3213,9 @@ SAMPLE
 <h2>Highlights odd numbers in your selected range.</h2>
 <div class="macroinner">
 <h6>Sub FindOdd()</h6>
-<h6>For Each cell In Selection</h6>
-<h6>If cell Mod 2 <> 0 Then cell.Interior.ColorIndex = 4 'green</h6>
-<h6>Next cell</h6>
+<h6>&nbsp;&nbspFor Each cell In Selection</h6>
+<h6>&nbsp;&nbsp&nbsp;&nbspIf cell Mod 2 <> 0 Then cell.Interior.ColorIndex = 4 'green</h6>
+<h6>&nbsp;&nbspNext cell</h6>
 <h6>End Sub</h6>
 </div>
 </div>
@@ -2952,6 +3982,44 @@ https://docs.microsoft.com/en-us/office/vba/api/excel.application.getsaveasfilen
 </div>
 
 
+<div id="SavexlsmAsxlsx" class="macroouter">
+<h1>SavexlsmAsxlsx</h1>
+<h2>Workaround to save xlsm as xlsx file.</h2>
+<div class="macroinner">
+<h6>Sub SavexlsmAsxlsx()</h6>
+<br>
+<h6>&nbsp;&nbspApplication.ScreenUpdating = False</h6>
+<h6>&nbsp;&nbspApplication.DisplayAlerts = False</h6>
+<br>
+<h6>&nbsp;&nbsp    Dim wb As Workbook</h6>
+<h6>&nbsp;&nbsp    Dim wb_new As Workbook</h6>
+<h6>&nbsp;&nbsp    Dim wbpath As String</h6>
+<br>
+<h6>&nbsp;&nbsp    Set wb = ThisWorkbook</h6>
+<h6>&nbsp;&nbsp    wbpath = wb.Path</h6>
+<h6>&nbsp;&nbsp    Debug.Print wbpath</h6>
+<br>
+<h6>&nbsp;&nbsp    wb.SaveCopyAs Filename:=wbpath & "\temporary.xlsm"</h6>
+<h6>&nbsp;&nbsp    Workbooks.Open Filename:=wbpath & "\temporary.xlsm"</h6>
+<br>
+<h6>&nbsp;&nbsp    Set wb_new = ActiveWorkbook</h6>
+<br>
+<h6>&nbsp;&nbsp    With wb_new</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .SaveAs Filename:=wbpath & "\copy.xlsx", FileFormat:=xlOpenXMLWorkbook</h6>
+<h6>&nbsp;&nbsp;&nbsp;&nbsp        .Close savechanges:=False</h6>
+<h6>&nbsp;&nbsp    End With</h6>
+<br>
+<h6>&nbsp;&nbsp    On Error Resume Next</h6>
+<h6>&nbsp;&nbsp    Kill wbpath & "\temporary.xlsm"</h6>
+<br>
+<h6>&nbsp;&nbspApplication.ScreenUpdating = True</h6>
+<h6>&nbsp;&nbspApplication.DisplayAlerts = True</h6>
+<br>
+<h6>End Sub</h6>
+</div>
+</div>
+
+
 <div id="StartCalculator" class="macroouter">
 <h1>StartCalculator</h1>
 <h2>Opens a calculator from Excel level.</h2>
@@ -3153,7 +4221,23 @@ On this website, you will find a bunch of codes ready to be pasted in your Excel
 <h4><a href="#openwebsite">Open Website</a></h4>
 <h4><a href="#webscraping1">Get currency data</a></h4>
 <h4><a href="#webscraping2">Get sport data</a></h4>
+<h4><a href="#webscraping3">Dwonload file from web</a></h4>
 <br>
+
+<h4><b><a href="#access">Mathematical</a></b></h4>
+<h4><a href="#primenumbers">Prime numbers</a></h4>
+<h4><a href="#multitable">Multiplication Table</a></h4>
+<h4><a href="#leapyear">Leap year</a></h4>
+<h4><a href="#fibonacci">Fibonacci numbers</a></h4>
+<h4><a href="#grcommondivisor">Greatest Common Divisor</a></h4>
+<br>
+
+<h4><b><a href="#access">Games</a></b></h4>
+<h4><a href="#easysudokusolver">Easy Sudoku solver</a></h4>
+<h4><a href="#brutesudokusolver">Brute Sudoku solver</a></h4>
+<h4><a href="#combinedsudokusolver">Combined Sudoku solver</a></h4>
+<br>
+
 
 <!--<old macros-->
 
@@ -3231,6 +4315,7 @@ On this website, you will find a bunch of codes ready to be pasted in your Excel
 <h4><a href="#Reminder">Reminder</a></h4>
 <h4><a href="#RestrictAccess">RestrictAccess</a></h4>
 <h4><a href="#SaveFileCopy">SaveFileCopy</a></h4>
+<h4><a href="#SavexlsmAsxlsx">SavexlsmAsxlsx</a></h4>
 <h4><a href="#StartCalculator">StartCalculator</a></h4>
 <h4><a href="#StartMsWord">StartMsWord</a></h4>
 <h4><a href="#TimeCountMin">TimeCountMin</a></h4>
