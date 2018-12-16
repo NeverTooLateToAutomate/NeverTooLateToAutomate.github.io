@@ -3988,6 +3988,7 @@
 							<h6>&nbsp;&nbsp    Application.DisplayAlerts = False</h6>
 							<h6>&nbsp;&nbsp    Application.ScreenUpdating = False</h6>
 							<h6>&nbsp;&nbsp    Application.AskToUpdateLinks = False</h6>
+							<h6>&nbsp;&nbsp    Application.EnableEvents = False ' disables external macros</h6>
 							<br>
 							<h6>&nbsp;&nbsp    Dim wb1 As Workbook</h6>
 							<h6>&nbsp;&nbsp    Dim wb2 As Workbook</h6>
@@ -4011,9 +4012,10 @@
 							<br>
 							<h6>&nbsp;&nbsp    Next objFile</h6>
 							<br>
-							<h6>&nbsp;&nbsp    Application.DisplayAlerts = True</h6>
-							<h6>&nbsp;&nbsp    Application.ScreenUpdating = True</h6>
+							<h6>&nbsp;&nbsp    Application.EnableEvents = True</h6>
 							<h6>&nbsp;&nbsp    Application.AskToUpdateLinks = True</h6>
+							<h6>&nbsp;&nbsp    Application.ScreenUpdating = True</h6>
+							<h6>&nbsp;&nbsp    Application.DisplayAlerts = True</h6>
 							<br>
 							<h6>End Sub</h6>
 						</div>
@@ -4152,7 +4154,7 @@
 							<h6>End Sub</h6>
 						</div>
 					</div>
-
+					
 					<div id="StartCalculator" class="macroouter">
 					<h1>Start Calculator</h1>
 					<h2>Opens a calculator from the Excel level.</h2>
@@ -4169,6 +4171,40 @@
 						<div class="macroinner">
 							<h6>Sub StartMsWord()</h6>
 							<h6>&nbsp;&nbsp	Application.ActivateMicrosoftApp xlMicrosoftWord 'or Index:=1</h6>
+							<h6>End Sub</h6>
+						</div>
+					</div>
+					
+					<div id="StopResume" class="macroouter">
+					<h1>Stop Resume</h1>
+					<h2>Allows stopping macro, do changes in a file and resuming after pressing a dedicated button.<br>
+					Useful links:
+					<a href="https://www.mrexcel.com/forum/excel-questions/673602-pause-macro-then-resume-macro.html" target="_blank" style="color:#0e5051"> Mr Excel &#124;</a>
+					<a href="https://support.office.com/pl-pl/article/przypisywanie-makra-do-formularza-lub-przycisku-kontrolki-d58edd7d-cb04-4964-bead-9c72c843a283" target="_blank" style="color:#0e5051"> Office support &#124;</a>
+					<a href="https://wellsr.com/vba/2018/excel/vba-doevents-and-when-to-use-it/" target="_blank" style="color:#0e5051"> wellsr</a></h2>
+						<div class="macroinner">
+							<h6>&nbsp;&nbsp	Public Resume_Macro As Boolean</h6>
+							<br>
+							<h5>' Assign below 3 lines to the button</h5>
+							<h6>Sub Resume_Click()</h6>
+							<h6>&nbsp;&nbsp	Resume_Macro = True</h6>
+							<h6>End Sub</h6>
+							<br>
+							<h6>Sub Pause_Macro()</h6>
+							<h6>&nbsp;&nbsp	Resume_Macro = False</h6>
+							<h6>&nbsp;&nbsp	MsgBox "Press Resume when you are ready"</h6>
+							<h6>&nbsp;&nbsp	While Not Resume_Macro</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    DoEvents</h6>
+							<h6>&nbsp;&nbsp	Wend</h6>
+							<h6>&nbsp;&nbsp	Resume_Macro = False</h6>
+							<h6>&nbsp;&nbsp	MsgBox "The macro will now continue"</h6>
+							<h6>End Sub</h6>
+							<br>
+							<h5>' Sample code</h5>
+							<h6>Sub test()</h6>
+							<h5>&nbsp;&nbsp ' code here</h5>
+							<h6>&nbsp;&nbsp	Call Pause_Macro</h6>
+							<h5>&nbsp;&nbsp ' code here</h5>
 							<h6>End Sub</h6>
 						</div>
 					</div>
@@ -4391,6 +4427,7 @@
 						<h4><a href="#Reminder">Reminder</a></h4>
 						<h4><a href="#StartCalculator">Start Calculator</a></h4>
 						<h4><a href="#StartMsWord">Start Ms Word</a></h4>
+						<h4><a href="#StopResume">Stop Resume</a></h4>
 						<h4><a href="#StyleKiller">Style Killer</a></h4>
 						<h4><a href="#ShellOpenFile">Shell open File</a></h4>
 					<br>
