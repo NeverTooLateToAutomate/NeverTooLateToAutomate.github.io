@@ -201,6 +201,13 @@ a {
 .grey-bg{
   background-color: #f9f9f9;	
 }	
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
 	
 /*
 @media (min-width:1400px) {
