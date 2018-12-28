@@ -1293,9 +1293,8 @@
 						</div>
 					</div>
 
-
-					<div id="SharepointOpenFile" class="macroouter">
-					<h1>Open file on Sharepoint</h1>
+					<div id="SharepointOpenFileEB" class="macroouter">
+					<h1>Open file on SP early binding</h1>
 					<h2>Opens Sharepoint file. Allows file modification and close.<br>
 					For code to work in Tools - References tick "Microsoft Scripting Runtime".<br>
 					Useful link:
@@ -1323,7 +1322,34 @@
 						</div>
 					</div>
 					
-					
+					<div id="SharepointOpenFileLB" class="macroouter">
+					<h1>Open file on SP late binding</h1>
+					<h2>Opens Sharepoint file. Allows file modification and close.<br>
+					For code to work in Tools - References tick "Microsoft Scripting Runtime".<br>
+					Useful link:
+					<a href="https://www.exceltrick.com/formulas_macros/filesystemobject-in-vba/" target="_blank" style="color:#0e5051"> Excel trick</a></h2>
+						<div class="macroinner">
+							<h6>Sub SharepointOpenFile()</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Dim fd As Object</h6>
+							<h6>&nbsp;&nbsp	Dim fl As Variant</h6>
+							<h6>&nbsp;&nbsp	Dim wb As Workbook</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Set fs = CreateObject("Scripting.FileSystemObject")</h6>
+							<h6>&nbsp;&nbsp	Set fd = fs.GetFolder("\\example.net@SSL\DavWWWRoot\site\example\")</h6>
+							<br>
+							<h6>&nbsp;&nbsp	For Each fl In fd.Files</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    If fl.Name = "test.xlsx" Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Set wb = Workbooks.Open(f)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        wb.Sheets(1).Range("C1").Value = "test"</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        wb.Close , SaveChanges = False</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    End If</h6>
+							<h6>&nbsp;&nbsp	Next fl</h6>
+							<br>
+							<h6>End Sub</h6>
+						</div>
+					</div>
+
 					<div id="SharepointSaveFileCopy" class="macroouter">
 					<h1>Copy file from Sharepoint</h1>
 					<h2>Creates a copy of Sharepoint file on local computer.</h2>
@@ -1766,8 +1792,6 @@
 					<div id="CurrencyConverter" class="macroouter">
 					<h1>Currency Converter</h1>
 					<h2>UserForm that enables selecting one out of three currencies and convert typed amount to EUR. Currency rates from European Central Bank.<br>
-					<a href="" target="_blank" style="color:#0e5051"> </a></h2>
-					
 						<!--connect to ECB & create button-->
 						<h2>Open ECB's website:
 						<a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" target="_blank" style="color:#0e5051"> ECB's currency rates</a><br>
@@ -1782,61 +1806,171 @@
 						<h2>Microsoft Excel Objects -> ThisWorkbook<br>
 						This code refreshes currency rates every time Excel is open.</h2>
 						<div class="macroinner">
-
-						<h6>Private Sub Workbook_Open()</h6>
-						<h6>&nbsp;&nbsp	ThisWorkbook.RefreshAll</h6>
-						<h6>End Sub</h6>
+							<h6>Private Sub Workbook_Open()</h6>
+							<h6>&nbsp;&nbsp	ThisWorkbook.RefreshAll</h6>
+							<h6>End Sub</h6>
 						</div>
 						<h2>Forms -> UserForm1 -> Cancel button</h2>
 						<div class="macroinner">
-						<h6>Private Sub Cancel_Click()</h6>
-						<h6>&nbsp;&nbsp	Unload UserForm1</h6>
-						<h6>End Sub</h6>
+							<h6>Private Sub Cancel_Click()</h6>
+							<h6>&nbsp;&nbsp	Unload UserForm1</h6>
+							<h6>End Sub</h6>
 						</div>
 						<h2>Forms -> UserForm1 -> Convert button</h2>
 						<div class="macroinner">
-						<h6>Private Sub Convert_Click()</h6>
-						<br>
-						<h6>&nbsp;&nbsp	Dim curFound As Range</h6>
-						<h6>&nbsp;&nbsp	Dim curRate As Double</h6>
-						<h6>&nbsp;&nbsp	Dim curAmount As Double</h6>
-						<br>
-						<h6>&nbsp;&nbsp	If obUSD Then</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp    Set curFound = Range("D:D").Find("USD")</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     curRate = curFound.Offset(0, 1).Value</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     curAmount = Round(curRate * tbAmount, 2)</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     MsgBox tbAmount & " EUR is " & curAmount & " USD"</h6>
-						<h6>&nbsp;&nbsp	End If</h6>
-						<br>
-						<h6>&nbsp;&nbsp	If obGBP Then</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     Set curFound = Range("D:D").Find("GBP")</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     curRate = curFound.Offset(0, 1).Value</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     curAmount = Round(curRate * tbAmount, 2)</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     MsgBox tbAmount & " EUR is " & curAmount & " GBP"</h6>
-						<h6>&nbsp;&nbsp	End If</h6>
-						<br>
-						<h6>&nbsp;&nbsp	If obPLN Then</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     Set curFound = Range("D:D").Find("PLN")</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     curRate = curFound.Offset(0, 1).Value</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     curAmount = Round(curRate * tbAmount, 2)</h6>
-						<h6>&nbsp;&nbsp;&nbsp;&nbsp     MsgBox tbAmount & " EUR is " & curAmount & " PLN"</h6>
-						<h6>&nbsp;&nbsp	End If</h6>
-						<br>
-						<h6>End Sub</h6>
+							<h6>Private Sub Convert_Click()</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Dim curFound As Range</h6>
+							<h6>&nbsp;&nbsp	Dim curRate As Double</h6>
+							<h6>&nbsp;&nbsp	Dim curAmount As Double</h6>
+							<br>
+							<h6>&nbsp;&nbsp	If obUSD Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    Set curFound = Range("D:D").Find("USD")</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     curRate = curFound.Offset(0, 1).Value</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     curAmount = Round(curRate * tbAmount, 2)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     MsgBox tbAmount & " EUR is " & curAmount & " USD"</h6>
+							<h6>&nbsp;&nbsp	End If</h6>
+							<br>
+							<h6>&nbsp;&nbsp	If obGBP Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     Set curFound = Range("D:D").Find("GBP")</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     curRate = curFound.Offset(0, 1).Value</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     curAmount = Round(curRate * tbAmount, 2)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     MsgBox tbAmount & " EUR is " & curAmount & " GBP"</h6>
+							<h6>&nbsp;&nbsp	End If</h6>
+							<br>
+							<h6>&nbsp;&nbsp	If obPLN Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     Set curFound = Range("D:D").Find("PLN")</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     curRate = curFound.Offset(0, 1).Value</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     curAmount = Round(curRate * tbAmount, 2)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp     MsgBox tbAmount & " EUR is " & curAmount & " PLN"</h6>
+							<h6>&nbsp;&nbsp	End If</h6>
+							<br>
+							<h6>End Sub</h6>
 						</div>
 						<h2>Modules -> Module1</h2>
 						<div class="macroinner">
-						<h6>Sub StartConverter()</h6>
-						<h6>&nbsp;&nbsp	UserForm1.Show</h6>
-						<h6>End Sub</h6>
+							<h6>Sub StartConverter()</h6>
+							<h6>&nbsp;&nbsp	UserForm1.Show</h6>
+							<h6>End Sub</h6>
 						</div>
 					</div>
 					
+					<div id="ProgressBar" class="macroouter">
+					<h1>Progress Bar</h1>
+					<h2>UserForm shows the progress while code runs.<br>
+					Code coming from the following website:
+					<a href="https://www.excel-easy.com/vba/examples/progress-indicator.html" target="_blank" style="color:#0e5051"> excel-easy</a></h2>
+					<img src="pro1.png" class="" alt="">
+						<h2>Create CommandButton1 and assign private sub to it. Paste the following pieces of code into:</h2>
+						<h2>Microsoft Excel Objects -> Sheet1</h2>
+						<div class="macroinner">
+							<h6>Private Sub CommandButton1_Click()</h6>
+							<h6>&nbsp;&nbsp	UserForm1.Show</h6>
+							<h6>End Sub</h6>
+						</div>
+						<h2>Forms -> UserForm1</h2>
+						<div class="macroinner">
+							<h6>Private Sub UserForm_Activate()</h6>
+							<h6>&nbsp;&nbsp	code</h6>
+							<h6>End Sub</h6>
+						</div>
+						<h2>Modules -> Module1</h2>
+						<div class="macroinner">
+							<h6>Sub code()</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Dim i As Integer, j As Integer, pctCompl As Single</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Arkusz1.Cells.Clear ' Sheets("Arkusz1").Cells.Clear</h6>
+							<br>
+							<h6>&nbsp;&nbsp	For i = 1 To 100</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    For j = 1 To 1000</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        Cells(i, 1).Value = j</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    Next j</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    pctCompl = i</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    progress pctCompl ' Call progress(pctCompl)</h6>
+							<h6>&nbsp;&nbsp	Next i</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Unload UserForm1</h6>
+							<h6>&nbsp;&nbsp	Set UserForm1 = Nothing</h6>
+							<br>
+							<h6>End Sub</h6>
+						</div>
+						<br>
+						<div class="macroinner">
+							<h6>Sub progress(pctCompl As Single)</h6>
+							<br>
+							<h6>&nbsp;&nbsp	UserForm1.Text.Caption = pctCompl & "% Completed"</h6>
+							<h6>&nbsp;&nbsp	UserForm1.Bar.Width = pctCompl * 2</h6>
+							<br>
+							<h5>&nbsp;&nbsp' Responsible for update of UserForm</h5>
+							<h6>&nbsp;&nbsp	DoEvents</h6>
+							<br>
+							<h6>End Sub</h6>
+						</div>
+					</div>
+					
+					<div id="UserPassword" class="macroouter">
+					<h1>User Password</h1>
+					<h2>Userform appears on file opening. Correct username and password are required to enter the file. Both are masked with asterisks.<br>
+					Useful links:
+					<a href="https://www.ozgrid.com/VBA/userform-close.htm" target="_blank" style="color:#0e5051"> Ozgrid &#124;</a>
+					<a href="https://wellsr.com/vba/2016/excel/mask-your-password-with-this-vba-inputbox/" target="_blank" style="color:#0e5051"> wellsr &#124;</a>
+					<a href="https://www.youtube.com/watch?v=E2xRf1hZKtY" target="_blank" style="color:#0e5051"> rstcomputer on youtube &#124;</a>
+					<a href="https://stackoverflow.com/questions/28189864/excel-vba-input-box" target="_blank" style="color:#0e5051"> stackoverflow</a></h2>
+					<h2>Username: "test", password = "test"</h2>
+					<img src="pass1.png" class="" alt="">
+					<h2>To mask typed text in textboxes' properties change PasswordChar to "*".</h2>	
+					<img src="pass2.png" class="" alt="">	
+						<h2>Microsoft Excel Objects -> ThisWorkbook</h2>
+						<div class="macroinner">
+							<h6>Private Sub Workbook_Open()</h6>
+							<h6>&nbsp;&nbsp    UserForm1.Show</h6>
+							<h6>End Sub</h6>
+						</div>
+						<h2>Forms -> UserForm1<br>
+						Ok button</h2>
+						<div class="macroinner">
+							<h6>Private Sub CommandButton1_Click()</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Dim username As String</h6>
+							<h6>&nbsp;&nbsp	Dim password As String</h6>
+							<br>
+							<h6>&nbsp;&nbsp	username = TextBox1.Text</h6>
+							<h6>&nbsp;&nbsp	password = TextBox2.Text</h6>
+							<br>
+							<h6>&nbsp;&nbsp	If username = "test" And password = "test" Then</h6>
+							<h6>&nbsp;&nbsp    MsgBox "Welcome!"</h6>
+							<h6>&nbsp;&nbsp    Unload Me</h6>
+							<h6>&nbsp;&nbsp	ElseIf username = "" Or password = "" Then</h6>
+							<h6>&nbsp;&nbsp    MsgBox "At least one field is empty."</h6>
+							<h6>&nbsp;&nbsp	Else</h6>
+							<h6>&nbsp;&nbsp    MsgBox "Invalid Password. Try again"</h6>
+							<h6>&nbsp;&nbsp	End If</h6>
+							<br>
+							<h6>End Sub</h6>
+						</div>
+						<h2>Cancel button</h2>
+						<div class="macroinner">
+							<h6>Private Sub CommandButton2_Click()</h6>
+							<h6>&nbsp;&nbsp    MsgBox "Goodbye!"</h6>
+							<h6>&nbsp;&nbsp    Unload Me</h6>
+							<h6>&nbsp;&nbsp    ActiveWorkbook.Close savechanges:=False</h6>
+							<h5>&nbsp;&nbsp    ' Application.Quit to close Excel</h5>
+							<h6>End Sub</h6>
+						</div>
+						<h2>Disables "x" button on userform.</h2>
+						<div class="macroinner">
+							<h6>Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)</h6>
+							<h6>&nbsp;&nbsp        If CloseMode = 0 Then Cancel = True</h6>
+							<h6>End Sub</h6>
+						</div>
+					</div>
+
 					
 					<div id="Functions">
 					<h1>Functions</h1>
 					</div>
-					
+
 					<div id="GetVersion" class="macroouter">
 					<h1>Get Excel version</h1>
 					<h2>Returns the version of currently used Excel. Useful when multiple users use different Excels.<br>
@@ -1876,6 +2010,25 @@
 						<div class="macroinner">
 							<h6>Function GetOperatingSystem() As String</h6>
 							<h6>&nbsp;&nbsp	GetOperatingSystem = Application.OperatingSystem</h6>
+							<h6>End Function</h6>
+						</div>
+					</div>
+					
+					<div id="NextFriday13th" class="macroouter">
+					<h1>Next Friday 13th</h1>
+					<h2>Function returns the next Friday 13th starting from today. Result has format of string.</h2>
+						<div class="macroinner">
+							<h6>Function NextFridayThe13th() As String</h6>
+							<br>
+							<h6>&nbsp;&nbsp    Dim startDate As Date</h6>
+							<h6>&nbsp;&nbsp    startDate = Date</h6>
+							<br>
+							<h6>&nbsp;&nbsp    Do Until Weekday(startDate) = vbFriday And Day(startDate) = 13</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp      startDate = startDate + 1</h6>
+							<h6>&nbsp;&nbsp    Loop</h6>
+							<br>
+							<h6>&nbsp;&nbsp    NextFridayThe13th = Format(startDate, "dd/mm/yyyy")</h6>
+							<br>
 							<h6>End Function</h6>
 						</div>
 					</div>
@@ -4267,6 +4420,62 @@
 					<h1>Other</h1>
 					</div>
 
+					<div id="ByValByRef" class="macroouter">
+					<h1>ByVal ByRef</h1>
+					<h2>Examples show how variables are passed between subroutines and what is the difference between ByVal and ByRef.<br>
+					ByRef is set by default - no need to declare. ByVal has to be declared.<br>
+					ByVal - values in original procedure ARE NOT changed.<br>
+					ByRef - values in original sub ARE changed.</h2>
+						<h2>Example 1<br>
+						n variable is not passed to another subroutine<br>
+						Debug.Print's results: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0</h2>
+						<div class="macroinner">
+						<h6>Sub FirstSub()</h6>
+						<h6>&nbsp;&nbsp	Dim n As Byte</h6>
+						<h6>&nbsp;&nbsp	For n = 1 To 10</h6>
+						<h6>&nbsp;&nbsp;&nbsp;&nbsp    SecondSub</h6>
+						<h6>&nbsp;&nbsp	Next</h6>
+						<h6>End Sub</h6>
+						<br>
+						<h6>Sub SecondSub()</h6>
+						<h6>&nbsp;&nbsp n = n * 2</h6>
+						<h6>&nbsp;&nbsp Debug.Print n</h6>
+						<h6>End Sub</h6>
+						</div>
+						<h2>Example 2<br>
+						n variable is passed to another subroutine by reference<br>
+						Debug.Print's results: 2, 6, 14</h2>
+						<div class="macroinner">
+						<h6>Sub FirstSubByRef()</h6>
+						<h6>&nbsp;&nbsp	Dim n As Byte</h6>
+						<h6>&nbsp;&nbsp	For n = 1 To 10</h6>
+						<h6>&nbsp;&nbsp;&nbsp;&nbsp    SecondSubByRef n 'Call SecondSubByRef(n)</h6>
+						<h6>&nbsp;&nbsp	Next</h6>
+						<h6>End Sub</h6>
+						<br>
+						<h6>Sub SecondSubByRef(ByRef n As Byte)</h6>
+						<h6>&nbsp;&nbsp    n = n * 2</h6>
+						<h6>&nbsp;&nbsp    Debug.Print n</h6>
+						<h6>End Sub</h6>
+						</div>
+						<h2>Example 3<br>
+						n variable is passed to another subroutine by value<br>
+						Debug.Print's results: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20</h2>
+						<div class="macroinner">
+						<h6>Sub FirstSubByVal()</h6>
+						<h6>&nbsp;&nbspDim n As Byte</h6>
+						<h6>&nbsp;&nbspFor n = 1 To 10</h6>
+						<h6>&nbsp;&nbsp;&nbsp;&nbsp    SecondSubByVal n 'Call SecondSubByVal(n)</h6>
+						<h6>&nbsp;&nbspNext</h6>
+						<h6>End Sub</h6>
+						<br>
+						<h6>Sub SecondSubByVal(ByVal n As Byte)</h6>
+						<h6>&nbsp;&nbsp    n = n * 2</h6>
+						<h6>&nbsp;&nbsp    Debug.Print n</h6>
+						<h6>End Sub</h6>
+						</div>
+					</div>
+
 					<div id="Reminder" class="macroouter">
 					<h1>Reminder</h1>
 					<h2>Activates on a pre-determined weekday to remind about an event.</h2>
@@ -4441,7 +4650,8 @@
 					<br>
 						<h4><b><a href="#Sharepoint">Sharepoint</a></b></h4>
 						<h4><a href="#SharepointUploadFile">Sharepoint file upload</a></h4>
-						<h4><a href="#SharepointOpenFile">Open file on Sharepoint</a></h4>
+						<h4><a href="#SharepointOpenFileEB">Open file on SP early binding</a></h4>
+						<h4><a href="#SharepointOpenFileLB">Open file on SP late binding</a></h4>
 						<h4><a href="#SharepointSaveFileCopy">Copy file from Sharepoint</a></h4>
 						<h4><a href="#SharepointGetList">Sharepoint Get List</a></h4>
 					<br>
@@ -4467,12 +4677,14 @@
 						<h4><a href="#GetListofFolders">Get list of Folders</a></h4>
 					<br>
 						<h4><b><a href="#UserForms">UserForms</a></b></h4>
-						<h4><a href="#CurrencyConverter">CurrencyConverter</a></h4>
-						<h4><a href="#"></a></h4>
+						<h4><a href="#CurrencyConverter">Currency Converter</a></h4>
+						<h4><a href="#ProgressBar">Progress Bar</a></h4>
+						<h4><a href="#UserPassword">User Password</a></h4>
 					<br>
 						<h4><b><a href="#Functions">Functions</a></b></h4>
 						<h4><a href="#GetVersion">Get Excel version</a></h4>
 						<h4><a href="#GetOS">Get OS</a></h4>
+						<h4><a href="#NextFriday13th">Next Friday 13th</a></h4>
 					<br>
 						<h4><b><a href="#WebScraping">Web Scraping</a></b></h4>
 						<h4><a href="#OpenWebsite">Open Website</a></h4>
@@ -4556,6 +4768,7 @@
 						<h4><a href="#UnhideWs">Unhide Ws</a></h4>
 					<br>
 						<h4><b><a href="#Other">Other</a></b></h4>
+						<h4><a href="#ByValByRef">ByVal ByRef</a></h4>
 						<h4><a href="#Reminder">Reminder</a></h4>
 						<h4><a href="#StartCalculator">Start Calculator</a></h4>
 						<h4><a href="#StartMsWord">Start Ms Word</a></h4>
