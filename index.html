@@ -3547,6 +3547,48 @@
 							<h6>End Sub</h6>
 						</div>
 					</div>
+					
+					<div id="ProtectWs" class="macroouter">
+					<h1>Protect Ws</h1>
+					<h2>Protects all worksheets in active workbook.</h2>
+						<div class="macroinner">
+							<h6>Sub ProtectAllWs()</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Dim ws As Worksheet</h6>
+							<h6>&nbsp;&nbsp	Dim password As String</h6>
+							<br>
+							<h6>&nbsp;&nbsp	password = "test"</h6>
+							<br>
+							<h6>&nbsp;&nbsp	On Error Resume Next</h6>
+							<h6>&nbsp;&nbsp	For Each ws In ActiveWorkbook.Worksheets</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    With ws</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        .Unprotect (password)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        .Protect password:=password, AllowFormattingColumns:=True, _</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            AllowFormattingRows:=True, AllowSorting:=True, AllowFiltering:=True</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    End With</h6>
+							<h6>&nbsp;&nbsp	Next ws</h6>
+							<br>
+							<h6>End Sub</h6>
+						</div>
+						<h2>Unrotects all worksheets in active workbook.</h2>
+						<div class="macroinner">
+							<h6>Sub UnprotectAllWs()</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Dim ws As Worksheet</h6>
+							<h6>&nbsp;&nbsp	Dim password As String</h6>
+							<br>
+							<h6>&nbsp;&nbsp	password = "test"</h6>
+							<br>
+							<h6>&nbsp;&nbsp	On Error Resume Next</h6>
+							<h6>&nbsp;&nbsp	For Each ws In ActiveWorkbook.Worksheets</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    With ws</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp        .Unprotect (password)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp    End With</h6>
+							<h6>&nbsp;&nbsp	Next ws</h6>
+							<br>
+							<h6>End Sub</h6>
+						</div>
+					</div>
 
 					<div id="RestrictAccess" class="macroouter">
 					<h1>Restrict Access</h1>
@@ -4735,6 +4777,7 @@
 						<h4><a href="#PasswordBreaker">Password Breaker</a></h4>
 						<h4><a href="#PasswordWb">Password Wb</a></h4>
 						<h4><a href="#ProtectWb">Protect Wb</a></h4>
+						<h4><a href="#ProtectWs">Protect Ws</a></h4>
 						<h4><a href="#RestrictAccess">Restrict Access</a></h4>
 					<br>
 						<h4><b><a href="#Time">Time</a></b></h4>
