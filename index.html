@@ -51,7 +51,6 @@
 <div class="main"><div id="header" style="height: 50px"></div>
 	<div class="container">
 		<div class="row">
-		
 				
 			<!--Intro-->
 			<div class="col-md-9">
@@ -75,7 +74,7 @@
 					</div>
 					
 					<div class="col-xs-12 visible-xs-block visible-sm-block">
-					<div class="">
+						<div class="">
 							<h1>Quick Navigation:</h1>
 							<div class="col-xs-6">
 								<h4><b><a href="#Access">Access</a></b></h4>
@@ -109,9 +108,6 @@
 					</div>
 				</div>				
 
-				<div class="col-xs-12 col-md-9">
-				<br>
-				</div>
 
 				<!--Macros-->
 				
@@ -1966,6 +1962,63 @@
 						</div>
 					</div>
 
+					<div id="UserformListBox" class="macroouter">
+					<h1>Userform ListBox</h1>
+					<h2>Contains multiple choice list. Returns message box that sums up your choice.<br>
+					<img src="list.png" class="" alt="">
+						<h2>Forms -> UserForm1 (Cancel button)</h2>
+						<div class="macroinner">
+							<h6>Private Sub CancelButton_Click()</h6>
+							<h6>&nbsp;&nbsp    Unload UserForm1</h6>
+							<h6>End Sub</h6>
+						</div>
+						<h2>Forms -> UserForm1 (Ok button)</h2>
+						<div class="macroinner">
+							<h6>Private Sub OKButton_Click()</h6>
+							<h6>&nbsp;&nbsp    Dim Msg As String</h6>
+							<h6>&nbsp;&nbsp    Dim i As Integer</h6>
+							<h6>&nbsp;&nbsp    Dim Counter As Integer</h6>
+							<h6>&nbsp;&nbsp    Msg = "You order pizza:" & vbNewLine</h6>
+							<h6>&nbsp;&nbsp    For i = 0 To ListBox1.ListCount - 1</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        If ListBox1.Selected(i) Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Counter = Counter + 1</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Msg = Msg & ListBox1.List(i) & vbNewLine</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+							<h6>&nbsp;&nbsp    Next i</h6>
+							<h6>&nbsp;&nbsp    If Counter = 0 Then Msg = Msg & "No pizza selected"</h6>
+							<h6>&nbsp;&nbsp    MsgBox Msg</h6>
+							<h6>&nbsp;&nbsp    Unload UserForm1</h6>
+							<h6>End Sub</h6>
+						</div>
+						<h2>Forms -> UserForm1 (List creation)</h2>
+						<div class="macroinner">
+							<h6>Private Sub UserForm_Initialize()</h6>
+							<h5>&nbsp;&nbsp    ' List creation</h5>
+							<h6>&nbsp;&nbsp    With ListBox1</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        .AddItem "Margherita"</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        .AddItem "Quattro Formaggi"</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        .AddItem "Prosciutto"</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        .AddItem "Vegetariana"</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        .AddItem "Funghi"</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        .AddItem "Parmigiana"</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        .AddItem "Romana"</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        .AddItem "Braccio di Ferro"</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        .AddItem "Napoletana"</h6>
+							<h6>&nbsp;&nbsp    End With</h6>
+							<h5>&nbsp;&nbsp    ' First element of the list selected</h5>
+							<h6>&nbsp;&nbsp    ListBox1.ListIndex = 0</h6>
+							<h5>&nbsp;&nbsp    ' Allow selection of multiple items</h5>
+							<h6>&nbsp;&nbsp    ListBox1.MultiSelect = 1</h6>
+							<h6>End Sub</h6>
+						</div>
+						<h2>Modules -> Module1</h2>
+						<div class="macroinner">
+							<h6>Sub ShowList()</h6>
+							<h6>&nbsp;&nbsp    UserForm1.Show</h6>
+							<h6>End Sub</h6>
+						</div>
+					</div>
+					
 					
 					<div id="Functions">
 					<h1>Functions</h1>
@@ -4739,6 +4792,7 @@
 						<h4><a href="#CurrencyConverter">Currency Converter</a></h4>
 						<h4><a href="#ProgressBar">Progress Bar</a></h4>
 						<h4><a href="#UserPassword">User Password</a></h4>
+						<h4><a href="#UserformListBox">Userform ListBox</a></h4>
 					<br>
 						<h4><b><a href="#Functions">Functions</a></b></h4>
 						<h4><a href="#GetVersion">Get Excel version</a></h4>
