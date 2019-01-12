@@ -403,11 +403,11 @@
 							<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockOptimistic</h6>
 							<h6>&nbsp;&nbsp    oRs.MoveLast</h6>
 							<h6>&nbsp;&nbsp    oRs.AddNew</h6>
-							<h6>&nbsp;&nbsp    oRs!pub_id = 4545</h6>
-							<h6>&nbsp;&nbsp    oRs!pub_name = "Gringo Bros."</h6>
-							<h6>&nbsp;&nbsp    oRs!city = "Warsaw"</h6>
-							<h6>&nbsp;&nbsp    oRs!State = ""</h6>
-							<h6>&nbsp;&nbsp    oRs!country = "Poland"</h6>
+							<h6>&nbsp;&nbsp    oRs.fields("pub_id") = 4545</h6>
+							<h6>&nbsp;&nbsp    oRs.fields("pub_name") = "Gringo Bros."</h6>
+							<h6>&nbsp;&nbsp    oRs.fields("city") = "Warsaw"</h6>
+							<h6>&nbsp;&nbsp    oRs.fields("State") = ""</h6>
+							<h6>&nbsp;&nbsp    oRs.fields("country") = "Poland"</h6>
 							<h6>&nbsp;&nbsp    oRs.Update</h6>
 							<h6>&nbsp;&nbsp    oRs.Close</h6>
 							<br>
@@ -426,8 +426,8 @@
 							<h5>&nbsp;&nbsp    ' update</h5>
 							<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockOptimistic</h6>
 							<h6>&nbsp;&nbsp    oRs.Find ("pub_id = 4545")</h6>
-							<h6>&nbsp;&nbsp    oRs!pub_id = 9999</h6>
-							<h6>&nbsp;&nbsp    oRs!pub_name = "Gregory Bros."</h6>
+							<h6>&nbsp;&nbsp    oRs.fields("pub_id") = 9999</h6>
+							<h6>&nbsp;&nbsp    oRs.fields("pub_name") = "Gregory Bros."</h6>
 							<h6>&nbsp;&nbsp    oRs.Update</h6>
 							<h6>&nbsp;&nbsp    oRs.Close</h6>
 							<br>
@@ -3681,6 +3681,12 @@
 							<h6>&nbsp;&nbsp	LastDay = DateSerial(Year(Date), Month(Date) + 1, 0)</h6>
 							<h6>&nbsp;&nbsp	MsgBox LastDay</h6>
 							<h6>End Sub</h6>
+						</div>
+						<br>
+					<h2>Date formatting included:</h2>
+						<div class="macroinner">
+							<h6>&nbsp;&nbsp	FirstDayOfPreviousMonth = Format(DateSerial(Year(myDate), Month(myDate) - 1, 1), "dd-mmm-yyyy")</h6>
+							<h6>&nbsp;&nbsp	LastDayOfPreviousMonth = Format(DateSerial(Year(myDate), Month(myDate), 0), "dd-mmm-yyyy")</h6>
 						</div>
 					</div>
 					
