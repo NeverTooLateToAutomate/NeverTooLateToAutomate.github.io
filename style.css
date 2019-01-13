@@ -1,4 +1,4 @@
-@media (min-width:1200px){
+@media (min-width:1600px){
 /*992*/	
 .navbar-brand {
     position: absolute;
@@ -41,7 +41,7 @@
   font-weight:400;	
   padding-top: 18px;
 /*większy padding na większej rozdzielczości*/
-  padding-right: 40px;
+  padding-right: 30px;
   
 }
 
@@ -50,7 +50,19 @@
 }
 
 
+@media (max-width:934px){
+.navbar-default .navbar-nav > li > a {
+  color: #ffffff;
+  font-family:Lato;
+  font-size: 20px;
+  font-weight:400;
+  padding-top: 18px;
+  padding-left: 10px; /*większy padding na większej rozdzielczości*/
+  padding-right: 10px;
+}
+}
 
+@media (min-width:935px){
 .navbar-default .navbar-nav > li > a {
   color: #ffffff;
   font-family:Lato;
@@ -60,6 +72,8 @@
   padding-left: 30px; /*większy padding na większej rozdzielczości*/
   padding-right: 30px;
 }
+}
+
 
 
 .navbar-default .navbar-nav > li > a:hover,

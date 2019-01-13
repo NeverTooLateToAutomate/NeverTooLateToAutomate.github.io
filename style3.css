@@ -1,5 +1,5 @@
-@media (min-width:1200px){
-	/*992*/
+@media (min-width:1600px){
+/*992*/	
 .navbar-brand {
     position: absolute;
     width: 108%;
@@ -15,14 +15,10 @@
 }
 
 
-
-
-
-
 .navbar-default .navbar-brand,
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-    color: #dddddd;
+    color: #FFD43B;
 }
 
 .navbar-brand,
@@ -34,19 +30,20 @@
 }
  
 .navbar-default .navbar-brand {
-  color: #ffffff;
+	  color: #ffffff;
   font-family:Lato;
   font-size: 20px;
   font-weight:400;	
   padding-top: 18px;
 /*większy padding na większej rozdzielczości*/
-  padding-right: 40px;
+  padding-right: 30px;
   
 }
 
 .navbar-default .navbar-text {
   color: #ffffff;
 }
+
 
 @media (max-width:934px){
 .navbar-default .navbar-nav > li > a {
@@ -72,33 +69,35 @@
 }
 }
 
+
+
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #dddddd;
+  color: #FFD43B;
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #dddddd;
-  background-color: #3D0000;
+  color: #FFD43B;
+  background-color: #062e2f;
 }
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  color: #dddddd;
-  background-color: #3D0000;
+  color: #FFD43B;
+  background-color: #062e2f;
 }
 
 .navbar-default .navbar-toggle {
-  border-color: #3D0000;
+  border-color: #062e2f;
   margin-top: 13px;
 }
 
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #3D0000;
+  background-color: #062e2f;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -114,7 +113,7 @@
   color: #ffffff;
 }
 .navbar-default .navbar-link:hover {
-  color: #dddddd;
+  color: #FFD43B;
 }
 */
 .navbar-default {
@@ -138,11 +137,13 @@ border-bottom: 0px;
 
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-color: #dddddd;
+color: #FFD43B;
 background-color: #0e5051; 
   }
 
 
+
+  
 
 
 /* body */
@@ -154,51 +155,44 @@ html, body {
 
 
 /* headers */
-h1, h2, h3, h4 {font-family:Lato, Arial, Helvetica, Sans-serif}
+h1, h2, h4 {font-family:Lato, Arial, Helvetica, Sans-serif}
 
 h1{padding-top:0px;font-size:20px;font-weight:700;}	/* headers */
-h2{padding-bottom:15px;font-size:16px;font-weight:400;background-color:;line-height: 200%;} /* sub-headers */
-h3{font-size:14px;font-weight:400;}
+h2{padding-bottom:10px;font-size:16px;font-weight:400;background-color:;line-height:200%;} /* sub-headers */
 h4{font-size:15px;font-weight:400;background-color:;line-height: 200%;}
-h5{font-size:24px;font-weight:400;background-color:;line-height: 150%;}
-h6{font-size:13px;font-weight:400;line-height: 150%;font-style: italic;}
+/* h5{font-size:24px;font-weight:400;background-color:;line-height: 150%;} */
 
-/* table */
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
-.tg .tg-yw4l{vertical-align:top} 
+h5{font-family: Cousine, Lato, Arial, Helvetica, Sans-serif}
+h5{color: #FF0000;font-size:14px;font-weight:400;line-height: 100%;}
 
-.tbl {
-  padding-top: 30px;
-  padding-bottom: 0px;
-  
-}
+h6{font-family: Cousine, Lato, Arial, Helvetica, Sans-serif}
+h6{color: #000000;font-size:14px;font-weight:400;line-height: 100%;}
 
 .macroinner {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   padding-left: 15px;
+  padding-right: 15px;
   padding-top: 5px;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
+  border-width:1.5px;  
+  border-left-style:dotted;
+  overflow-x: scroll;
+  overflow-y: hidden;
   white-space: nowrap;
-  border-width:1px;  
-  border-left-style:dashed;
-
  }
-
- .inner {
+ 
+.inner {
   padding-left: 15px;
  }
  
 .dashed {
   border-width:1px;  
   border-bottom-style:dashed;
-
  }	
 
  
  .macroouter {
-  padding-bottom: 10px;
+  padding-bottom: 30px;
   padding-top: 0px;
  }
  
@@ -216,6 +210,13 @@ a {
 .grey-bg{
   background-color: #f9f9f9;	
 }	
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
 	
 /*
 @media (min-width:1400px) {
