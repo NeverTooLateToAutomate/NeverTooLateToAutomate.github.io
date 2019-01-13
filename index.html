@@ -4570,6 +4570,23 @@
 					<div id="Other">	
 					<h1>Other</h1>
 					</div>
+					
+					<div id="AddInlocationchange" class="macroouter">
+					<h1>Add-In location change</h1>
+					<h2>A file with the XLAM file extension is an Excel Macro-Enabled Add-In file that's used to add new functions to Excel. Macro changes path of such file.</h2>
+						<div class="macroinner">
+							<h6>Sub addinlocationchange()</h6>
+							<br>
+							<h6>&nbsp;&nbsp	Dim sOldLink As String, sNewLink As String</h6>
+							<br>
+							<h6>&nbsp;&nbsp sOldLink = "C:\Users\admin\Downloads\xlwings.xlam"</h6>
+							<h6>&nbsp;&nbsp    sNewLink = "C:\Users\admin\AppData\Roaming\Microsoft\AddIns\xlwings.xlam"</h6>
+							<br>
+							<h6>&nbsp;&nbsp    ActiveWorkbook.ChangeLink sOldLink, sNewLink, xlLinkTypeExcelLinks</h6>
+							<br>
+							<h6>End Sub</h6>
+						</div>	
+					</div>
 
 					<div id="ByValByRef" class="macroouter">
 					<h1>ByVal ByRef</h1>
@@ -4923,6 +4940,7 @@
 						<h4><a href="#UnhideWs">Unhide Ws</a></h4>
 					<br>
 						<h4><b><a href="#Other">Other</a></b></h4>
+						<h4><a href="#AddInlocationchange">Add-In location change</a></h4>						
 						<h4><a href="#ByValByRef">ByVal ByRef</a></h4>
 						<h4><a href="#Reminder">Reminder</a></h4>
 						<h4><a href="#StartCalculator">Start Calculator</a></h4>
