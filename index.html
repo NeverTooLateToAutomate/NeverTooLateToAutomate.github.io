@@ -1720,6 +1720,32 @@
 					<h1>File Properties</h1>
 					</div>
 					
+					<div id="OpenFileDialog" class="macroouter">
+					<h1>Open File Dialog</h1>
+					<h2>Displays a Dialog Box that allows to select a single file.<br>
+					Useful link:
+					<a href="https://www.chicagocomputerclasses.com/excel-vba-display-a-file-open-dialog-and-open-the-file-excel-functions/" target="_blank" style="color:#0e5051"> Chicago computer classes</a></h2>
+						<div class="macroinner">
+							<h6>Sub OpenFileDialog()</h6>
+							<br>
+							<h6>&nbsp;&nbsp    Dim fullpath As String</h6>
+							<br>
+							<h6>&nbsp;&nbsp    With Application.FileDialog(msoFileDialogFilePicker)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp          .AllowMultiSelect = False</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp          .Filters.Add "Excel Files", "*.xlsx; *.xlsm; *.xls; *.xlsb", 1</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp          .Show</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp          fullpath = .SelectedItems.Item(1)</h6>
+							<h6>&nbsp;&nbsp    End With</h6>
+							<h6>&nbsp;&nbsp    Workbooks.Open fullpath</h6>
+							<br>
+							<h6>&nbsp;&nbsp    Debug.Print ActiveWorkbook.FullName</h6>
+							<h6>&nbsp;&nbsp    Debug.Print ActiveWorkbook.Path</h6>
+							<h6>&nbsp;&nbsp    Debug.Print ActiveWorkbook.Name</h6>
+							<br>
+							<h6>End Sub</h6>
+						</div>
+					</div>
+					
 					<div id="GetListofFiles" class="macroouter">
 					<h1>Get list of Files</h1>
 					<h2>Retrieves file properties.<br>
@@ -1841,6 +1867,12 @@
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp     MsgBox tbAmount & " EUR is " & curAmount & " PLN"</h6>
 							<h6>&nbsp;&nbsp	End If</h6>
 							<br>
+							<h6>End Sub</h6>
+						</div>
+						<br>
+						<div class="macroinner">
+							<h6>Private Sub UserForm_Initialize()</h6>
+							<h6>&nbsp;&nbsp	Me.tbAmount.Text = 100</h6>
 							<h6>End Sub</h6>
 						</div>
 						<h2>Modules -> Module1</h2>
@@ -4791,6 +4823,7 @@
 						<h4><a href="#PrintSheet">Print Sheet</a></h4>
 					<br>
 						<h4><b><a href="#FileProperties">File Properties</a></b></h4>
+						<h4><a href="#OpenFileDialog">Open File Dialog</a></h4>
 						<h4><a href="#GetListofFiles">Get list of Files</a></h4>
 						<h4><a href="#GetListofFolders">Get list of Folders</a></h4>
 					<br>
