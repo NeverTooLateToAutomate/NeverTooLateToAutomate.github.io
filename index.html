@@ -328,6 +328,41 @@
 						</div>
 					</div>
 
+					<div id="LastRecordDateCheck" class="macroouter">
+					<h1>Last Record Date Check</h1>
+					<h2>Informs a user if last record in recordset contains month and year that is equal to current month and year. If yes, notifies user and exits the sub.</h2>
+						<div class="macroinner">
+							<h6>Sub LastRecordsetDateCheck()</h6>
+							<br>
+							<h6>&nbsp;&nbsp    Dim oRs As New ADODB.Recordset</h6>
+							<h6>&nbsp;&nbsp    Dim sConn As String</h6>
+							<h6>&nbsp;&nbsp    Dim sSQL As String</h6>
+							<br>
+							<h6>&nbsp;&nbsp    sConn = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\Users\admin\Documents\test.accdb;"</h6>
+							<h6>&nbsp;&nbsp    sSQL = "SELECT * FROM Table_Name;"</h6>
+							<br>
+							<h6>&nbsp;&nbsp    oRs.CursorLocation = adUseClient</h6>
+							<h6>&nbsp;&nbsp    oRs.Open sSQL, sConn, adOpenStatic, adLockBatchOptimistic, adCmdText</h6>
+							<br>
+							<h6>&nbsp;&nbsp    If Not (oRs.EOF And oRs.BOF) Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        oRs.MoveLast</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        If Month(Date) = Month(oRs.Fields("tm_Date")) And _</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp			   Year(Date) = Year(oRs.Fields("tm_Date")) Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            MsgBox Format(oRs.Fields("tm_Date"), "mmm-yyyy") & " records already exist in database."</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        End If</h6>
+							<h6>&nbsp;&nbsp    Else</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        MsgBox "There are no records in the recordset."</h6>
+							<h6>&nbsp;&nbsp    End If</h6>
+							<br>
+							<h6>&nbsp;&nbsp    Set oRs.ActiveConnection = Nothing</h6>
+							<h6>&nbsp;&nbsp    oRs.Close</h6>
+							<h6>&nbsp;&nbsp    Set oRs = Nothing</h6>
+							<br>
+							<h6>&nbsp;&nbspEnd Sub</h6>
+						</div>
+					</div>
+					
 					<div id="RecordsetConnLoop" class="macroouter">
 					<h1>Loop Through Recordset</h1>
 					<h2>Enables export from Access to Excel using Recordset Object and including loop through recordset.</h2>
@@ -4785,6 +4820,7 @@
 						<h4><a href="#ObjectConn">Export from Access 2 oConn</a></h4>
 						<h4><a href="#RecordsetConn">Export from Access 3 oRs</a></h4>
 						<h4><a href="#ExportFromAccessDoCmd">Export from Access 4 DoCmd</a></h4>
+						<h4><a href="#LastRecordDateCheck">Last Record Date Check</a></h4>						
 						<h4><a href="#RecordsetConnLoop">Loop Through Recordset</a></h4>
 						<h4><a href="#RecordsetConnAddUpdateDelete">Import to Access 1 oRs</a></h4>
 						<h4><a href="#ObjectConnSQLInsertUpdateDelete">Import to Access 2 Sql</a></h4>
