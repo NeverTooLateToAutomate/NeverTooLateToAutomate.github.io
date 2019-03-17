@@ -27,7 +27,7 @@
 
 <body data-spy="scroll" data-target=".navbar" data-offset="70">
 
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #306998;">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #1b427e;">
 	  <div class="container-fluid">
 		<div class="navbar-header">
 		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -42,7 +42,7 @@
 			<li class="active"><a href="#section1">Home</a></li>
 			<li><a href="index.html">VBA codes</a></li>
 			<li><a href="index2.html">SQL queries</a></li>
-			<li><a href="#section2">Python Excel</a></li>
+			<li><a href="#section2">Tableau</a></li>
 			<li class="visible-xs-block"><a href="#section3">Contact</a></li>
 		  </ul>
 		</div>
@@ -56,57 +56,97 @@
 			<!--Intro-->
 			<div class="col-md-9">
 				<div id="section1" class="">
-									
-					<div class="dashed">
-						<h1><br>Start</h1>
-						<h2>text</h2> 
-						<img src="samplephoto.png" class="img-responsive" alt="">
-						<br>
-					</div>
-					
-					<div class="col-xs-12 visible-xs-block visible-sm-block">
-						<div class="">
-							<h1>Quick Navigation:</h1>
-							<div class="col-xs-6">
-								<h4><b><a href="#test1">test1</a></b></h4>
-							</div>
-							<div class="col-xs-6">
-								<h4><b><a href="#test2">test2</a></b></h4>							
-							</div>
-						</div>
-					</div>
-					<div class="dashed col-xs-12 visible-xs-block visible-sm-block">
-					</div>
 				</div>				
 
-
-				<!--Macros-->
-				
-				<!--
-				SAMPLE
-				<div id="Calculate" class="macroouter">
-				<h1>Access</h1>
-				<h1>Calculate</h1>
-				<h2>Descr.</h2>
-				<div class="macroinner">
-				<h6>code</h6>
-				</div>
-				</div>
-				-->
-					
 				<div id="section2" class="">
 
-					<div id="Access">
-					<h1>Access</h1>
-					</div>
-					
-					<div id="CommandConn" class="macroouter">
-					<h1>Code title</h1>
-					<h2>Code descriptions</h2>
-						<div class="macroinner">
-							<h6>Code here</h6>
-							<br>
-						</div>
+					<div class="dashed">	
+						<h1><br>Translators project in Tableau</h1>
+						<h2><p>Download the translators' data from the following link: <a href="Translators_list.xlsx"><b>Translators_list.xlsx</b></a></p>
+						<p>Download the ready report in Tableau from the following link: <a href="Translators_list.xlsx"><b>Translators.twb</b></a></p>
+						<p>The excel file contains three sheets:</p>
+						<p>1. The Translators sheet contains the list of translators that are certified by the Polish Ministry of Justice. On the list there are their names, languages they translate, citizenship, address (country, voivodeship, city) and the year of licence being granted. [10847 rows]</p>
+						<img src="Translators.png" class="img-responsive" alt=""></h2>
+						<h2><p>2. The Population sheet contains a list of cities of Poland and their respective population. The data source is Główny Urząd Statystyczny (Statictics Poland). [930 rows]</p>
+						<img src="Population.png" class="img-responsive" alt=""></h2>
+						<h2><p>3. The Rates sheet contains languages and the language group they belong to according to the Polish law. [52 rows]</p>
+						<ul>There are four language groups:
+						<li>Group I: English, German, French, Russian</li>
+						<li>Group II: other European languages and Latin language</li>
+						<li>Group III: Non-European languages using latin alphabet</li>
+						<li>Group IV: Non-European languages using non-latin alphabet</li>
+						</ul>
+						<p>The rates are for one page of 1125 characters from Polish.</p>
+						<img src="Rates.png" class="img-responsive" alt=""></h2>
+						<h2><p>Connect to the database and create the following connections between the tables.</p>
+						<img src="Connections.png" class="img-responsive" alt=""><h2>
+						
+						<h2><p><b>1. Top 20 languages in Poland</b></p>
+						<p>Conclusions: German is the most common language among the certified translators in Poland. Among the largest Polish cities Warszawa, the capital, is the leader in terms of the number of translators, followed by Kraków. The most popular language in Warszawa is English.</p>
+						<img src="top20languagesinpoland.png" class="img-responsive" alt=""></h2>
+						<h2><p>Create and use the Measure: Language count</p>
+						<img src="languagecount.png" class="img-responsive" alt=""></h2>
+						<h2><p>Create and use the Dimension: Main cities</p>					
+						<img src="maincities.png" class="img-responsive" alt=""></h2>
+						<h2><p>Create and use the Parameter: Top N</p>					
+						<img src="topn.png" class="img-responsive" alt=""></h2>					
+						
+						<h2><p><b>2. Translators abroad</b></p>
+						<p>Conclusions: Most translators live in Europe: Germany, United Kingdom, Spain. However, some live in more distant corners of the world, e.g. Malaysia, Mexico.</p>
+						<img src="translatorsabroad.png" class="img-responsive" alt=""></h2>
+						<h2><p>Create and use the Measure: Translator distinct</p>
+						<img src="translatordistinct.png" class="img-responsive" alt=""></h2>						
+						
+						<h2><p><b>3. Licences granted per year</b></p>
+						<p>Conclusions: Most licences were granted in 2005. At the time, licences were granted based on working experience rather than exam. Since 2008, between 90-205 licences per year are granted.</p>
+						<img src="licensesgrantedperyear.png" class="img-responsive" alt=""></h2>
+
+						<h2><p><b>4. Licences granted per year per group</b></p>
+						<p>Conclusions: The languages from the Group I are the most common in terms of licences granted per year. However, since 2010 we have observed an increasing share of Group II languages. In 2012, 6.6% of licences were granted to translators of Group IV languages.</p>
+						<img src="licensesgratedperyearpergroup.png" class="img-responsive" alt=""></h2>
+						
+						<h2><p><b>5. Four and more languages per year</b></p>
+						<p>Conclusions: There are 13 translators who are certified in 4 or 5 languages. Most of them were sworn in 2005. However, one of the translators got all licences in 2015.</p>
+						<img src="fourandmorelanguagesperyear.png" class="img-responsive" alt=""></h2>
+						<h2><p>Create and use the Measure: Index. Convert the Measure to Discrete.</p>
+						<img src="index.png" class="img-responsive" alt=""></h2>
+						
+						<h2><p><b>6. Translators and number of languages</b></p>
+						<p>Conclusions: Most of the translators are sworn in one language. However, 714 of them have a licence in a second language.</p>
+						<img src="translatorsandnumberoflanguages.png" class="img-responsive" alt=""></h2>
+						<h2><p>Create and use the Dimension: Multiple languages</p>
+						<img src="multiplelanguages.png" class="img-responsive" alt=""></h2>						
+
+						<h2><p><b>7. Translators per city size per group</b></p>
+						<p>Conclusions: Groups I and II are the most popular, regardless of the city size. The groups III and IV are wider represented in small cities than in middle-size cities. The total number of translators is almost equal in large and small cities.</p>
+						<img src="translatorspercitypergroup.png" class="img-responsive" alt=""></h2>
+						<h2><p>Create and use the Dimension: City size</p>			
+						<img src="citysize.png" class="img-responsive" alt=""></h2>
+
+						<h2><p><b>8. Number of translators per population (per mille)</b></p>
+						<p>Conclusions: Lubuskie, małopolskie and mazowieckie have most translators per capita. There are the least translators per capita in łódzkie and pomorskie. Lubuskie is a bit of surprise because, as demonstrated in one of the previous slides, Warszawa and Kraków are home to a great number of translators.</p>
+						<img src="translatorsperpopulationpermille.png" class="img-responsive" alt=""></h2>
+						<h2><p>Create and use the Measure: Population distinct</p>
+						<img src="populationdistinct.png" class="img-responsive" alt=""></h2>			
+						<h2><p>Create and use the Measure: Population per Translators</p>
+						<img src="populationpertranslators.png" class="img-responsive" alt=""></h2>				
+
+						<h2><p><b>9. Translators per group</b></p>
+						<p>Conclusions: Group I is dominant among translators, whereas group III is the least popular.</p>
+						<img src="translatorspergroup.png" class="img-responsive" alt=""></h2>
+						
+						<h2><p><b>10. Number of translators per population (per mille) (index)</b></p>
+						<p>Assuming that in some voivodeships there may live translators that specialize in non-European languages a special weight (index) was applied for groups II, III, and IV. The index was based on rates. The higher the group the higher the value of the index.</p>
+						<p>Conclusions: Applying weights (index) didn't change much in translator per population ranking. This is because the translators of langauge Groups III and IV represent around 1.5% of all translators.</p>
+						<img src="translatorsperpopulationpermilleindex.png" class="img-responsive" alt=""></h2>
+						<h2><p>Create and use the Measure: Population per Translators (index)</p>
+						<img src="populationpertranslatorsindex.png" class="img-responsive" alt=""></h2>		
+						<!--
+						SAMPLE
+						<h2><p>...</p>
+						<img src=".png" class="img-responsive" alt=""></h2>
+						-->
+						
 					</div>
 
 				</div> <!--End of Section 2-->
@@ -121,15 +161,15 @@
 				<div id="" class="dashed">
 					<br><img src="Photo.png" class="img-responsive" alt="Photo of Piotr Janus">
 						<h4>
-							<p>Intro1</p>
-							<p>Intro2</p>
-							<p>Cause it is never too late to automate!</p>
+							<p>Business Intelligence has played an increasingly important role over the last years. Knowledge of the BI tools, such as Power Bi or Tableau, is essential for anyone planning their career as a data analyst.</p>
+							<p>In this section you will find simple tutorials that will help you to take first steps in the complex BI world.</p>
+							<p>Because it is never too late to automate!</p>
 							<a href="mailto:piotrjanus@outlook.com?Subject=Hi Piotr" style="color: #0e5051" target="_top">piotrjanus@outlook.com</a>
 							<a href="https://pl.linkedin.com/in/januspiotr"><img src="In-2C-28px-TM.png" align="right" style="margin-right: 0px; margin-left: 0px; padding-top: px;"></a>
 						</h4>
 				</div>
 
-				<div id="" class="list">
+				<!--<div id="" class="list">
 					<br>
 						<h4><b><a href="#group1">group1</a></b></h4>
 						<h4><a href="#code1">code1</a></h4>
@@ -137,7 +177,7 @@
 						<h4><b><a href="#group2">group2</a></b></h4>
 						<h4><a href="#code2">code2</a></h4>
 					<br>
-				</div>
+				</div>-->
 			</div>
 
 
@@ -151,9 +191,9 @@
 				
 					<div class="col-xs-12 col-sm-7 hidden-md hidden-lg hidden-xl">
 						<h4>
-						<p>Hi,</p>
-						<p>On my website ...</p>
-						<p>Remember that it's never to late to automate!</p>
+						<p>Business Intelligence has played an increasingly important role over the last years. Knowledge of the BI tools, such as Power Bi or Tableau, is essential for anyone planning their career as a data analyst.</p>
+						<p>In this section you will find simple tutorials that will help you to take first steps in the complex BI world.</p>
+						<p>Because it is never too late to automate!</p>
 						<a href="mailto:piotrjanus@outlook.com?Subject=Hi Piotr" style="color: #0e5051" target="_top">piotrjanus@outlook.com</a>
 						<a href="https://pl.linkedin.com/in/januspiotr"><img src="In-2C-28px-TM.png" align="right" style="margin-right: 0px; margin-left: 0px; padding-top: px;"></a>
 						<h4/>
