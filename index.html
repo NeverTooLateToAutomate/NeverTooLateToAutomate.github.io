@@ -3541,7 +3541,91 @@
 					<h1>Scrabble</h1>
 					<h2>Helps to find 7 o 8 digit Scrabble words including blank and non-blank options.</h2>
 						<div class="macroinner">
-							<h6>code</h6>
+							<h6>Sub Scrabble()</h6>
+							<h6>&nbsp;&nbsp    Dim Start As Double</h6>
+							<h6>&nbsp;&nbsp    Dim Finish As Double</h6>
+							<h6>&nbsp;&nbsp    Dim myFile As String</h6>
+							<h6>&nbsp;&nbsp    Dim textline As String</h6>
+							<h6>&nbsp;&nbsp    Dim myArray() As Variant</h6>
+							<h6>&nbsp;&nbsp    Dim counter As Long</h6>
+							<h6>&nbsp;&nbsp    Dim myWord As Variant</h6>
+							<h6>&nbsp;&nbsp    Dim myletters As String</h6>
+							<h6>&nbsp;&nbsp    Dim alphabet As String</h6>
+							<h6>&nbsp;&nbsp    Dim sortstr As String</h6>
+							<h6>&nbsp;&nbsp    Dim i As Byte</h6>
+							<h6>&nbsp;&nbsp    Dim j As Byte</h6>
+							<h6>&nbsp;&nbsp    Dim a As Byte</h6>
+							<h6>&nbsp;&nbsp    Dim b As Byte</h6>
+							<h6>&nbsp;&nbsp    Dim str As String</h6>
+							<br>
+							<h6>&nbsp;&nbsp    '7-letter check</h6>
+							<h6>&nbsp;&nbsp    myletters = InputBox("Type your Scrabble letters. For blank type a digit, e.g. 1")</h6>
+							<h6>&nbsp;&nbsp    If Len(myletters) = 7 Or Len(myletters) = 8 Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        'do nothing</h6>
+							<h5>&nbsp;&nbsp    Else</h5>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         MsgBox ("Run the macro again and type 7 or 8 letters")</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         Exit Sub</h6>
+							<h5>&nbsp;&nbsp    End If</h5>
+							<br>
+							<h6>&nbsp;&nbsp    'import wordlist</h6>
+							<h6>&nbsp;&nbsp    If Len(myletters) = 7 Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        myFile = "C:\Users\admin\Documents\Nauka\VBA Excel\Scrabble\siedmioliterowe.txt"</h6>
+							<h6>&nbsp;&nbsp    Else</h6>
+							<h5>&nbsp;&nbsp;&nbsp;&nbsp        myFile = "C:\Users\admin\Documents\Nauka\VBA Excel\Scrabble\ośmioliterowe.txt"</h5>
+							<h6>&nbsp;&nbsp    End If</h6>
+							<br>
+							<h6>&nbsp;&nbsp    Open myFile For Input As #1</h6>
+							<h6>&nbsp;&nbsp    Do Until EOF(1)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         Line Input #1, textline</h6>
+							<h5>&nbsp;&nbsp;&nbsp;&nbsp         'Debug.Print textline</h5>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         ReDim Preserve myArray(counter)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         myArray(counter) = textline</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         counter = counter + 1</h6>
+							<h6>&nbsp;&nbsp    Loop</h6>
+							<h6>&nbsp;&nbsp    Close #1</h6>
+							<br>
+							<h5>&nbsp;&nbsp    'timer start</h5>
+							<h6>&nbsp;&nbsp    Start = Timer</h6>
+							<br>
+							<h5>&nbsp;&nbsp    'letters sorted from the rarest</h5>
+							<h5>&nbsp;&nbsp    alphabet = "źńćśfóżhęgąbjłdptlcsuywzmnrkeioa" '32</h5>
+							<h6>&nbsp;&nbsp    For i = 1 To 32</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         For j = 1 To Len(myletters)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp ;&nbsp;&nbsp             If Mid(alphabet, i, 1) = Mid(myletters, j, 1) Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp ;&nbsp;&nbsp ;&nbsp;&nbsp                 sortstr = sortstr & Mid(myletters, j, 1)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp ;&nbsp;&nbsp             End If</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         Next j</h6>
+							<h6>&nbsp;&nbsp    Next i</h6>
+							<h6>&nbsp;&nbsp    myletters = sortstr</h6>
+							<br>
+							<h5>&nbsp;&nbsp    'letters comparison against wordlist</h5>
+							<h6>&nbsp;&nbsp    str = ""</h6>
+							<h6>&nbsp;&nbsp    For Each myWord In myArray</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        For i = 1 To Len(myletters)</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp				a = Len(myletters) - Len(WorksheetFunction.Substitute(myletters, Mid(myletters, i, 1), ""))</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            	b = Len(myWord) - Len(WorksheetFunction.Substitute(myWord, Mid(myletters, i, 1), ""))</h6>
+							<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If a = b Or b = a + 1 Then ' just one case that b = a + 1</h5>
+							<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp					'do nothing</h5>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextItem</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        Next i</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        str = str & myWord & vbNewLine</h6>
+							<h6>NextItem:</h6>
+							<h6>&nbsp;&nbsp    Next myWord</h6>
+							<br>
+							<h5>&nbsp;&nbsp    'result</h5>
+							<h6>&nbsp;&nbsp    If str <> "" Then</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         Debug.Print str</h6>
+							<h6>&nbsp;&nbsp    Else</h6>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp         Debug.Print "nothing found"</h6>
+							<h6>&nbsp;&nbsp    End If</h6>
+							<br>
+							<h5>&nbsp;&nbsp    'timer finish</h5>
+							<h6>&nbsp;&nbsp    Finish = Round(Timer - Start, 2)</h6>
+							<h6>&nbsp;&nbsp    Debug.Print Finish</h6>
+							<br>
+							<h6>End Sub</h6>
 						</div>
 					</div>
 					
