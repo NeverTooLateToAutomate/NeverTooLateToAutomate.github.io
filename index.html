@@ -3539,7 +3539,10 @@
 
 					<div id="Scrabble" class="macroouter">
 					<h1>Scrabble</h1>
-					<h2>Helps to find 7 o 8 digit Scrabble words including blank and non-blank options.</h2>
+					<h2>Helps to find 7 o 8 digit Scrabble words including blank and non-blank options.<br>
+					Downloads:
+					<a href="7letter.txt"><b>7-letter wordlist</b></a>
+					<a href="8letter.txt"><b>8-letter wordlist</b></a></h2>
 						<div class="macroinner">
 							<h6>Sub Scrabble()</h6>
 							<h6>&nbsp;&nbsp    Dim Start As Double</h6>
@@ -3562,22 +3565,21 @@
 							<h6>&nbsp;&nbsp    myletters = InputBox("Type your Scrabble letters. For blank type a digit, e.g. 1")</h6>
 							<h6>&nbsp;&nbsp    If Len(myletters) = 7 Or Len(myletters) = 8 Then</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp        'do nothing</h6>
-							<h5>&nbsp;&nbsp    Else</h5>
+							<h6>&nbsp;&nbsp    Else</h5>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp         MsgBox ("Run the macro again and type 7 or 8 letters")</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp         Exit Sub</h6>
-							<h5>&nbsp;&nbsp    End If</h5>
+							<h6>&nbsp;&nbsp    End If</h5>
 							<br>
 							<h6>&nbsp;&nbsp    'import wordlist</h6>
 							<h6>&nbsp;&nbsp    If Len(myletters) = 7 Then</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp        myFile = "C:\Users\admin\Documents\Nauka\VBA Excel\Scrabble\siedmioliterowe.txt"</h6>
 							<h6>&nbsp;&nbsp    Else</h6>
-							<h5>&nbsp;&nbsp;&nbsp;&nbsp        myFile = "C:\Users\admin\Documents\Nauka\VBA Excel\Scrabble\ośmioliterowe.txt"</h5>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp        myFile = "C:\Users\admin\Documents\Nauka\VBA Excel\Scrabble\ośmioliterowe.txt"</h5>
 							<h6>&nbsp;&nbsp    End If</h6>
 							<br>
 							<h6>&nbsp;&nbsp    Open myFile For Input As #1</h6>
 							<h6>&nbsp;&nbsp    Do Until EOF(1)</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp         Line Input #1, textline</h6>
-							<h5>&nbsp;&nbsp;&nbsp;&nbsp         'Debug.Print textline</h5>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp         ReDim Preserve myArray(counter)</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp         myArray(counter) = textline</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp         counter = counter + 1</h6>
@@ -3588,7 +3590,7 @@
 							<h6>&nbsp;&nbsp    Start = Timer</h6>
 							<br>
 							<h5>&nbsp;&nbsp    'letters sorted from the rarest</h5>
-							<h5>&nbsp;&nbsp    alphabet = "źńćśfóżhęgąbjłdptlcsuywzmnrkeioa" '32</h5>
+							<h6>&nbsp;&nbsp    alphabet = "źńćśfóżhęgąbjłdptlcsuywzmnrkeioa"</h5>
 							<h6>&nbsp;&nbsp    For i = 1 To 32</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp         For j = 1 To Len(myletters)</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp ;&nbsp;&nbsp             If Mid(alphabet, i, 1) = Mid(myletters, j, 1) Then</h6>
@@ -3604,8 +3606,8 @@
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp        For i = 1 To Len(myletters)</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp				a = Len(myletters) - Len(WorksheetFunction.Substitute(myletters, Mid(myletters, i, 1), ""))</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            	b = Len(myWord) - Len(WorksheetFunction.Substitute(myWord, Mid(myletters, i, 1), ""))</h6>
-							<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If a = b Or b = a + 1 Then ' just one case that b = a + 1</h5>
-							<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp					'do nothing</h5>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            If a = b Or b = a + 1 Then ' just one case that b = a + 1</h5>
+							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp					'do nothing</h5>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            Else</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp                GoTo NextItem</h6>
 							<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp            End If</h6>
